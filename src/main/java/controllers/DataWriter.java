@@ -7,5 +7,5 @@ import org.json.JSONObject;
  */
 public interface DataWriter {
 
-    public JSONObject writeDate();
+    JSONObject writeDate();
 }
