@@ -15,11 +15,12 @@ public class UnpackFileWalker extends SimpleFileVisitor<Path> {
     private List<Path> excludes;
     private Path rootPath;
     private Path unpackDirectory;
-
+    private long unpackAmount;
 
     @Override
     public FileVisitResult visitFile(Path file, BasicFileAttributes attr) {
         copyFileToInstallationDirectory(file);
+        unpackAmount += attr.size();
         return FileVisitResult.CONTINUE;
     }
 
@@ -42,22 +43,16 @@ public class UnpackFileWalker extends SimpleFileVisitor<Path> {
     }
 
     FileVisitResult checkExcludes(Path file) {
-        String fileName = file.toString() + "/";
+        String fileName = file.toAbsolutePath().toString();
         for(Path path : excludes) {
-            Path resolvedPath = path.resolve(fileName);
-            if(resolvedPath.equals(path)) {
+            String excludeName = path.toString() + "/";
+            if(fileName.equals(excludeName)) {
                 return FileVisitResult.SKIP_SUBTREE;
             }
         }
         return FileVisitResult.CONTINUE;
     }
 
-
-    // If there is some error accessing
-    // the file, let the user know.
-    // If you don't override this method
-    // and an error occurs, an IOException
-    // is thrown.
     @Override
     public FileVisitResult visitFileFailed(Path file, IOException exc) {
         System.err.println(exc);

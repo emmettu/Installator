@@ -1,5 +1,6 @@
 package models.packaging;
 
+import models.packaging.utils.SizeFileWalker;
 import models.packaging.utils.UnpackFileWalker;
 
 import java.io.IOException;
@@ -13,7 +14,8 @@ import java.util.List;
  * This the base implementation of the package class.
  * It stores information about where a package is
  * located, where it is unpacked to, and how it is
- * unpacked.
+ * unpacked. It unpacks from the "packages" folder
+ * of the current jar it is executing in.
  */
 
 public class StandardPackage extends Package {
@@ -21,11 +23,14 @@ public class StandardPackage extends Package {
     private List<Path> excludes = new ArrayList();
     private Path rootPath;
     private FileSystem jarFileSystem;
+    private long size;
 
     public StandardPackage(String packageName) {
         String jarFilePath = getRunningJarLocation();
         jarFileSystem = getJarFileSystem(jarFilePath);
         rootPath = jarFileSystem.getPath("packages", packageName);
+        size = calculatePackageSize();
+        System.out.println(size);
     }
 
     private String getRunningJarLocation() {
@@ -64,6 +69,21 @@ public class StandardPackage extends Package {
             e.printStackTrace();
         }
         return fs;
+    }
+
+    private long calculatePackageSize() {
+        SizeFileWalker sizeCalculator = new SizeFileWalker();
+        try {
+            Files.walkFileTree(rootPath, sizeCalculator);
+        }
+        catch(IOException e) {
+            e.printStackTrace();
+        }
+        return sizeCalculator.getSize();
+    }
+
+    public long getSize() {
+        return size;
     }
 
     public void addExclude(String excludePathName) {

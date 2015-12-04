@@ -11,6 +11,10 @@ public class BuildInstaller {
         System.out.println(new JSONObject().toString());
         StandardPackage standardPackage = new StandardPackage("wildfly-10.0.0.CR4");
         standardPackage.setUnpackDirectory("/home/eunderhi/tmp/");
+          standardPackage.addExclude("bin");
+//        standardPackage.addExclude("docs");
+//        standardPackage.addExclude("modules");
+        standardPackage.addExclude("standalone/deployments");
         standardPackage.unpack();
     }
 }
