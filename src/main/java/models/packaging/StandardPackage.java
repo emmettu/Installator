@@ -1,7 +1,6 @@
 package models.packaging;
 
 import models.packaging.utils.SizeFileWalker;
-import models.packaging.utils.UnpackFileWalker;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -43,21 +42,6 @@ public class StandardPackage extends Package {
         }
     }
 
-    @Override
-    public void unpack() {
-        UnpackFileWalker walker = new UnpackFileWalker();
-        walker.setRootPath(rootPath);
-        walker.setExcludes(excludes);
-        walker.setUnpackDirectory(getUnpackDirectory());
-
-        try {
-            Files.walkFileTree(rootPath, walker);
-        }
-        catch(IOException e) {
-            e.printStackTrace();
-        }
-    }
-
     private FileSystem getJarFileSystem(String jarPath) {
         FileSystem fs = null;
         Path jar = Paths.get(jarPath);
@@ -92,7 +76,14 @@ public class StandardPackage extends Package {
         excludes.add(excludePath);
     }
 
-    public void setExcludes(List<Path> excludes) {
-        this.excludes = excludes;
+    public List<Path> getExcludes() {
+        return excludes;
     }
+
+    public Path getRootPath() {
+        return rootPath;
+    }
+
+    @Override
+    public void notifyListeners(Object message) {}
 }
