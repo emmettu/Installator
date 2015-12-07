@@ -15,16 +15,6 @@ import java.util.zip.ZipEntry;
  */
 public class DummyPackage extends Package {
 
-    @Override
-    public void unpack() {
-
-        try {
-            unpackJar();
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 
     private void unpackJar() throws IOException {
         JarFile file = new JarFile(getClass().getResource("/InstallUtils-0.1.jar").getPath());
@@ -47,4 +37,8 @@ public class DummyPackage extends Package {
         }
     }
 
+    @Override
+    public void notifyListeners(Object message) {
+
+    }
 }

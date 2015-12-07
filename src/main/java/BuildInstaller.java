@@ -1,3 +1,4 @@
+import controllers.unpacker.Unpacker;
 import models.packaging.StandardPackage;
 import org.json.JSONObject;
 
@@ -11,6 +12,9 @@ public class BuildInstaller {
         System.out.println(new JSONObject().toString());
         StandardPackage standardPackage = new StandardPackage("wildfly-10.0.0.CR4");
         standardPackage.setUnpackDirectory("/home/eunderhi/tmp/");
-        standardPackage.unpack();
+        standardPackage.addExclude("docs/contrib");
+        Unpacker unpacker = new Unpacker();
+        unpacker.setPackageToUnpack(standardPackage);
+        unpacker.performAction();
     }
 }

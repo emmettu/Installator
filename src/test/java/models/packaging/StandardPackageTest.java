@@ -25,7 +25,6 @@ public class StandardPackageTest {
         Package testPackage = new DummyPackage();
         testPackage.setPath("packages");
         testPackage.setUnpackDirectory(tmp.getRoot().toString());
-        testPackage.unpack();
     }
 
     public void testStandardUnpacker() {
