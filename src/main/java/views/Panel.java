@@ -12,7 +12,7 @@ public abstract class Panel implements View {
 
     @Override
     public void update() {
-
+        display();
     }
 
     @Override
