@@ -28,7 +28,6 @@ public class Unpacker implements Controller {
     }
 
     private void unpack() {
-
         try {
             Files.walkFileTree(rootPath, walker);
         }
@@ -38,11 +37,11 @@ public class Unpacker implements Controller {
     }
 
     public void setPackageToUnpack(StandardPackage packageToUnpack) {
+        this.packageToUnpack = packageToUnpack;
         rootPath = packageToUnpack.getRootPath();
         walker.setRootPath(rootPath);
         walker.setExcludes(packageToUnpack.getExcludes());
         walker.setUnpackDirectory(packageToUnpack.getUnpackDirectory());
-        this.packageToUnpack = packageToUnpack;
     }
 
 }
