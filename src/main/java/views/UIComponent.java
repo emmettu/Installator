@@ -19,4 +19,5 @@ public abstract class UIComponent implements View {
     public void addController(Controller controller) {
         controllers.add(controller);
     }
+
 }

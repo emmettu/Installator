@@ -32,4 +32,5 @@ public abstract class Panel implements View {
     public void addView(View view) {
         viewList.add(view);
     }
+
 }

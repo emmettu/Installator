@@ -10,11 +10,9 @@ import java.util.List;
 
 /**
  * Created by eunderhi on 30/11/15.
- * This the base implementation of the package class.
- * It stores information about where a package is
- * located, where it is unpacked to, and how it is
- * unpacked. It unpacks from the "packages" folder
- * of the current jar it is executing in.
+ * This is the base implementation of the package class. It stores information about where a package is
+ * located, and where it is unpacked to. It unpacks from the "packages" folder of the current jar it is
+ * executing in.
  */
 
 public class StandardPackage extends Package {
@@ -86,4 +84,5 @@ public class StandardPackage extends Package {
 
     @Override
     public void notifyListeners(Object message) {}
+
 }

@@ -9,4 +9,5 @@ import org.json.JSONObject;
 public abstract class PanelData implements Model, DataWriter {
     public abstract void writeData();
     public abstract void loadData(JSONObject json);
+
 }

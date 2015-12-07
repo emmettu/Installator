@@ -8,7 +8,7 @@ import java.util.List;
 
 /**
  * Created by eunderhi on 01/12/15.
- * walks a zip filesystem and unpacks files
+ * Walks a zip filesystem and unpacks files. Pays attention to excludes, which it does not unpack.
  */
 public class UnpackFileWalker extends SimpleFileVisitor<Path> {
 
@@ -36,7 +36,6 @@ public class UnpackFileWalker extends SimpleFileVisitor<Path> {
         }
     }
 
-    // Print each directory visited.
     @Override
     public FileVisitResult preVisitDirectory(Path dir, BasicFileAttributes attr) {
         return checkExcludes(dir);
