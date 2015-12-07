@@ -1,2 +1,2 @@
 # Installator
-MVC Installer building library
+An MVC Installer building library
