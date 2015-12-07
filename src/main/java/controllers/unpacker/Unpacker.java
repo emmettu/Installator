@@ -19,8 +19,8 @@ import java.nio.file.Path;
 public class Unpacker implements Controller {
 
     private StandardPackage packageToUnpack;
-    UnpackFileWalker walker = new UnpackFileWalker();
-    Path rootPath;
+    private UnpackFileWalker walker = new UnpackFileWalker();
+    private Path rootPath;
 
     @Override
     public void performAction() {
