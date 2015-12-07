@@ -1,6 +1,7 @@
-package views;
+package views.ui;
 
 import controllers.Controller;
+import views.View;
 
 import java.util.List;
 

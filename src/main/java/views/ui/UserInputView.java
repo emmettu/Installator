@@ -1,6 +1,7 @@
-package views;
+package views.ui;
 
 import controllers.Validator;
+import views.ui.UIComponent;
 
 /**
  * Created by eunderhi on 27/11/15.

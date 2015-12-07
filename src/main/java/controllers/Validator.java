@@ -1,6 +1,6 @@
 package controllers;
 
-import views.UserInputView;
+import views.ui.UserInputView;
 
 /**
  * Created by eunderhi on 27/11/15.
