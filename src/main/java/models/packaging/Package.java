@@ -32,4 +32,8 @@ public abstract class Package extends InstallerModel {
     public void setPath(String path) {
         this.path = path;
     }
+
+    public abstract Path getRootPath();
+    public abstract List<Path> getExcludes();
+
 }

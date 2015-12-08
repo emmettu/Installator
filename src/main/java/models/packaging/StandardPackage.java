@@ -74,10 +74,12 @@ public class StandardPackage extends Package {
         excludes.add(excludePath);
     }
 
+    @Override
     public List<Path> getExcludes() {
         return excludes;
     }
 
+    @Override
     public Path getRootPath() {
         return rootPath;
     }

@@ -20,7 +20,6 @@ public class Unpacker implements Controller {
 
     private StandardPackage packageToUnpack;
     private UnpackFileWalker walker = new UnpackFileWalker();
-    private Path rootPath;
 
     @Override
     public void performAction() {
@@ -29,19 +28,20 @@ public class Unpacker implements Controller {
 
     private void unpack() {
         try {
-            Files.walkFileTree(rootPath, walker);
+            Files.walkFileTree(getRootPath(), walker);
         }
         catch(IOException e) {
             e.printStackTrace();
         }
     }
 
-    public void setPackageToUnpack(StandardPackage packageToUnpack) {
+    public void setPackage(StandardPackage packageToUnpack) {
         this.packageToUnpack = packageToUnpack;
-        rootPath = packageToUnpack.getRootPath();
-        walker.setRootPath(rootPath);
-        walker.setExcludes(packageToUnpack.getExcludes());
-        walker.setUnpackDirectory(packageToUnpack.getUnpackDirectory());
+        walker.setPackage(packageToUnpack);
+    }
+
+    private Path getRootPath() {
+        return packageToUnpack.getRootPath();
     }
 
 }

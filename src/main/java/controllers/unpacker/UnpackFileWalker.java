@@ -1,5 +1,7 @@
 package controllers.unpacker;
 
+import models.packaging.Package;
+
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.*;
@@ -12,10 +14,8 @@ import java.util.List;
  */
 public class UnpackFileWalker extends SimpleFileVisitor<Path> {
 
-    private List<Path> excludes;
-    private Path rootPath;
-    private Path unpackDirectory;
     private long unpackAmount;
+    private Package packageToUnpack;
 
     @Override
     public FileVisitResult visitFile(Path file, BasicFileAttributes attr) {
@@ -25,7 +25,7 @@ public class UnpackFileWalker extends SimpleFileVisitor<Path> {
     }
 
     private void copyFileToInstallationDirectory(Path file) {
-        Path destination = Paths.get(unpackDirectory.toString(), file.subpath(1, file.getNameCount()).toString());
+        Path destination = Paths.get(getUnpackDirectory().toString(), file.subpath(1, file.getNameCount()).toString());
         File destinationFile = destination.toFile();
         destinationFile.mkdirs();
         try {
@@ -43,7 +43,7 @@ public class UnpackFileWalker extends SimpleFileVisitor<Path> {
 
     FileVisitResult checkExcludes(Path file) {
         String fileName = file.toAbsolutePath().toString();
-        for(Path path : excludes) {
+        for(Path path : getExcludes()) {
             String excludeName = path.toString() + "/";
             if(fileName.equals(excludeName)) {
                 return FileVisitResult.SKIP_SUBTREE;
@@ -59,18 +59,18 @@ public class UnpackFileWalker extends SimpleFileVisitor<Path> {
     }
 
     public Path getRootPath() {
-        return rootPath;
+        return packageToUnpack.getRootPath();
     }
 
-    public void setRootPath(Path rootPath) {
-        this.rootPath = rootPath;
+    public List<Path> getExcludes() {
+        return packageToUnpack.getExcludes();
     }
 
-    public void setExcludes(List<Path> excludes) {
-        this.excludes = excludes;
+    public void setPackage(Package packageToUnpack) {
+        this.packageToUnpack = packageToUnpack;
     }
 
-    public void setUnpackDirectory(Path unpackDirectory) {
-        this.unpackDirectory = unpackDirectory;
+    public Path getUnpackDirectory() {
+        return packageToUnpack.getUnpackDirectory();
     }
 }

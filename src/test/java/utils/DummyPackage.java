@@ -1,6 +1,7 @@
 package utils;
 
 import models.packaging.Package;
+import models.packaging.StandardPackage;
 
 import java.io.*;
 import java.nio.file.FileSystems;
@@ -13,8 +14,12 @@ import java.util.zip.ZipEntry;
  * This package unpacks /InstallUtils-0.1.jar in the resources folder.
  * It's entirely for testing purposes
  */
-public class DummyPackage extends Package {
+public class DummyPackage extends StandardPackage {
 
+
+    public DummyPackage(String packageName) {
+        super(packageName);
+    }
 
     private void unpackJar() throws IOException {
         JarFile file = new JarFile(getClass().getResource("/InstallUtils-0.1.jar").getPath());
@@ -41,4 +46,5 @@ public class DummyPackage extends Package {
     public void notifyListeners(Object message) {
 
     }
+
 }

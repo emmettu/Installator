@@ -22,7 +22,7 @@ public class StandardPackageTest {
     public void testUnpack() throws Exception {
         TemporaryFolder tmp = new TemporaryFolder();
         tmp.create();
-        Package testPackage = new DummyPackage();
+        Package testPackage = new DummyPackage("test");
         testPackage.setPath("packages");
         testPackage.setUnpackDirectory(tmp.getRoot().toString());
     }
