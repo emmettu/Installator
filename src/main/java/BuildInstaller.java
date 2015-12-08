@@ -16,10 +16,13 @@ public class BuildInstaller {
         //standardPackage.setUnpackDirectory("/home/eunderhi/tmp/");
         Unpacker unpacker = new Unpacker();
         unpacker.setPackageToUnpack(standardPackage);
-        TextInputField inputField = new ConsoleTextInputField();
+        ConsoleTextInputField field = new ConsoleTextInputField();
+        field.setPrompt("Enter the unpacking directory: ");
         PathInputController controller = new PathInputController();
-        controller.setTextInputField(inputField);
+        controller.setTextInputField(field);
         controller.setPackage(standardPackage);
+
+        field.update();
 
         System.out.println(standardPackage.getUnpackDirectory());
     }
