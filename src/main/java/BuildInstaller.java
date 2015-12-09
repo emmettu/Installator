@@ -2,7 +2,12 @@ import controllers.textinput.PathInputController;
 import controllers.unpacker.Unpacker;
 import models.packaging.StandardPackage;
 import views.ui.button.ConsoleButton;
+import views.ui.panels.GUIPanel;
 import views.ui.textinput.ConsoleTextInputField;
+import views.ui.textinput.GUITextInputField;
+
+import javax.swing.*;
+import java.awt.*;
 
 /**
  * Created by eunderhi on 25/11/15.
@@ -10,6 +15,10 @@ import views.ui.textinput.ConsoleTextInputField;
 public class BuildInstaller {
 
     public static void main(String args[]) {
+        buildGUI();
+    }
+
+    public static void buildConsole() {
         StandardPackage standardPackage = new StandardPackage("wildfly-10.0.0.CR4");
         standardPackage.addExclude("docs/contrib");
         Unpacker unpacker = new Unpacker();
@@ -25,6 +34,27 @@ public class BuildInstaller {
 
         field.update();
         button.update();
+    }
+
+    public static void buildGUI() {
+        StandardPackage standardPackage = new StandardPackage("wildfly-10.0.0.CR4");
+        standardPackage.addExclude("docs/contrib");
+        Unpacker unpacker = new Unpacker();
+        unpacker.setPackage(standardPackage);
+        GUITextInputField field = new GUITextInputField();
+        ConsoleButton button = new ConsoleButton();
+        button.setText("Press enter to start unpacking.");
+        PathInputController controller = new PathInputController();
+        controller.setTextInputField(field);
+        controller.setPackage(standardPackage);
+        button.addController(unpacker);
+        JFrame frame = new JFrame("Installer");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        GUIPanel panel = new GUIPanel(frame);
+        panel.setField(field);
+
+        panel.display();
+
     }
 
 }

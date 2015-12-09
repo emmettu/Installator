@@ -1,4 +1,6 @@
-package views;
+package views.ui.panels;
+
+import views.View;
 
 import java.util.ArrayList;
 import java.util.List;
