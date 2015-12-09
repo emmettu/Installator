@@ -17,15 +17,13 @@ public class BuildInstaller {
         ConsoleTextInputField field = new ConsoleTextInputField();
         field.setPrompt("Enter the unpacking directory: ");
         ConsoleButton button = new ConsoleButton();
-        button.setText("Press enter to continue.");
+        button.setText("Press enter to start unpacking.");
         PathInputController controller = new PathInputController();
         controller.setTextInputField(field);
         controller.setPackage(standardPackage);
         button.addController(unpacker);
 
-
         field.update();
-        System.out.println(standardPackage.getUnpackDirectory());
         button.update();
     }
 

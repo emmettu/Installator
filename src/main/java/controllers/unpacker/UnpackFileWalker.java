@@ -58,10 +58,6 @@ public class UnpackFileWalker extends SimpleFileVisitor<Path> {
         return FileVisitResult.CONTINUE;
     }
 
-    public Path getRootPath() {
-        return packageToUnpack.getRootPath();
-    }
-
     public List<Path> getExcludes() {
         return packageToUnpack.getExcludes();
     }
