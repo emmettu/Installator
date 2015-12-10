@@ -8,7 +8,6 @@ import views.ui.textinput.ConsoleTextInputField;
 import views.ui.textinput.GUITextInputField;
 
 import javax.swing.*;
-import java.awt.*;
 
 /**
  * Created by eunderhi on 25/11/15.
@@ -16,7 +15,12 @@ import java.awt.*;
 public class BuildInstaller {
 
     public static void main(String args[]) {
-        buildGUI();
+        if(args.length >= 1 && args[0].equals("-console")) {
+            buildConsole();
+        }
+        else {
+            buildGUI();
+        }
     }
 
     public static void buildConsole() {
