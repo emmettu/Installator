@@ -2,6 +2,7 @@ import controllers.textinput.PathInputController;
 import controllers.unpacker.Unpacker;
 import models.packaging.StandardPackage;
 import views.ui.button.ConsoleButton;
+import views.ui.button.GUIButton;
 import views.ui.panels.GUIPanel;
 import views.ui.textinput.ConsoleTextInputField;
 import views.ui.textinput.GUITextInputField;
@@ -42,8 +43,7 @@ public class BuildInstaller {
         Unpacker unpacker = new Unpacker();
         unpacker.setPackage(standardPackage);
         GUITextInputField field = new GUITextInputField();
-        ConsoleButton button = new ConsoleButton();
-        button.setText("Press enter to start unpacking.");
+        GUIButton button = new GUIButton();
         PathInputController controller = new PathInputController();
         controller.setTextInputField(field);
         controller.setPackage(standardPackage);
@@ -52,9 +52,10 @@ public class BuildInstaller {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         GUIPanel panel = new GUIPanel(frame);
         panel.setField(field);
+        panel.setButton(button);
+        panel.build();
 
         panel.display();
-
     }
 
 }
