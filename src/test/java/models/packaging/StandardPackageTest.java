@@ -18,7 +18,6 @@ public class StandardPackageTest {
     }
 
     @Test
-    @Ignore
     public void testUnpack() throws Exception {
     }
 
