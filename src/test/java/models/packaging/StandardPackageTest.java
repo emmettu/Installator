@@ -20,11 +20,6 @@ public class StandardPackageTest {
     @Test
     @Ignore
     public void testUnpack() throws Exception {
-        TemporaryFolder tmp = new TemporaryFolder();
-        tmp.create();
-        Package testPackage = new DummyPackage("test");
-        testPackage.setPath("packages");
-        testPackage.setUnpackDirectory(tmp.getRoot().toString());
     }
 
     public void testStandardUnpacker() {

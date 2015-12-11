@@ -4,6 +4,7 @@ import models.packaging.Package;
 import models.packaging.StandardPackage;
 
 import java.io.*;
+import java.net.URISyntaxException;
 import java.nio.file.FileSystems;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
@@ -11,8 +12,10 @@ import java.util.zip.ZipEntry;
 
 /**
  * Created by eunderhi on 30/11/15.
- * This package unpacks /InstallUtils-0.1.jar in the resources folder.
- * It's entirely for testing purposes
+ * This package unpacks /test.jar in the resources folder.
+ * It inherits from StandardPackage and does everything the same
+ * except it overrides the getRunningJarLocation to grab the resources
+ * jar instead of the currently running one.
  */
 public class DummyPackage extends StandardPackage {
 
@@ -21,30 +24,15 @@ public class DummyPackage extends StandardPackage {
         super(packageName);
     }
 
-    private void unpackJar() throws IOException {
-        JarFile file = new JarFile(getClass().getResource("/InstallUtils-0.1.jar").getPath());
-        JarEntry jarEntry = file.getJarEntry(getPath());
-        writeEntryContentsToFile(file, jarEntry);
-    }
 
-    private void writeEntryContentsToFile(JarFile file, JarEntry entry) {
-        try {
-            InputStream is = file.getInputStream(entry);
-            FileOutputStream fos = new FileOutputStream(getUnpackDirectory() + "/wildlfy");
-            while(is.available() > 0) {
-                fos.write(is.read());
-            }
-            fos.close();
-            is.close();
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    @Override
-    public void notifyListeners(Object message) {
-
-    }
+   @Override
+    public String getRunningJarLocation() {
+       try {
+           return getClass().getResource("/test.jar").toURI().getPath();
+       }
+       catch (URISyntaxException e) {
+           return null;
+       }
+   }
 
 }
