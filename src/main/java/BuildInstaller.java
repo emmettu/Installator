@@ -4,6 +4,7 @@ import models.packaging.StandardPackage;
 import views.ui.button.ConsoleButton;
 import views.ui.button.GUIButton;
 import views.ui.panels.GUIPanel;
+import views.ui.panels.PathInputPanel;
 import views.ui.textinput.ConsoleTextInputField;
 import views.ui.textinput.GUITextInputField;
 
@@ -54,7 +55,7 @@ public class BuildInstaller {
         button.addController(unpacker);
         JFrame frame = new JFrame("Installer");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        GUIPanel panel = new GUIPanel(frame);
+        PathInputPanel panel = new PathInputPanel(frame);
         panel.setField(field);
         panel.setButton(button);
         panel.build();

@@ -22,7 +22,7 @@ public class GUITextInputField extends TextInputField {
                 update();
             }
         });
-        textField.setSize(1, 10);
+        textField.setSize(10, 15);
     }
 
     @Override

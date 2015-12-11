@@ -10,7 +10,7 @@ public class GUIButton extends Button {
     private JButton button = new JButton();
 
     public GUIButton() {
-        button.setSize(6, 10);
+        button.setSize(6, 15);
         button.addActionListener(actionEvent -> update());
     }
 
@@ -23,6 +23,11 @@ public class GUIButton extends Button {
     @Override
     public void display() {
         button.repaint();
+    }
+
+    @Override
+    public void setText(String text) {
+        button.setText(text);
     }
 
     public JButton getButton() {
