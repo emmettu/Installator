@@ -3,6 +3,7 @@ import controllers.unpacker.Unpacker;
 import models.packaging.StandardPackage;
 import views.ui.button.ConsoleButton;
 import views.ui.button.GUIButton;
+import views.ui.panels.ConsolePanel;
 import views.ui.panels.GUIPanel;
 import views.ui.panels.PathInputPanel;
 import views.ui.textinput.ConsoleTextInputField;
@@ -37,9 +38,12 @@ public class BuildInstaller {
         controller.setTextInputField(field);
         controller.setPackage(standardPackage);
         button.addController(unpacker);
+        ConsolePanel panel = new ConsolePanel();
+        panel.addComponent(field);
+        panel.addComponent(button);
 
-        field.update();
-        button.update();
+        panel.display();
+
     }
 
     public static void buildGUI() {
