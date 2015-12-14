@@ -1,8 +1,5 @@
 package views.ui.panels;
 
-import views.ui.button.GUIButton;
-import views.ui.textinput.GUITextInputField;
-
 import javax.swing.*;
 
 /**
@@ -11,8 +8,6 @@ import javax.swing.*;
 public abstract class GUIPanel extends Panel {
 
     protected JFrame frame;
-    protected GUITextInputField field;
-    protected GUIButton button;
 
     public GUIPanel(JFrame frame) {
         this.frame = frame;
@@ -21,7 +16,6 @@ public abstract class GUIPanel extends Panel {
 
     @Override
     protected void displayPanel() {
-        SwingUtilities.invokeLater(() -> field.display());
     }
 
     public abstract void build();

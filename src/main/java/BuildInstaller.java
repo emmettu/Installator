@@ -9,6 +9,7 @@ import views.ui.panels.PathInputPanel;
 import views.ui.textinput.ConsoleTextInputField;
 import views.ui.textinput.GUITextInputField;
 import views.ui.textstream.ConsoleUnpackerTextStream;
+import views.ui.textstream.GUIUnpackerTextStream;
 import views.ui.textstream.UnpackerTextStream;
 
 import javax.swing.*;
@@ -41,7 +42,7 @@ public class BuildInstaller {
         controller.setPackage(standardPackage);
         button.addController(unpackerController);
         ConsolePanel panel = new ConsolePanel();
-        UnpackerTextStream stream = new ConsoleUnpackerTextStream(unpacker);
+        new ConsoleUnpackerTextStream(unpacker);
 
         panel.addComponent(field);
         panel.addComponent(button);
@@ -54,18 +55,21 @@ public class BuildInstaller {
         StandardPackage standardPackage = new StandardPackage("wildfly-10.0.0.CR4");
         standardPackage.addExclude("docs/contrib");
         Unpacker unpacker = new Unpacker(standardPackage);
+        UnpackerController unpackerController = new UnpackerController(unpacker);
         unpacker.setPackage(standardPackage);
         GUITextInputField field = new GUITextInputField();
         GUIButton button = new GUIButton();
         PathInputController controller = new PathInputController();
         controller.setTextInputField(field);
         controller.setPackage(standardPackage);
-        button.addController(controller);
+        button.addController(unpackerController);
         JFrame frame = new JFrame("Installer");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         PathInputPanel panel = new PathInputPanel(frame);
+        GUIUnpackerTextStream stream = new GUIUnpackerTextStream(unpacker);
         panel.setField(field);
         panel.setButton(button);
+        panel.setUnpackStream(stream);
         panel.build();
 
         panel.display();
