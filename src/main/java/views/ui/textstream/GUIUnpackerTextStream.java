@@ -25,7 +25,8 @@ public class GUIUnpackerTextStream extends UnpackerTextStream {
     @Override
     public void update() {
         super.update();
-        area.append(text + "\n");
+        double percentDone = ((double) unpacker.getUnpackedAmount() / (double) unpacker.getSize()) * 100.0;
+        area.append(String.format("%s %d\n", text, (int) Math.ceil(percentDone)));
         scroller.update(scroller.getGraphics());
     }
 

@@ -23,7 +23,7 @@ public class Unpacker extends InstallerModel {
     private UnpackFileWalker walker = new UnpackFileWalker();
     private Stack<Path> filesUnpacked = new Stack<>();
     private long size;
-    private long unpackedAmount;
+    private long unpackedAmount = 0;
 
     public Unpacker(StandardPackage thePackage) {
         setPackage(thePackage);

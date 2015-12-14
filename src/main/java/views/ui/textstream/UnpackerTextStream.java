@@ -9,7 +9,7 @@ import java.nio.file.Path;
  */
 public abstract class UnpackerTextStream extends TextStream {
 
-    private Unpacker unpacker;
+    protected Unpacker unpacker;
 
     public UnpackerTextStream(Unpacker unpacker) {
         this.unpacker = unpacker;
