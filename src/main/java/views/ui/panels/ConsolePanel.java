@@ -22,4 +22,5 @@ public class ConsolePanel extends Panel {
     public void addComponent(View component) {
         components.add(component);
     }
+
 }

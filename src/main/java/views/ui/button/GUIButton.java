@@ -33,4 +33,5 @@ public class GUIButton extends Button {
     public JButton getButton() {
         return button;
     }
+
 }

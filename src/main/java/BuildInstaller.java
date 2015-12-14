@@ -1,13 +1,15 @@
 import controllers.textinput.PathInputController;
 import controllers.unpacker.Unpacker;
+import controllers.unpacker.UnpackerController;
 import models.packaging.StandardPackage;
 import views.ui.button.ConsoleButton;
 import views.ui.button.GUIButton;
 import views.ui.panels.ConsolePanel;
-import views.ui.panels.GUIPanel;
 import views.ui.panels.PathInputPanel;
 import views.ui.textinput.ConsoleTextInputField;
 import views.ui.textinput.GUITextInputField;
+import views.ui.textstream.ConsoleUnpackerTextStream;
+import views.ui.textstream.UnpackerTextStream;
 
 import javax.swing.*;
 
@@ -28,8 +30,8 @@ public class BuildInstaller {
     public static void buildConsole() {
         StandardPackage standardPackage = new StandardPackage("wildfly-10.0.0.CR4");
         standardPackage.addExclude("docs/contrib");
-        Unpacker unpacker = new Unpacker();
-        unpacker.setPackage(standardPackage);
+        Unpacker unpacker = new Unpacker(standardPackage);
+        UnpackerController unpackerController = new UnpackerController(unpacker);
         ConsoleTextInputField field = new ConsoleTextInputField();
         field.setPrompt("Enter the unpacking directory: ");
         ConsoleButton button = new ConsoleButton();
@@ -37,8 +39,10 @@ public class BuildInstaller {
         PathInputController controller = new PathInputController();
         controller.setTextInputField(field);
         controller.setPackage(standardPackage);
-        button.addController(unpacker);
+        button.addController(unpackerController);
         ConsolePanel panel = new ConsolePanel();
+        UnpackerTextStream stream = new ConsoleUnpackerTextStream(unpacker);
+
         panel.addComponent(field);
         panel.addComponent(button);
 
@@ -49,14 +53,14 @@ public class BuildInstaller {
     public static void buildGUI() {
         StandardPackage standardPackage = new StandardPackage("wildfly-10.0.0.CR4");
         standardPackage.addExclude("docs/contrib");
-        Unpacker unpacker = new Unpacker();
+        Unpacker unpacker = new Unpacker(standardPackage);
         unpacker.setPackage(standardPackage);
         GUITextInputField field = new GUITextInputField();
         GUIButton button = new GUIButton();
         PathInputController controller = new PathInputController();
         controller.setTextInputField(field);
         controller.setPackage(standardPackage);
-        button.addController(unpacker);
+        button.addController(controller);
         JFrame frame = new JFrame("Installer");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         PathInputPanel panel = new PathInputPanel(frame);

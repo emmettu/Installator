@@ -16,4 +16,5 @@ public abstract class Button extends UIComponent {
     public void setText(String text) {
         this.text = text;
     }
+
 }

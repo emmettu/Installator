@@ -14,13 +14,14 @@ import java.util.List;
  */
 public class UnpackFileWalker extends SimpleFileVisitor<Path> {
 
-    private long unpackAmount;
     private Package packageToUnpack;
+    private Unpacker unpacker;
 
     @Override
     public FileVisitResult visitFile(Path file, BasicFileAttributes attr) {
         copyFileToInstallationDirectory(file);
-        unpackAmount += attr.size();
+        unpacker.addUnpackedFile(file, attr.size());
+
         return FileVisitResult.CONTINUE;
     }
 
@@ -68,6 +69,10 @@ public class UnpackFileWalker extends SimpleFileVisitor<Path> {
 
     public Path getUnpackDirectory() {
         return packageToUnpack.getUnpackDirectory();
+    }
+
+    public void setUnpacker(Unpacker unpacker) {
+        this.unpacker = unpacker;
     }
 
 }

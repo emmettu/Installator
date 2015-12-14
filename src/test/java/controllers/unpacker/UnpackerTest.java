@@ -24,14 +24,13 @@ public class UnpackerTest {
         folder.create();
         dummyPack = new DummyPackage("test3");
         dummyPack.setUnpackDirectory(folder.getRoot().toString());
-        unpacker = new Unpacker();
-        unpacker.setPackage(dummyPack);
+        unpacker = new Unpacker(dummyPack);
 
     }
 
     @Test
     public void testRegularUnpack() throws Exception {
-        unpacker.performAction();
+        unpacker.unpack();
         File[] unpackedFiles = folder.getRoot().listFiles();
         File unpackedFile = unpackedFiles[0];
 
@@ -44,7 +43,7 @@ public class UnpackerTest {
     @Test
     public void testExcludeUnpack() throws Exception {
         dummyPack.addExclude("test5");
-        unpacker.performAction();
+        unpacker.unpack();
 
         assertEquals(true, fileExists("/test3/test4"));
         assertEquals(true, fileExists("/test3/test6"));

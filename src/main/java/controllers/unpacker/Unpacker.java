@@ -1,11 +1,12 @@
 package controllers.unpacker;
 
-import controllers.Controller;
+import models.InstallerModel;
 import models.packaging.StandardPackage;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Stack;
 
 /**
  * Created by eunderhi on 04/12/15.
@@ -16,17 +17,19 @@ import java.nio.file.Path;
  * action.
  */
 
-public class Unpacker implements Controller {
+public class Unpacker extends InstallerModel {
 
     private StandardPackage packageToUnpack;
     private UnpackFileWalker walker = new UnpackFileWalker();
+    private Stack<Path> filesUnpacked = new Stack<>();
+    private long size;
+    private long unpackedAmount;
 
-    @Override
-    public void performAction() {
-        unpack();
+    public Unpacker(StandardPackage thePackage) {
+        setPackage(thePackage);
     }
 
-    private void unpack() {
+    public void unpack() {
         try {
             Files.walkFileTree(getRootPath(), walker);
         }
@@ -38,10 +41,35 @@ public class Unpacker implements Controller {
     public void setPackage(StandardPackage packageToUnpack) {
         this.packageToUnpack = packageToUnpack;
         walker.setPackage(packageToUnpack);
+        walker.setUnpacker(this);
+        size = packageToUnpack.getSize();
     }
 
     private Path getRootPath() {
         return packageToUnpack.getRootPath();
+    }
+
+    public void addUnpackedFile(Path path, long size) {
+        filesUnpacked.add(path);
+        unpackedAmount += size;
+        notifyListeners();
+    }
+
+    public Stack<Path> getUnpackedFiles() {
+        return filesUnpacked;
+    }
+
+    public long getSize() {
+        return size;
+    }
+
+    public long getUnpackedAmount() {
+        return unpackedAmount;
+    }
+
+    @Override
+    public void notifyListeners(Object message) {
+
     }
 
 }

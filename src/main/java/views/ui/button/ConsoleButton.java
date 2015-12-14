@@ -16,4 +16,5 @@ public class ConsoleButton extends Button {
     public void display() {
         System.out.print(getText());
     }
+
 }
