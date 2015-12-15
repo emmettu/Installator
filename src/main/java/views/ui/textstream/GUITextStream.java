@@ -27,12 +27,11 @@ public class GUITextStream extends TextStream {
 
     @Override
     public void display() {
-        area.update(area.getGraphics());
-        //scroller.update(scroller.getGraphics());
+        scroller.update(scroller.getGraphics());
     }
 
-    public JTextArea getTextArea() {
-        return area;
+    public JScrollPane getTextArea() {
+        return scroller;
     }
 
 }
