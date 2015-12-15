@@ -17,7 +17,6 @@ public class GUIButton extends Button {
     @Override
     public void update() {
         notifyControllers();
-        System.out.println("Starting unpacking routine");
     }
 
     @Override
