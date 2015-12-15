@@ -1,4 +1,4 @@
-package controllers.unpacker;
+package models.unpacking;
 
 import models.InstallerModel;
 import models.packaging.StandardPackage;
@@ -65,11 +65,6 @@ public class Unpacker extends InstallerModel {
 
     public long getUnpackedAmount() {
         return unpackedAmount;
-    }
-
-    @Override
-    public void notifyListeners(Object message) {
-
     }
 
 }

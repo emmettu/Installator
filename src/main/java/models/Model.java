@@ -5,5 +5,4 @@ package models;
  */
 public interface Model {
     void notifyListeners();
-    void notifyListeners(Object message);
 }

@@ -2,7 +2,7 @@ package views.ui.panels;
 
 import views.ui.button.GUIButton;
 import views.ui.textinput.GUITextInputField;
-import views.ui.textstream.GUIUnpackerTextStream;
+import views.ui.textstream.GUITextStream;
 
 import javax.swing.*;
 import java.awt.*;
@@ -14,7 +14,7 @@ public class PathInputPanel extends GUIPanel {
 
     private GUITextInputField field;
     private GUIButton button;
-    private GUIUnpackerTextStream stream;
+    private GUITextStream stream;
 
     public PathInputPanel(JFrame frame) {
         super(frame);
@@ -38,7 +38,7 @@ public class PathInputPanel extends GUIPanel {
         this.button = button;
     }
 
-    public void setUnpackStream(GUIUnpackerTextStream stream) {
+    public void setTextStream(GUITextStream stream) {
         this.stream = stream;
     }
 

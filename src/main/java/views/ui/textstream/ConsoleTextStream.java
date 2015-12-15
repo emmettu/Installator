@@ -7,7 +7,6 @@ public class ConsoleTextStream extends TextStream {
 
     @Override
     public void update() {
-
         display();
     }
 

@@ -9,7 +9,7 @@ public abstract class TextStream extends UIComponent {
 
     protected String text;
 
-    public void updateText(String text) {
+    public void setText(String text) {
         this.text = text;
     }
 

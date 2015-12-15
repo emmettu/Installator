@@ -1,5 +1,6 @@
 import controllers.textinput.PathInputController;
-import controllers.unpacker.Unpacker;
+import controllers.textstream.UnpackerDisplayController;
+import models.unpacking.Unpacker;
 import controllers.unpacker.UnpackerController;
 import models.packaging.StandardPackage;
 import views.ui.button.ConsoleButton;
@@ -8,9 +9,8 @@ import views.ui.panels.ConsolePanel;
 import views.ui.panels.PathInputPanel;
 import views.ui.textinput.ConsoleTextInputField;
 import views.ui.textinput.GUITextInputField;
-import views.ui.textstream.ConsoleUnpackerTextStream;
-import views.ui.textstream.GUIUnpackerTextStream;
-import views.ui.textstream.UnpackerTextStream;
+import views.ui.textstream.ConsoleTextStream;
+import views.ui.textstream.GUITextStream;
 
 import javax.swing.*;
 
@@ -42,7 +42,11 @@ public class BuildInstaller {
         controller.setPackage(standardPackage);
         button.addController(unpackerController);
         ConsolePanel panel = new ConsolePanel();
-        new ConsoleUnpackerTextStream(unpacker);
+        ConsoleTextStream unpackingStream = new ConsoleTextStream();
+        UnpackerDisplayController udc = new UnpackerDisplayController();
+        udc.setTextStream(unpackingStream);
+        udc.setUnpacker(unpacker);
+        unpacker.addController(udc);
 
         panel.addComponent(field);
         panel.addComponent(button);
@@ -66,10 +70,14 @@ public class BuildInstaller {
         JFrame frame = new JFrame("Installer");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         PathInputPanel panel = new PathInputPanel(frame);
-        GUIUnpackerTextStream stream = new GUIUnpackerTextStream(unpacker);
+        GUITextStream unpackerStream = new GUITextStream();
+        UnpackerDisplayController udc = new UnpackerDisplayController();
+        udc.setTextStream(unpackerStream);
+        udc.setUnpacker(unpacker);
+        unpacker.addController(udc);
         panel.setField(field);
         panel.setButton(button);
-        panel.setUnpackStream(stream);
+        panel.setTextStream(unpackerStream);
         panel.build();
 
         panel.display();

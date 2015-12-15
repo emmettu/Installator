@@ -83,7 +83,4 @@ public class StandardPackage extends Package {
         return rootPath;
     }
 
-    @Override
-    public void notifyListeners(Object message) {}
-
 }
