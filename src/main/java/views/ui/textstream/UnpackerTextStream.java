@@ -19,7 +19,7 @@ public abstract class UnpackerTextStream extends TextStream {
     @Override
     public void update() {
         Path latestFile = unpacker.getUnpackedFiles().peek();
-        setText(latestFile.toString());
+        updateText(latestFile.toString());
         display();
     }
 
