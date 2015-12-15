@@ -1,16 +1,12 @@
 package controllers.textstream;
 
-import models.packaging.StandardPackage;
 import models.unpacking.Unpacker;
-import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
-import utils.DummyPackage;
+import utils.ConsoleTest;
 import views.ui.textstream.ConsoleTextStream;
 import views.ui.textstream.TextStream;
 
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Stack;
@@ -20,17 +16,7 @@ import static org.junit.Assert.*;
 /**
  * Created by eunderhi on 15/12/15.
  */
-public class UnpackerDisplayControllerTest {
-
-
-    private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-    private final ByteArrayOutputStream errContent = new ByteArrayOutputStream();
-
-    @Before
-    public void setUpStreams() {
-        System.setOut(new PrintStream(outContent));
-        System.setErr(new PrintStream(errContent));
-    }
+public class UnpackerDisplayControllerTest extends ConsoleTest {
 
     @Test
     public void testPerformAction() throws Exception {
@@ -45,7 +31,7 @@ public class UnpackerDisplayControllerTest {
         assertEquals(outContent.toString(), "test\n");
     }
 
-    Unpacker getMockUnpacker() {
+    private Unpacker getMockUnpacker() {
         Stack<Path> stack = new Stack<>();
         stack.add(Paths.get("test"));
         Unpacker mockUnpacker = Mockito.mock(Unpacker.class);

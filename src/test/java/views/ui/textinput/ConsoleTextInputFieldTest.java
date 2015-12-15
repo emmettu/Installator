@@ -4,6 +4,7 @@ import controllers.Controller;
 import controllers.textinput.PathInputController;
 import org.junit.Before;
 import org.junit.Test;
+import utils.ConsoleTest;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -13,18 +14,14 @@ import static org.junit.Assert.*;
 /**
  * Created by eunderhi on 07/12/15.
  */
-public class ConsoleTextInputFieldTest {
+public class ConsoleTextInputFieldTest extends ConsoleTest {
 
-    private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-    private final ByteArrayOutputStream errContent = new ByteArrayOutputStream();
     private ConsoleTextInputField field ;
 
     @Before
-    public void setUpStreams() {
+    public void setUp() {
         field = new ConsoleTextInputField();
-        System.setOut(new PrintStream(outContent));
-        System.setErr(new PrintStream(errContent));
-}
+    }
 
     @Test
     public void testSetPrompt() throws Exception {
