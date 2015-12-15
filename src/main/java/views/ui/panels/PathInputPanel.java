@@ -15,6 +15,7 @@ public class PathInputPanel extends GUIPanel {
     private GUITextInputField field;
     private GUIButton button;
     private GUITextStream stream;
+    private GUIButton nextButton;
 
     public PathInputPanel(JFrame frame) {
         super(frame);
@@ -26,8 +27,14 @@ public class PathInputPanel extends GUIPanel {
         frame.getContentPane().removeAll();
         frame.getContentPane().setLayout(new BorderLayout());
         frame.getContentPane().add(field.getTextField(), BorderLayout.NORTH);
-        frame.getContentPane().add(button.getButton(), BorderLayout.SOUTH);
         frame.getContentPane().add(stream.getTextArea(), BorderLayout.CENTER);
+
+        JPanel buttonsPanel = new JPanel();
+        buttonsPanel.add(button.getButton());
+        buttonsPanel.add(nextButton.getButton());
+
+        frame.getContentPane().add(buttonsPanel, BorderLayout.SOUTH);
+
         frame.setSize(900, 600);
     }
 
@@ -41,6 +48,10 @@ public class PathInputPanel extends GUIPanel {
 
     public void setTextStream(GUITextStream stream) {
         this.stream = stream;
+    }
+
+    public void setNextButton(GUIButton button) {
+        this.nextButton = button;
     }
 
 }

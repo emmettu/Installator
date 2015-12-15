@@ -1,6 +1,7 @@
 package models;
 
 import controllers.DataWriter;
+import models.panels.PanelData;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -19,7 +20,7 @@ public class InstallationWriter implements DataWriter {
     public JSONObject writeDate() {
         JSONArray installData = new JSONArray();
         for(PanelData panel : panels) {
-            JSONObject data = panel.writeDate();
+            JSONObject data = panel.writeData();
             if(data != null) {
                 installData.put(data);
             }

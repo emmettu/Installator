@@ -1,6 +1,5 @@
-package models;
+package models.panels;
 
-import controllers.DataWriter;
 import org.json.JSONObject;
 
 /**
@@ -8,9 +7,9 @@ import org.json.JSONObject;
  * coherent panel structure in the same way that Panel encapsulates views.
  */
 
-public abstract class PanelData implements Model, DataWriter {
+public abstract class PanelData {
 
-    public abstract void writeData();
+    public abstract JSONObject writeData();
     public abstract void loadData(JSONObject json);
 
 }

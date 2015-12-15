@@ -1,8 +1,10 @@
+import controllers.installer.NextPanelController;
 import controllers.textinput.PathInputController;
 import controllers.textstream.UnpackerDisplayController;
 import models.unpacking.Unpacker;
 import controllers.unpacker.UnpackerController;
 import models.packaging.StandardPackage;
+import views.ui.Installer;
 import views.ui.button.ConsoleButton;
 import views.ui.button.GUIButton;
 import views.ui.panels.ConsolePanel;
@@ -75,12 +77,26 @@ public class BuildInstaller {
         udc.setTextStream(unpackerStream);
         udc.setUnpacker(unpacker);
         unpacker.addController(udc);
+
+
+        Installer installer = new Installer();
+
+        NextPanelController npc = new NextPanelController();
+        npc.setInstaller(installer);
+
+        GUIButton nextButton = new GUIButton();
+        nextButton.setText("next");
+        nextButton.addController(npc);
+
         panel.setField(field);
         panel.setButton(button);
         panel.setTextStream(unpackerStream);
+        panel.setNextButton(nextButton);
         panel.build();
 
-        panel.display();
+        installer.addPanel(panel);
+        installer.addPanel(panel);
+        installer.display();
     }
 
 }
