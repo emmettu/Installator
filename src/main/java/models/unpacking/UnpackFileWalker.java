@@ -1,21 +1,19 @@
 package models.unpacking;
 
 import models.packaging.Package;
-import models.unpacking.Unpacker;
+import models.packaging.utils.FileWalker;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.*;
 import java.nio.file.attribute.BasicFileAttributes;
-import java.util.List;
 
 /**
  * Created by eunderhi on 01/12/15.
  * Walks a zip filesystem and unpacks files. Pays attention to excludes, which it does not unpack.
  */
-public class UnpackFileWalker extends SimpleFileVisitor<Path> {
+public class UnpackFileWalker extends FileWalker {
 
-    private Package packageToUnpack;
     private Unpacker unpacker;
 
     @Override
@@ -39,37 +37,13 @@ public class UnpackFileWalker extends SimpleFileVisitor<Path> {
     }
 
     @Override
-    public FileVisitResult preVisitDirectory(Path dir, BasicFileAttributes attr) {
-        return checkExcludes(dir);
-    }
-
-    FileVisitResult checkExcludes(Path file) {
-        String fileName = file.toAbsolutePath().toString();
-        for(Path path : getExcludes()) {
-            String excludeName = path.toString() + "/";
-            if(fileName.equals(excludeName)) {
-                return FileVisitResult.SKIP_SUBTREE;
-            }
-        }
-        return FileVisitResult.CONTINUE;
-    }
-
-    @Override
     public FileVisitResult visitFileFailed(Path file, IOException exc) {
         System.err.println(exc);
         return FileVisitResult.CONTINUE;
     }
 
-    public List<Path> getExcludes() {
-        return packageToUnpack.getExcludes();
-    }
-
-    public void setPackage(Package packageToUnpack) {
-        this.packageToUnpack = packageToUnpack;
-    }
-
     public Path getUnpackDirectory() {
-        return packageToUnpack.getUnpackDirectory();
+        return thePackage.getUnpackDirectory();
     }
 
     public void setUnpacker(Unpacker unpacker) {

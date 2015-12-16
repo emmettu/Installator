@@ -7,8 +7,9 @@ import java.nio.file.attribute.BasicFileAttributes;
 
 /**
  * Created by eunderhi on 04/12/15.
+ * calculates the size of a package
  */
-public class SizeFileWalker extends SimpleFileVisitor<Path> {
+public class SizeFileWalker extends FileWalker {
 
     private long size = 0;
 

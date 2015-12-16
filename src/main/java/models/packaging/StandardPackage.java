@@ -54,6 +54,7 @@ public class StandardPackage extends Package {
 
     private long calculatePackageSize() {
         SizeFileWalker sizeCalculator = new SizeFileWalker();
+        sizeCalculator.setPackage(this);
         try {
             Files.walkFileTree(rootPath, sizeCalculator);
         }
