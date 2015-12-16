@@ -51,8 +51,8 @@ public class BuildInstaller {
         ConsoleProgressBar bar = new ConsoleProgressBar();
         ProgressBarController pbc = new ProgressBarController(bar);
         bar.setPrompt("Unpacking: ");
-        bar.setLength(40);
-        bar.setEndPrompt("Unpacking Complete");
+        bar.setLength(60);
+        bar.setEndPrompt(" Unpacking Complete");
         unpacker.addController(pbc);
         pbc.setUnpacker(unpacker);
 

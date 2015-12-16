@@ -20,8 +20,7 @@ public class ConsoleProgressBar extends ProgressBar {
     public void display() {
         System.out.print(prompt + makeBar() + "\r");
         if(getPercentDone() == 100) {
-            System.out.println();
-            System.out.println(endPrompt);
+            System.out.println(makeBar() + endPrompt);
         }
     }
 
