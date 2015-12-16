@@ -28,7 +28,7 @@ public class BuildInstaller {
         }
         else {
             buildGUI();
-    }
+        }
     }
 
     public static void buildConsole() {
