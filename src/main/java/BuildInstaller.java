@@ -12,9 +12,9 @@ import views.ui.button.GUIButton;
 import views.ui.panels.ConsolePanel;
 import views.ui.panels.PathInputPanel;
 import views.ui.progressbar.ConsoleProgressBar;
+import views.ui.progressbar.GUIProgressBar;
 import views.ui.textinput.ConsoleTextInputField;
 import views.ui.textinput.GUITextInputField;
-import views.ui.textstream.ConsoleTextStream;
 import views.ui.textstream.GUITextStream;
 
 import javax.swing.*;
@@ -86,6 +86,11 @@ public class BuildInstaller {
 
         Installer installer = new Installer();
 
+        GUIProgressBar bar = new GUIProgressBar();
+        ProgressBarController pbc = new ProgressBarController(bar);
+        pbc.setUnpacker(unpacker);
+        unpacker.addController(pbc);
+
         NextPanelController npc = new NextPanelController();
         npc.setInstaller(installer);
 
@@ -106,6 +111,7 @@ public class BuildInstaller {
         panel.setTextStream(unpackerStream);
         panel.setNextButton(nextButton);
         panel.setPreviousButton(previousButton);
+        panel.setBar(bar);
         panel.build();
 
         installer.addPanel(panel);

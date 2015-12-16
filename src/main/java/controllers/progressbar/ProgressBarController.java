@@ -21,7 +21,7 @@ public class ProgressBarController implements Controller {
         int percentDone = getPercentDone();
         if(bar.getPercentDone() != percentDone) {
             bar.setPercentDone(percentDone);
-            bar.display();
+            bar.update();
         }
     }
 

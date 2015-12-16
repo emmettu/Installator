@@ -1,6 +1,7 @@
 package views.ui.panels;
 
 import views.ui.button.GUIButton;
+import views.ui.progressbar.GUIProgressBar;
 import views.ui.textinput.GUITextInputField;
 import views.ui.textstream.GUITextStream;
 
@@ -17,6 +18,7 @@ public class PathInputPanel extends GUIPanel {
     private GUITextStream stream;
     private GUIButton nextButton;
     private GUIButton previousButton;
+    private GUIProgressBar bar;
 
     public PathInputPanel(JFrame frame) {
         super(frame);
@@ -28,7 +30,13 @@ public class PathInputPanel extends GUIPanel {
         frame.getContentPane().removeAll();
         frame.getContentPane().setLayout(new BorderLayout());
         frame.getContentPane().add(field.getTextField(), BorderLayout.NORTH);
-        frame.getContentPane().add(stream.getTextArea(), BorderLayout.CENTER);
+
+        JPanel progressPanel = new JPanel();
+        progressPanel.setLayout(new BoxLayout(progressPanel, BoxLayout.PAGE_AXIS));
+        progressPanel.add(bar.getBar());
+        progressPanel.add(stream.getTextArea());
+
+        frame.getContentPane().add(progressPanel, BorderLayout.CENTER);
 
         JPanel buttonsPanel = new JPanel();
         buttonsPanel.add(previousButton.getButton());
@@ -60,4 +68,7 @@ public class PathInputPanel extends GUIPanel {
         this.previousButton = button;
     }
 
+    public void setBar(GUIProgressBar bar) {
+        this.bar = bar;
+    }
 }
