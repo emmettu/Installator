@@ -1,4 +1,5 @@
 import controllers.installer.NextPanelController;
+import controllers.installer.PreviousPanelController;
 import controllers.textinput.PathInputController;
 import controllers.textstream.UnpackerDisplayController;
 import models.unpacking.Unpacker;
@@ -27,7 +28,7 @@ public class BuildInstaller {
         }
         else {
             buildGUI();
-        }
+    }
     }
 
     public static void buildConsole() {
@@ -78,20 +79,28 @@ public class BuildInstaller {
         udc.setUnpacker(unpacker);
         unpacker.addController(udc);
 
-
         Installer installer = new Installer();
 
         NextPanelController npc = new NextPanelController();
         npc.setInstaller(installer);
 
+        PreviousPanelController ppc = new PreviousPanelController();
+        ppc.setInstaller(installer);
+
         GUIButton nextButton = new GUIButton();
-        nextButton.setText("next");
+        nextButton.setText("Next");
         nextButton.addController(npc);
+
+        GUIButton previousButton = new GUIButton();
+        previousButton.setText("Previous");
+
+        previousButton.addController(ppc);
 
         panel.setField(field);
         panel.setButton(button);
         panel.setTextStream(unpackerStream);
         panel.setNextButton(nextButton);
+        panel.setPreviousButton(previousButton);
         panel.build();
 
         installer.addPanel(panel);

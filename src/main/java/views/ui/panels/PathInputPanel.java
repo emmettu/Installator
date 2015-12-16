@@ -16,6 +16,7 @@ public class PathInputPanel extends GUIPanel {
     private GUIButton button;
     private GUITextStream stream;
     private GUIButton nextButton;
+    private GUIButton previousButton;
 
     public PathInputPanel(JFrame frame) {
         super(frame);
@@ -30,6 +31,7 @@ public class PathInputPanel extends GUIPanel {
         frame.getContentPane().add(stream.getTextArea(), BorderLayout.CENTER);
 
         JPanel buttonsPanel = new JPanel();
+        buttonsPanel.add(previousButton.getButton());
         buttonsPanel.add(button.getButton());
         buttonsPanel.add(nextButton.getButton());
 
@@ -52,6 +54,10 @@ public class PathInputPanel extends GUIPanel {
 
     public void setNextButton(GUIButton button) {
         this.nextButton = button;
+    }
+
+    public void setPreviousButton(GUIButton button) {
+        this.previousButton = button;
     }
 
 }
