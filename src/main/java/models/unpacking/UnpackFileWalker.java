@@ -1,6 +1,5 @@
 package models.unpacking;
 
-import models.packaging.Package;
 import models.packaging.utils.FileWalker;
 
 import java.io.File;

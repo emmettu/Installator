@@ -72,6 +72,7 @@ public class StandardPackage extends Package {
         Path excludePath = jarFileSystem.getPath(rootPath.toString(), excludePathName);
         excludePath = excludePath.toAbsolutePath();
         excludes.add(excludePath);
+        calculatePackageSize();
     }
 
     @Override
