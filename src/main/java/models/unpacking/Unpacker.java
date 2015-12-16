@@ -22,7 +22,6 @@ public class Unpacker extends InstallerModel {
     private StandardPackage packageToUnpack;
     private UnpackFileWalker walker = new UnpackFileWalker();
     private Stack<Path> filesUnpacked = new Stack<>();
-    private long size;
     private long unpackedAmount = 0;
 
     public Unpacker(StandardPackage thePackage) {
@@ -42,7 +41,6 @@ public class Unpacker extends InstallerModel {
         this.packageToUnpack = packageToUnpack;
         walker.setPackage(packageToUnpack);
         walker.setUnpacker(this);
-        size = packageToUnpack.getSize();
     }
 
     private Path getRootPath() {
@@ -60,7 +58,7 @@ public class Unpacker extends InstallerModel {
     }
 
     public long getSize() {
-        return size;
+        return packageToUnpack.getSize();
     }
 
     public long getUnpackedAmount() {

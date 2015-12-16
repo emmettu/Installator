@@ -7,7 +7,7 @@ import views.ui.UIComponent;
  */
 public abstract class ProgressBar extends UIComponent {
 
-    private int percentDone;
+    private int percentDone = 0;
 
     public int getPercentDone() {
         return percentDone;

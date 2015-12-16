@@ -26,7 +26,6 @@ public class StandardPackage extends Package {
         String jarFilePath = getRunningJarLocation();
         jarFileSystem = getJarFileSystem(jarFilePath);
         rootPath = jarFileSystem.getPath("packages", packageName);
-        size = calculatePackageSize();
     }
 
     public String getRunningJarLocation() {
@@ -52,7 +51,7 @@ public class StandardPackage extends Package {
         return fs;
     }
 
-    private long calculatePackageSize() {
+    private void calculatePackageSize() {
         SizeFileWalker sizeCalculator = new SizeFileWalker();
         sizeCalculator.setPackage(this);
         try {
@@ -61,7 +60,7 @@ public class StandardPackage extends Package {
         catch(IOException e) {
             e.printStackTrace();
         }
-        return sizeCalculator.getSize();
+        size = sizeCalculator.getSize();
     }
 
     public long getSize() {

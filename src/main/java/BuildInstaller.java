@@ -1,5 +1,6 @@
 import controllers.installer.NextPanelController;
 import controllers.installer.PreviousPanelController;
+import controllers.progressbar.ProgressBarController;
 import controllers.textinput.PathInputController;
 import controllers.textstream.UnpackerDisplayController;
 import models.unpacking.Unpacker;
@@ -10,6 +11,7 @@ import views.ui.button.ConsoleButton;
 import views.ui.button.GUIButton;
 import views.ui.panels.ConsolePanel;
 import views.ui.panels.PathInputPanel;
+import views.ui.progressbar.ConsoleProgressBar;
 import views.ui.textinput.ConsoleTextInputField;
 import views.ui.textinput.GUITextInputField;
 import views.ui.textstream.ConsoleTextStream;
@@ -45,11 +47,14 @@ public class BuildInstaller {
         controller.setPackage(standardPackage);
         button.addController(unpackerController);
         ConsolePanel panel = new ConsolePanel();
-        ConsoleTextStream unpackingStream = new ConsoleTextStream();
-        UnpackerDisplayController udc = new UnpackerDisplayController();
-        udc.setTextStream(unpackingStream);
-        udc.setUnpacker(unpacker);
-        unpacker.addController(udc);
+
+        ConsoleProgressBar bar = new ConsoleProgressBar();
+        ProgressBarController pbc = new ProgressBarController(bar);
+        bar.setPrompt("Unpacking: ");
+        bar.setLength(40);
+        bar.setEndPrompt("Unpacking Complete");
+        unpacker.addController(pbc);
+        pbc.setUnpacker(unpacker);
 
         panel.addComponent(field);
         panel.addComponent(button);
