@@ -27,7 +27,6 @@ public class GUITextStream extends TextStream {
 
     @Override
     public void display() {
-        scroller.revalidate();
         JScrollBar bar = scroller.getVerticalScrollBar();
         bar.setValue(bar.getMaximum());
     }
