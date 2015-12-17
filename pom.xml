@@ -85,7 +85,6 @@
                                     <outputDirectory>${project.build.directory}/classes/packages</outputDirectory>
                                 </artifactItem>
                             </artifactItems>
-                            <stripVersion>true</stripVersion>
                             <outputAbsoluteArtifactFilename>true</outputAbsoluteArtifactFilename>
                         </configuration>
                     </execution>
