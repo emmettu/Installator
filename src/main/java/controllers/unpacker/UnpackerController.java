@@ -17,6 +17,6 @@ public class UnpackerController implements Controller {
 
     @Override
     public void performAction() {
-        unpacker.unpack();
+        new Thread(unpacker::unpack).start();
     }
 }
