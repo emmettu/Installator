@@ -10,6 +10,7 @@ import views.ui.Installer;
 import views.ui.button.ConsoleButton;
 import views.ui.button.GUIButton;
 import views.ui.panels.ConsolePanel;
+import views.ui.panels.LanguageSelectPanel;
 import views.ui.panels.PathInputPanel;
 import views.ui.progressbar.ConsoleProgressBar;
 import views.ui.progressbar.GUIProgressBar;
@@ -52,7 +53,7 @@ public class BuildInstaller {
         ProgressBarController pbc = new ProgressBarController(bar);
         bar.setPrompt("Unpacking: ");
         bar.setLength(60);
-        bar.setEndPrompt(" Unpacking Complete");
+        bar.setEndPrompt(" You did it. You unpacked the package.");
         unpacker.addController(pbc);
         pbc.setUnpacker(unpacker);
 
@@ -111,7 +112,7 @@ public class BuildInstaller {
         panel.setPreviousButton(previousButton);
         panel.setBar(bar);
 
-        installer.addPanel(panel);
+        //installer.addPanel(new LanguageSelectPanel());
         installer.addPanel(panel);
         installer.display();
     }

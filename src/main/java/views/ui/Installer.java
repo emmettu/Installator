@@ -30,7 +30,7 @@ public class Installer implements View {
 
     @Override
     public void display() {
-        panels.get(currentPanelIndex).display();
+        panels.get(currentPanelIndex).build();
     }
 
     public Panel getCurrentPanel() {
@@ -51,7 +51,6 @@ public class Installer implements View {
 
     public void addPanel(GUIPanel panel) {
         panel.setFrame(frame);
-        panel.build();
         panels.add(panel);
     }
 
