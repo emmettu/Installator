@@ -20,10 +20,6 @@ public class PathInputPanel extends GUIPanel {
     private GUIButton previousButton;
     private GUIProgressBar bar;
 
-    public PathInputPanel(JFrame frame) {
-        super(frame);
-    }
-
     @Override
     public void build() {
         button.setText("Install");
@@ -71,4 +67,5 @@ public class PathInputPanel extends GUIPanel {
     public void setBar(GUIProgressBar bar) {
         this.bar = bar;
     }
+
 }

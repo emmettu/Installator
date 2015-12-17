@@ -21,7 +21,7 @@ public class GUIProgressBar extends ProgressBar {
 
     @Override
     public void display() {
-        bar.update(bar.getGraphics());
+        bar.revalidate();
     }
 
     public JProgressBar getBar() {

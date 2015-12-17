@@ -75,9 +75,7 @@ public class BuildInstaller {
         controller.setTextInputField(field);
         controller.setPackage(standardPackage);
         button.addController(unpackerController);
-        JFrame frame = new JFrame("Installer");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        PathInputPanel panel = new PathInputPanel(frame);
+        PathInputPanel panel = new PathInputPanel();
         GUITextStream unpackerStream = new GUITextStream();
         UnpackerDisplayController udc = new UnpackerDisplayController();
         udc.setTextStream(unpackerStream);
@@ -112,7 +110,6 @@ public class BuildInstaller {
         panel.setNextButton(nextButton);
         panel.setPreviousButton(previousButton);
         panel.setBar(bar);
-        panel.build();
 
         installer.addPanel(panel);
         installer.addPanel(panel);

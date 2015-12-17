@@ -16,7 +16,7 @@ public class GUIButton extends Button {
 
     @Override
     public void update() {
-        notifyControllers();
+        new Thread(this::notifyControllers).start();
     }
 
     @Override

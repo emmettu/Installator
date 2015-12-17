@@ -9,15 +9,13 @@ public abstract class GUIPanel extends Panel {
 
     protected JFrame frame;
 
-    public GUIPanel(JFrame frame) {
-        this.frame = frame;
-        frame.setVisible(true);
-    }
-
     @Override
-    protected void displayPanel() {
-    }
+    protected void displayPanel() {}
 
     public abstract void build();
+
+    public void setFrame(JFrame frame) {
+        this.frame = frame;
+    }
 
 }
