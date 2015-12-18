@@ -18,8 +18,6 @@ import views.ui.textinput.ConsoleTextInputField;
 import views.ui.textinput.GUITextInputField;
 import views.ui.textstream.GUITextStream;
 
-import javax.swing.*;
-
 /**
  * Created by eunderhi on 25/11/15.
  */
@@ -105,12 +103,12 @@ public class BuildInstaller {
 
         previousButton.addController(ppc);
 
-        panel.setField(field);
-        panel.setButton(button);
-        panel.setTextStream(unpackerStream);
-        panel.setNextButton(nextButton);
-        panel.setPreviousButton(previousButton);
-        panel.setBar(bar);
+        panel.setField(field.getTextField());
+        panel.setButton(button.getButton());
+        panel.setTextStream(unpackerStream.getTextArea());
+        panel.setNextButton(nextButton.getButton());
+        panel.setPreviousButton(previousButton.getButton());
+        panel.setBar(bar.getBar());
 
         //installer.addPanel(new LanguageSelectPanel());
         installer.addPanel(panel);

@@ -1,10 +1,5 @@
 package views.ui.panels;
 
-import views.ui.button.GUIButton;
-import views.ui.progressbar.GUIProgressBar;
-import views.ui.textinput.GUITextInputField;
-import views.ui.textstream.GUITextStream;
-
 import javax.swing.*;
 import java.awt.*;
 
@@ -13,58 +8,58 @@ import java.awt.*;
  */
 public class PathInputPanel extends GUIPanel {
 
-    private GUITextInputField field;
-    private GUIButton button;
-    private GUITextStream stream;
-    private GUIButton nextButton;
-    private GUIButton previousButton;
-    private GUIProgressBar bar;
+    private JTextField field;
+    private JButton button;
+    private JScrollPane stream;
+    private JButton nextButton;
+    private JButton previousButton;
+    private JProgressBar bar;
 
     @Override
     public void build() {
         button.setText("Install");
         frame.getContentPane().removeAll();
         frame.getContentPane().setLayout(new BorderLayout());
-        frame.getContentPane().add(field.getTextField(), BorderLayout.NORTH);
+        frame.getContentPane().add(field, BorderLayout.NORTH);
 
         JPanel progressPanel = new JPanel();
         progressPanel.setLayout(new BoxLayout(progressPanel, BoxLayout.PAGE_AXIS));
-        progressPanel.add(bar.getBar());
-        progressPanel.add(stream.getTextArea());
+        progressPanel.add(bar);
+        progressPanel.add(stream);
 
         frame.getContentPane().add(progressPanel, BorderLayout.CENTER);
 
         JPanel buttonsPanel = new JPanel();
-        buttonsPanel.add(previousButton.getButton());
-        buttonsPanel.add(button.getButton());
-        buttonsPanel.add(nextButton.getButton());
+        buttonsPanel.add(previousButton);
+        buttonsPanel.add(button);
+        buttonsPanel.add(nextButton);
 
         frame.getContentPane().add(buttonsPanel, BorderLayout.SOUTH);
 
         frame.setSize(900, 600);
     }
 
-    public void setField(GUITextInputField field) {
+    public void setField(JTextField field) {
         this.field = field;
     }
 
-    public void setButton(GUIButton button) {
+    public void setButton(JButton button) {
         this.button = button;
     }
 
-    public void setTextStream(GUITextStream stream) {
+    public void setTextStream(JScrollPane stream) {
         this.stream = stream;
     }
 
-    public void setNextButton(GUIButton button) {
+    public void setNextButton(JButton button) {
         this.nextButton = button;
     }
 
-    public void setPreviousButton(GUIButton button) {
+    public void setPreviousButton(JButton button) {
         this.previousButton = button;
     }
 
-    public void setBar(GUIProgressBar bar) {
+    public void setBar(JProgressBar bar) {
         this.bar = bar;
     }
 

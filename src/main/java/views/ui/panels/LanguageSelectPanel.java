@@ -12,4 +12,5 @@ public class LanguageSelectPanel extends GUIPanel {
         frame.getContentPane().removeAll();
         frame.getContentPane().add(new JTextField());
     }
+    
 }
