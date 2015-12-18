@@ -11,7 +11,7 @@ import models.unpacking.Unpacker;
 public class UnpackerController implements Controller {
 
     private Unpacker unpacker;
-    private boolean singleThreaded = true;
+    private boolean singleThreaded = false;
 
     public UnpackerController(Unpacker unpacker) {
         this.unpacker = unpacker;
