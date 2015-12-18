@@ -18,8 +18,4 @@ public abstract class ComboBox extends UIComponent {
         return userSelection;
     }
 
-    public String[] getSelections() {
-        return selections;
-    }
-
 }
