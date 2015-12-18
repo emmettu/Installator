@@ -18,9 +18,9 @@ public class Installer implements View {
     private JFrame frame;
 
     public Installer() {
-            frame = new JFrame("Installer");
-            frame.setVisible(true);
-            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame = new JFrame("Installer");
+        frame.setVisible(true);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
     @Override

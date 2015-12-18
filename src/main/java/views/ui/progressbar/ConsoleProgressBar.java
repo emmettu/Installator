@@ -2,8 +2,7 @@ package views.ui.progressbar;
 
 /**
  * Created by eunderhi on 16/12/15.
- * A progress bar view for console mode. Looks like this:
- * [=========-----------]
+ * A progress bar view for console mode.
  */
 public class ConsoleProgressBar extends ProgressBar {
 
