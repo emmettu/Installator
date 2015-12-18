@@ -11,6 +11,7 @@ import models.unpacking.Unpacker;
 public class UnpackerController implements Controller {
 
     private Unpacker unpacker;
+    private boolean singleThreaded = true;
 
     public UnpackerController(Unpacker unpacker) {
         this.unpacker = unpacker;
@@ -18,6 +19,15 @@ public class UnpackerController implements Controller {
 
     @Override
     public void performAction() {
-        new Thread(unpacker::unpack).start();
+        if(singleThreaded) {
+            unpacker.unpack();
+        }
+        else {
+            new Thread(unpacker::unpack).start();
+        }
+    }
+
+    public void setSingleThreaded(boolean singleThreaded) {
+        this.singleThreaded = singleThreaded;
     }
 }

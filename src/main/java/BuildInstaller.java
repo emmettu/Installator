@@ -1,3 +1,4 @@
+import controllers.combobox.ComboBoxController;
 import controllers.installer.NextPanelController;
 import controllers.installer.PreviousPanelController;
 import controllers.progressbar.ProgressBarController;
@@ -9,6 +10,7 @@ import models.packaging.StandardPackage;
 import views.ui.Installer;
 import views.ui.button.ConsoleButton;
 import views.ui.button.GUIButton;
+import views.ui.combobox.ConsoleComboBox;
 import views.ui.panels.ConsolePanel;
 import views.ui.panels.LanguageSelectPanel;
 import views.ui.panels.PathInputPanel;
@@ -37,6 +39,7 @@ public class BuildInstaller {
         standardPackage.addExclude("docs/contrib");
         Unpacker unpacker = new Unpacker(standardPackage);
         UnpackerController unpackerController = new UnpackerController(unpacker);
+        unpackerController.setSingleThreaded(true);
         ConsoleTextInputField field = new ConsoleTextInputField();
         field.setPrompt("Enter the unpacking directory: ");
         ConsoleButton button = new ConsoleButton();
@@ -55,8 +58,14 @@ public class BuildInstaller {
         unpacker.addController(pbc);
         pbc.setUnpacker(unpacker);
 
+        ConsoleComboBox combo = new ConsoleComboBox("yeah", "sure", "maybe");
+        ComboBoxController cbc = new ComboBoxController();
+        cbc.setComboBox(combo);
+        combo.addController(cbc);
+
         panel.addComponent(field);
         panel.addComponent(button);
+        panel.addComponent(combo);
 
         panel.display();
 

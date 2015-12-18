@@ -4,6 +4,7 @@ import javax.swing.*;
 
 /**
  * Created by eunderhi on 09/12/15.
+ * The base gui panel that all GUI panels derive from.
  */
 public abstract class GUIPanel extends Panel {
 
