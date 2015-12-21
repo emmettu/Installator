@@ -11,6 +11,7 @@ public class GUIProgressBar extends ProgressBar {
 
     public GUIProgressBar() {
         bar.setValue(getPercentDone());
+        bar.setStringPainted(true);
     }
 
     @Override

@@ -26,6 +26,7 @@ public class StandardPackage extends Package {
         String jarFilePath = getRunningJarLocation();
         jarFileSystem = getJarFileSystem(jarFilePath);
         rootPath = jarFileSystem.getPath("packages", packageName);
+        calculatePackageSize();
     }
 
     public String getRunningJarLocation() {

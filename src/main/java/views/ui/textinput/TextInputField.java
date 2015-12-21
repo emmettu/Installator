@@ -7,7 +7,7 @@ import views.ui.UIComponent;
  */
 public abstract class TextInputField extends UIComponent {
 
-    private String text;
+    private String text = "";
 
     public String getText() {
         return text;
