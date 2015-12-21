@@ -11,7 +11,7 @@ public class PathInputPanel extends GUIPanel {
     private JTextField field;
     private JButton button;
     private JScrollPane stream;
-    private JProgressBar bar;
+    private JPanel progressPanel = new JPanel();
 
     @Override
     public void build(JPanel contentPanel) {
@@ -19,10 +19,7 @@ public class PathInputPanel extends GUIPanel {
         button.setText("Install");
         contentPanel.add(field, BorderLayout.NORTH);
 
-        JPanel progressPanel = new JPanel();
         progressPanel.setLayout(new BoxLayout(progressPanel, BoxLayout.PAGE_AXIS));
-        progressPanel.add(bar);
-        progressPanel.add(stream);
 
         contentPanel.add(progressPanel, BorderLayout.CENTER);
 
@@ -44,8 +41,8 @@ public class PathInputPanel extends GUIPanel {
         this.stream = stream;
     }
 
-    public void setBar(JProgressBar bar) {
-        this.bar = bar;
+    public void addBar(JProgressBar bar) {
+        progressPanel.add(bar);
     }
 
 }

@@ -2,21 +2,26 @@ package controllers.textinput;
 
 import models.packaging.Package;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by eunderhi on 07/12/15.
  */
 public class PathInputController extends TextInputController {
 
-    private Package thePackage;
+    private List<Package> packages = new ArrayList<>();
 
     @Override
     public void performAction() {
         String path = getTextInputField().getText();
-        thePackage.setUnpackDirectory(path);
+        for(Package thePackage: packages) {
+            thePackage.setUnpackDirectory(path);
+        }
     }
 
-    public void setPackage(Package thePackage) {
-        this.thePackage = thePackage;
+    public void addPackage(Package thePackage) {
+        packages.add(thePackage);
     }
 
 }
