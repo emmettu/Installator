@@ -1,11 +1,11 @@
 package views.ui.textinput;
 
-import views.ui.UIComponent;
+import views.ui.UserInputView;
 
 /**
  * Created by eunderhi on 07/12/15.
  */
-public abstract class TextInputField extends UIComponent {
+public abstract class TextInputField extends UserInputView {
 
     private String text = "";
 

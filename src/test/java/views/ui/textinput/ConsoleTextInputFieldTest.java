@@ -16,7 +16,7 @@ import static org.junit.Assert.*;
  */
 public class ConsoleTextInputFieldTest extends ConsoleTest {
 
-    private ConsoleTextInputField field ;
+    private ConsoleTextInputField field;
 
     @Before
     public void setUp() {

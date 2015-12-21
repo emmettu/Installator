@@ -22,6 +22,7 @@ public class PathInputController extends TextInputController {
 
     public void addPackage(Package thePackage) {
         packages.add(thePackage);
+        thePackage.setUnpackDirectory(getTextInputField().getText());
     }
 
 }
