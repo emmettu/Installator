@@ -15,7 +15,6 @@ public abstract class Package extends InstallerModel {
 
     private String path;
     private Path unpackDirectory;
-    List<Package> subPacks;
 
     public Path getUnpackDirectory() {
         return unpackDirectory;
