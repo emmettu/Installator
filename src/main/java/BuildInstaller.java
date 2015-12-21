@@ -116,9 +116,10 @@ public class BuildInstaller {
         panel.setField(field.getTextField());
         panel.setButton(button.getButton());
         panel.setTextStream(unpackerStream.getTextArea());
-        panel.setNextButton(nextButton.getButton());
-        panel.setPreviousButton(previousButton.getButton());
         panel.setBar(bar.getBar());
+
+        installer.addNavButton(previousButton.getButton());
+        installer.addNavButton(nextButton.getButton());
 
         GUIComboBox box = new GUIComboBox("English", "French", "Japanese", "Spanish");
         ComboBoxController cbc = new ComboBoxController();

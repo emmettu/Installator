@@ -15,7 +15,7 @@ public abstract class GUIPanel extends Panel {
 
     }
 
-    public abstract void build();
+    public abstract void build(JPanel contentPanel);
 
     public void setFrame(JFrame frame) {
         this.frame = frame;

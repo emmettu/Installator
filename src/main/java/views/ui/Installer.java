@@ -5,6 +5,7 @@ import views.ui.panels.GUIPanel;
 import views.ui.panels.Panel;
 
 import javax.swing.*;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,11 +17,19 @@ public class Installer implements View {
     private List<GUIPanel> panels = new ArrayList<>();
     private int currentPanelIndex = 0;
     private JFrame frame;
+    private JPanel contentPanel;
+    private JPanel buttonPanel;
 
     public Installer() {
         frame = new JFrame("Installer");
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setLayout(new BorderLayout());
+        contentPanel = new JPanel();
+        contentPanel.setLayout(new BorderLayout());
+        buttonPanel = new JPanel();
+        frame.add(contentPanel, BorderLayout.CENTER);
+        frame.add(buttonPanel, BorderLayout.SOUTH);
     }
 
     @Override
@@ -30,7 +39,8 @@ public class Installer implements View {
 
     @Override
     public void display() {
-        panels.get(currentPanelIndex).build();
+        panels.get(currentPanelIndex).build(contentPanel);
+        contentPanel.updateUI();
     }
 
     public Panel getCurrentPanel() {
@@ -52,6 +62,10 @@ public class Installer implements View {
     public void addPanel(GUIPanel panel) {
         panel.setFrame(frame);
         panels.add(panel);
+    }
+
+    public void addNavButton(JButton button) {
+        buttonPanel.add(button);
     }
 
 }

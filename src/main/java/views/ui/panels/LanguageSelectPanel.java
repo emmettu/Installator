@@ -11,10 +11,9 @@ public class LanguageSelectPanel extends GUIPanel {
     private JComboBox comboBox;
 
     @Override
-    public void build() {
-        frame.getContentPane().removeAll();
-        frame.setLayout(new BorderLayout());
-        frame.getContentPane().add(comboBox, BorderLayout.NORTH);
+    public void build(JPanel contentPanel) {
+        contentPanel.removeAll();
+        contentPanel.add(comboBox, BorderLayout.NORTH);
     }
 
     public void setComboBox(JComboBox box) {
