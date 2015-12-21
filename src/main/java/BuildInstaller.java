@@ -11,6 +11,7 @@ import views.ui.Installer;
 import views.ui.button.ConsoleButton;
 import views.ui.button.GUIButton;
 import views.ui.combobox.ConsoleComboBox;
+import views.ui.combobox.GUIComboBox;
 import views.ui.panels.ConsolePanel;
 import views.ui.panels.LanguageSelectPanel;
 import views.ui.panels.PathInputPanel;
@@ -119,7 +120,13 @@ public class BuildInstaller {
         panel.setPreviousButton(previousButton.getButton());
         panel.setBar(bar.getBar());
 
-        //installer.addPanel(new LanguageSelectPanel());
+        GUIComboBox box = new GUIComboBox("English", "French", "Japanese", "Spanish");
+        ComboBoxController cbc = new ComboBoxController();
+        cbc.setComboBox(box);
+        box.addController(cbc);
+        LanguageSelectPanel langPanel = new LanguageSelectPanel();
+        langPanel.setComboBox(box.getBox());
+        installer.addPanel(langPanel);
         installer.addPanel(panel);
         installer.display();
     }
