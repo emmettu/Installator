@@ -19,6 +19,8 @@ public class Installer implements View {
     private JFrame frame;
     private JPanel contentPanel;
     private JPanel buttonPanel;
+    public static final int WIDTH = 930;
+    public static final int HEIGHT = 600;
 
     public Installer() {
         frame = new JFrame("Installer");
@@ -30,6 +32,8 @@ public class Installer implements View {
         buttonPanel = new JPanel();
         frame.add(contentPanel, BorderLayout.CENTER);
         frame.add(buttonPanel, BorderLayout.SOUTH);
+        frame.setPreferredSize(new Dimension(WIDTH, HEIGHT));
+        UIManager.put("Button.defaultButtonFollowsFocus", Boolean.TRUE);
     }
 
     @Override
