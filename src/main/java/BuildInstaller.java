@@ -40,7 +40,6 @@ public class BuildInstaller {
         standardPackage.addExclude("docs/contrib");
         Unpacker unpacker = new Unpacker(standardPackage);
         UnpackerController unpackerController = new UnpackerController(unpacker);
-        unpackerController.setSingleThreaded(true);
         ConsoleTextInputField field = new ConsoleTextInputField();
         field.setPrompt("Enter the unpacking directory: ");
         ConsoleButton button = new ConsoleButton();
@@ -104,6 +103,14 @@ public class BuildInstaller {
         UnpackerController modulesController = new UnpackerController(modulesUnpacker);
         UnpackerController standaloneController = new UnpackerController(standaloneUnpacker);
         UnpackerController welcomeController = new UnpackerController(welcomeUnpacker);
+        mainController.multiThread();
+        docsController.multiThread();
+        appclientController.multiThread();
+        binController.multiThread();
+        domainController.multiThread();
+        modulesController.multiThread();
+        standaloneController.multiThread();
+        welcomeController.multiThread();
         GUITextInputField field = new GUITextInputField();
         GUIButton button = new GUIButton();
         PathInputController controller = new PathInputController();
