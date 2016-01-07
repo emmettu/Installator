@@ -21,6 +21,8 @@ import views.ui.textinput.ConsoleTextInputField;
 import views.ui.textinput.GUITextInputField;
 import views.ui.textstream.GUITextStream;
 
+import javax.swing.*;
+
 /**
  * Created by eunderhi on 25/11/15.
  */
@@ -72,6 +74,7 @@ public class BuildInstaller {
     }
 
     public static void buildGUI() {
+        SwingUtilities.invokeLater(BuildInstaller::setLookAndFeel);
         StandardPackage mainPack = new StandardPackage("wildfly-10.0.0.CR4");
         mainPack.addExclude("docs");
         mainPack.addExclude("appclient");
@@ -221,4 +224,13 @@ public class BuildInstaller {
         installer.display();
     }
 
+
+    private static void setLookAndFeel() {
+        try {
+            UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

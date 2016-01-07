@@ -19,21 +19,27 @@ public class Installer implements View {
     private JFrame frame;
     private JPanel contentPanel;
     private JPanel buttonPanel;
-    public static final int WIDTH = 930;
-    public static final int HEIGHT = 600;
+    public static final int WIDTH = 500;
+    public static final int HEIGHT = 500;
 
     public Installer() {
+        setUpFrame();
+        contentPanel = new JPanel();
+        contentPanel.setLayout(new BorderLayout());
+        contentPanel.setPreferredSize(new Dimension(WIDTH, HEIGHT));
+        buttonPanel = new JPanel();
+        frame.add(contentPanel, BorderLayout.CENTER);
+        frame.add(buttonPanel, BorderLayout.SOUTH);
+        UIManager.put("Button.defaultButtonFollowsFocus", Boolean.TRUE);
+        frame.pack();
+        SwingUtilities.updateComponentTreeUI(frame);
+    }
+
+    private void setUpFrame() {
         frame = new JFrame("Installer");
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(new BorderLayout());
-        contentPanel = new JPanel();
-        contentPanel.setLayout(new BorderLayout());
-        buttonPanel = new JPanel();
-        frame.add(contentPanel, BorderLayout.CENTER);
-        frame.add(buttonPanel, BorderLayout.SOUTH);
-        frame.setPreferredSize(new Dimension(WIDTH, HEIGHT));
-        UIManager.put("Button.defaultButtonFollowsFocus", Boolean.TRUE);
     }
 
     @Override

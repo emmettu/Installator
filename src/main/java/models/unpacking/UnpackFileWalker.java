@@ -17,6 +17,7 @@ public class UnpackFileWalker extends FileWalker {
 
     @Override
     public FileVisitResult visitFile(Path file, BasicFileAttributes attr) {
+
         copyFileToInstallationDirectory(file);
         unpacker.addUnpackedFile(file, attr.size());
 
@@ -29,6 +30,9 @@ public class UnpackFileWalker extends FileWalker {
         destinationFile.mkdirs();
         try {
             Files.copy(file, destination, StandardCopyOption.REPLACE_EXISTING);
+            if(destinationFile.getName().endsWith(".sh")) {
+                destinationFile.setExecutable(true);
+            }
         }
         catch(IOException e) {
             e.printStackTrace();
