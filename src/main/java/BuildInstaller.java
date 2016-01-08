@@ -3,7 +3,6 @@ import controllers.installer.NextPanelController;
 import controllers.installer.PreviousPanelController;
 import controllers.progressbar.ProgressBarController;
 import controllers.textinput.PathInputController;
-import controllers.textstream.UnpackerDisplayController;
 import models.packaging.utils.PackageSet;
 import models.unpacking.Unpacker;
 import controllers.unpacker.UnpackerController;
@@ -20,7 +19,6 @@ import views.ui.progressbar.ConsoleProgressBar;
 import views.ui.progressbar.GUIProgressBar;
 import views.ui.textinput.ConsoleTextInputField;
 import views.ui.textinput.GUITextInputField;
-import views.ui.textstream.GUITextStream;
 
 import javax.swing.*;
 import java.util.ArrayList;
@@ -83,8 +81,13 @@ public class BuildInstaller {
         packages.add("")
                     .exclude("docs").exclude("appclient").exclude("bin").exclude("domain")
                     .exclude("modules").exclude("standalone").exclude("welcome-content")
-                .add("docs").add("appclient").add("bin").add("domain")
-                .add("modules").add("standalone").add("welcome-content");
+                .add("docs")
+                .add("appclient")
+                .add("bin")
+                .add("domain")
+                .add("modules")
+                .add("standalone")
+                .add("welcome-content");
         packages.addMultiThreadedUnpackers();
 
 
