@@ -4,6 +4,7 @@ import controllers.installer.PreviousPanelController;
 import controllers.progressbar.ProgressBarController;
 import controllers.textinput.PathInputController;
 import controllers.textstream.UnpackerDisplayController;
+import models.packaging.utils.PackageSet;
 import models.unpacking.Unpacker;
 import controllers.unpacker.UnpackerController;
 import models.packaging.StandardPackage;
@@ -22,6 +23,8 @@ import views.ui.textinput.GUITextInputField;
 import views.ui.textstream.GUITextStream;
 
 import javax.swing.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by eunderhi on 25/11/15.
@@ -75,113 +78,39 @@ public class BuildInstaller {
 
     public static void buildGUI() {
         SwingUtilities.invokeLater(BuildInstaller::setLookAndFeel);
-        StandardPackage mainPack = new StandardPackage("wildfly-10.0.0.CR4");
-        mainPack.addExclude("docs");
-        mainPack.addExclude("appclient");
-        mainPack.addExclude("bin");
-        mainPack.addExclude("domain");
-        mainPack.addExclude("modules");
-        mainPack.addExclude("standalone");
-        mainPack.addExclude("welcome-content");
-        StandardPackage docs = new StandardPackage("wildfly-10.0.0.CR4/docs");
-        StandardPackage appclient = new StandardPackage("wildfly-10.0.0.CR4/appclient");
-        StandardPackage bin = new StandardPackage("wildfly-10.0.0.CR4/bin");
-        StandardPackage domain = new StandardPackage("wildfly-10.0.0.CR4/domain");
-        StandardPackage modules = new StandardPackage("wildfly-10.0.0.CR4/modules");
-        StandardPackage standalone = new StandardPackage("wildfly-10.0.0.CR4/standalone");
-        StandardPackage welcome = new StandardPackage("wildfly-10.0.0.CR4/welcome-content");
-        Unpacker mainUnpacker = new Unpacker(mainPack);
-        Unpacker docsUnpacker = new Unpacker(docs);
-        Unpacker appclientUnpacker = new Unpacker(appclient);
-        Unpacker binUnpacker = new Unpacker(bin);
-        Unpacker domainUnpacker = new Unpacker(domain);
-        Unpacker modulesUnpacker = new Unpacker(modules);
-        Unpacker standaloneUnpacker = new Unpacker(standalone);
-        Unpacker welcomeUnpacker = new Unpacker(welcome);
-        UnpackerController mainController = new UnpackerController(mainUnpacker);
-        UnpackerController docsController = new UnpackerController(docsUnpacker);
-        UnpackerController appclientController = new UnpackerController(appclientUnpacker);
-        UnpackerController binController = new UnpackerController(binUnpacker);
-        UnpackerController domainController = new UnpackerController(domainUnpacker);
-        UnpackerController modulesController = new UnpackerController(modulesUnpacker);
-        UnpackerController standaloneController = new UnpackerController(standaloneUnpacker);
-        UnpackerController welcomeController = new UnpackerController(welcomeUnpacker);
-        mainController.multiThread();
-        docsController.multiThread();
-        appclientController.multiThread();
-        binController.multiThread();
-        domainController.multiThread();
-        modulesController.multiThread();
-        standaloneController.multiThread();
-        welcomeController.multiThread();
+        PackageSet packages = new PackageSet();
+        packages.setRootDirectory("wildfly-10.0.0.CR4/");
+        packages.add("")
+                    .exclude("docs").exclude("appclient").exclude("bin").exclude("domain")
+                    .exclude("modules").exclude("standalone").exclude("welcome-content")
+                .add("docs").add("appclient").add("bin").add("domain")
+                .add("modules").add("standalone").add("welcome-content");
+        packages.addMultiThreadedUnpackers();
+
+
         GUITextInputField field = new GUITextInputField();
         GUIButton button = new GUIButton();
         PathInputController controller = new PathInputController();
         controller.setTextInputField(field);
-        controller.addPackage(mainPack);
-        controller.addPackage(docs);
-        controller.addPackage(appclient);
-        controller.addPackage(bin);
-        controller.addPackage(domain);
-        controller.addPackage(modules);
-        controller.addPackage(standalone);
-        controller.addPackage(welcome);
-        button.addController(mainController);
-        button.addController(docsController);
-        button.addController(appclientController);
-        button.addController(binController);
-        button.addController(modulesController);
-        button.addController(standaloneController);
-        button.addController(welcomeController);
-        button.addController(domainController);
+        for(StandardPackage pack : packages.getPackages()) {
+            controller.addPackage(pack);
+        }
+        for(UnpackerController uc : packages.getControllers()) {
+            button.addController(uc);
+        }
         PathInputPanel panel = new PathInputPanel();
-        GUITextStream unpackerStream = new GUITextStream();
-        UnpackerDisplayController udc = new UnpackerDisplayController();
-        udc.setTextStream(unpackerStream);
-        udc.setUnpacker(mainUnpacker);
-        mainUnpacker.addController(udc);
 
         Installer installer = new Installer();
 
-        GUIProgressBar bar = new GUIProgressBar();
-        ProgressBarController pbc = new ProgressBarController(bar);
-        pbc.setUnpacker(mainUnpacker);
-        mainUnpacker.addController(pbc);
+        List<GUIProgressBar> bars = new ArrayList<>();
 
-        GUIProgressBar docBar = new GUIProgressBar();
-        ProgressBarController docBarController = new ProgressBarController(docBar);
-        docBarController.setUnpacker(docsUnpacker);
-        docsUnpacker.addController(docBarController);
-
-        GUIProgressBar appBar = new GUIProgressBar();
-        ProgressBarController appBarController = new ProgressBarController(appBar);
-        appBarController.setUnpacker(appclientUnpacker);
-        appclientUnpacker.addController(appBarController);
-
-        GUIProgressBar binBar = new GUIProgressBar();
-        ProgressBarController binBarController = new ProgressBarController(binBar);
-        binBarController.setUnpacker(binUnpacker);
-        binUnpacker.addController(binBarController);
-
-        GUIProgressBar domainBar = new GUIProgressBar();
-        ProgressBarController domainBarController = new ProgressBarController(domainBar);
-        domainBarController.setUnpacker(domainUnpacker);
-        domainUnpacker.addController(domainBarController);
-
-        GUIProgressBar moduleBar = new GUIProgressBar();
-        ProgressBarController modulesBarController = new ProgressBarController(moduleBar);
-        modulesBarController.setUnpacker(modulesUnpacker);
-        modulesUnpacker.addController(modulesBarController);
-
-        GUIProgressBar standaloneBar = new GUIProgressBar();
-        ProgressBarController standaloneBarController = new ProgressBarController(standaloneBar);
-        standaloneBarController.setUnpacker(standaloneUnpacker);
-        standaloneUnpacker.addController(standaloneBarController);
-
-        GUIProgressBar welcomeBar = new GUIProgressBar();
-        ProgressBarController welcomeBarController = new ProgressBarController(welcomeBar);
-        welcomeBarController.setUnpacker(welcomeUnpacker);
-        welcomeUnpacker.addController(welcomeBarController);
+        for(Unpacker unpacker : packages.getUnpackers()) {
+            GUIProgressBar bar = new GUIProgressBar();
+            ProgressBarController pbc = new ProgressBarController(bar);
+            pbc.setUnpacker(unpacker);
+            unpacker.addController(pbc);
+            bars.add(bar);
+        }
 
         NextPanelController npc = new NextPanelController();
         npc.setInstaller(installer);
@@ -200,15 +129,9 @@ public class BuildInstaller {
 
         panel.setField(field.getTextField());
         panel.setButton(button.getButton());
-        panel.setTextStream(unpackerStream.getTextArea());
-        panel.addBar(bar.getBar());
-        panel.addBar(docBar.getBar());
-        panel.addBar(appBar.getBar());
-        panel.addBar(binBar.getBar());
-        panel.addBar(domainBar.getBar());
-        panel.addBar(moduleBar.getBar());
-        panel.addBar(standaloneBar.getBar());
-        panel.addBar(welcomeBar.getBar());
+        for(GUIProgressBar bar : bars) {
+            panel.addBar(bar.getBar());
+        }
 
         installer.addNavButton(previousButton.getButton());
         installer.addNavButton(nextButton.getButton());

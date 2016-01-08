@@ -32,7 +32,6 @@ public class Installer implements View {
         frame.add(buttonPanel, BorderLayout.SOUTH);
         UIManager.put("Button.defaultButtonFollowsFocus", Boolean.TRUE);
         frame.pack();
-        SwingUtilities.updateComponentTreeUI(frame);
     }
 
     private void setUpFrame() {
