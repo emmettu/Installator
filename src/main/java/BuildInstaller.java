@@ -7,6 +7,13 @@ import models.packaging.utils.PackageSet;
 import models.unpacking.Unpacker;
 import controllers.unpacker.UnpackerController;
 import models.packaging.StandardPackage;
+import views.lookandfeel.ButtonFactory;
+import views.lookandfeel.FontResources;
+import views.lookandfeel.UiResources;
+import views.lookandfeel.patternfly.PatternflyButtonUI;
+import views.lookandfeel.patternfly.PatternflyFileChooserUI;
+import views.lookandfeel.patternfly.PatternflyOptionPaneUI;
+import views.lookandfeel.patternfly.PatternflyScrollBarUI;
 import views.ui.Installer;
 import views.ui.button.ConsoleButton;
 import views.ui.button.GUIButton;
@@ -21,8 +28,12 @@ import views.ui.textinput.ConsoleTextInputField;
 import views.ui.textinput.GUITextInputField;
 
 import javax.swing.*;
+import javax.swing.plaf.FontUIResource;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 /**
  * Created by eunderhi on 25/11/15.
@@ -75,7 +86,8 @@ public class BuildInstaller {
     }
 
     public static void buildGUI() {
-        SwingUtilities.invokeLater(BuildInstaller::setLookAndFeel);
+        //SwingUtilities.invokeLater(BuildInstaller::setLookAndFeel);
+        setLookAndFeel();
         PackageSet packages = new PackageSet();
         packages.setRootDirectory("wildfly-10.0.0.CR4/");
         packages.add("")
@@ -155,10 +167,32 @@ public class BuildInstaller {
 
     private static void setLookAndFeel() {
         try {
-            UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
+            ButtonFactory.useHighlightButtons();
+            ButtonFactory.useButtonIcons(false);
+            UIManager.put("Panel.background", Color.WHITE);
+            UIManager.put("OptionPane.background", Color.WHITE);
+            UIManager.put("PasswordField.inactiveBackground", UiResources.inactiveTextField);
+            UIManager.put("TextArea.inactiveBackground", UiResources.inactiveTextField);
+            UIManager.put("TextField.inactiveBackground", UiResources.inactiveTextField);
+            UIManager.put("ScrollBarUI", PatternflyScrollBarUI.class.getName());
+            UIManager.put("Button.rollover", true);
+            UIManager.put("ButtonUI", PatternflyButtonUI.class.getName());
+            UIManager.put("FileChooserUI", PatternflyFileChooserUI.class.getName());
+            UIManager.put("OptionPaneUI", PatternflyOptionPaneUI.class.getName());
+            setUIFont(new FontUIResource(FontResources.getOpenSansRegular()));
         }
         catch(Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    public static void setUIFont(javax.swing.plaf.FontUIResource f) {
+        java.util.Enumeration keys = UIManager.getDefaults().keys();
+        while (keys.hasMoreElements()) {
+            Object key = keys.nextElement();
+            Object value = UIManager.get(key);
+            if (value != null && value instanceof javax.swing.plaf.FontUIResource && !key.equals("PasswordField.font"))
+                UIManager.put(key, f);
         }
     }
 }
