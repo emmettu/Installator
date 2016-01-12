@@ -132,8 +132,10 @@ public class BuildInstaller {
 
         panel.setField(field.getTextField());
         panel.setButton(button.getButton());
-        for(GUIProgressBar bar : bars) {
-            panel.addBar(bar.getBar());
+        String[] packageNames = {"Wildfly", "docs", "appclient", "bin", "domain", "modules", "standalone", "welcome-content"};
+
+        for(int i = 0; i < packageNames.length; i++) {
+            panel.addBar(bars.get(i).getBar(), packageNames[i]);
         }
 
         installer.addNavButton(previousButton.getButton());

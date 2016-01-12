@@ -41,8 +41,13 @@ public class PathInputPanel extends GUIPanel {
         this.stream = stream;
     }
 
-    public void addBar(JProgressBar bar) {
-        progressPanel.add(bar);
+    public void addBar(JProgressBar bar, String barName) {
+        JPanel barAndLabel = new JPanel(new GridLayout());
+        JLabel label = new JLabel(barName);
+        label.setPreferredSize(new Dimension(1, 1));
+        barAndLabel.add(label);
+        barAndLabel.add(bar);
+        progressPanel.add(barAndLabel);
     }
 
 }

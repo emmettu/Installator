@@ -18,7 +18,6 @@ public class PackageSet {
     private List<UnpackerController> controllers = new ArrayList<>();
     private String rootDirectory;
 
-
     public PackageSet add(String packageName) {
         packages.add(new StandardPackage(rootDirectory + packageName));
         return this;
