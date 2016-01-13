@@ -1,5 +1,7 @@
 package views.ui.button;
 
+import views.lookandfeel.ButtonFactory;
+
 import javax.swing.*;
 
 /**
@@ -7,10 +9,14 @@ import javax.swing.*;
  */
 public class GUIButton extends Button {
 
-    private JButton button = new JButton();
+    private JButton button;
 
     public GUIButton() {
-        button.setSize(6, 15);
+        this(ButtonFactory.createButton(""));
+    }
+
+    public GUIButton(JButton button) {
+        this.button = button;
         button.addActionListener(actionEvent -> update());
     }
 

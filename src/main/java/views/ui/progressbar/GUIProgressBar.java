@@ -1,5 +1,7 @@
 package views.ui.progressbar;
 
+import views.lookandfeel.patternfly.PatternflyProgressBarUI;
+
 import javax.swing.*;
 
 /**
@@ -12,6 +14,8 @@ public class GUIProgressBar extends ProgressBar {
     public GUIProgressBar() {
         bar.setValue(getPercentDone());
         bar.setStringPainted(true);
+        bar.setUI(new PatternflyProgressBarUI());
+        bar.setAlignmentX(0.5f);
     }
 
     @Override

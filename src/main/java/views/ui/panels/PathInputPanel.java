@@ -1,9 +1,7 @@
 package views.ui.panels;
 
-import views.lookandfeel.patternfly.PatternflyButtonUI;
 
 import javax.swing.*;
-import javax.swing.plaf.ButtonUI;
 import java.awt.*;
 
 /**
@@ -38,7 +36,6 @@ public class PathInputPanel extends GUIPanel {
 
     public void setButton(JButton button) {
         this.button = button;
-        button.setUI((ButtonUI) PatternflyButtonUI.createUI(button));
     }
 
     public void setTextStream(JScrollPane stream) {

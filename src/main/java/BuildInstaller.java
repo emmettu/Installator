@@ -10,6 +10,7 @@ import models.packaging.StandardPackage;
 import views.lookandfeel.ButtonFactory;
 import views.lookandfeel.FontResources;
 import views.lookandfeel.UiResources;
+import views.lookandfeel.buttonstyles.ButtonEmporium;
 import views.lookandfeel.patternfly.PatternflyButtonUI;
 import views.lookandfeel.patternfly.PatternflyFileChooserUI;
 import views.lookandfeel.patternfly.PatternflyOptionPaneUI;
@@ -28,12 +29,11 @@ import views.ui.textinput.ConsoleTextInputField;
 import views.ui.textinput.GUITextInputField;
 
 import javax.swing.*;
+import javax.swing.plaf.ColorUIResource;
 import javax.swing.plaf.FontUIResource;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
 
 /**
  * Created by eunderhi on 25/11/15.
@@ -88,6 +88,7 @@ public class BuildInstaller {
     public static void buildGUI() {
         //SwingUtilities.invokeLater(BuildInstaller::setLookAndFeel);
         setLookAndFeel();
+
         PackageSet packages = new PackageSet();
         packages.setRootDirectory("wildfly-10.0.0.CR4/");
         packages.add("")
@@ -133,12 +134,10 @@ public class BuildInstaller {
         PreviousPanelController ppc = new PreviousPanelController();
         ppc.setInstaller(installer);
 
-        GUIButton nextButton = new GUIButton();
-        nextButton.setText("Next");
+        GUIButton nextButton = new GUIButton(ButtonEmporium.blueGradient("Next"));
         nextButton.addController(npc);
 
-        GUIButton previousButton = new GUIButton();
-        previousButton.setText("Previous");
+        GUIButton previousButton = new GUIButton(ButtonEmporium.greyGradient("Previous"));
 
         previousButton.addController(ppc);
 
@@ -167,7 +166,8 @@ public class BuildInstaller {
 
     private static void setLookAndFeel() {
         try {
-            ButtonFactory.useHighlightButtons();
+            ButtonFactory.useHighlightButtons(true);
+            ButtonFactory.useButtonIcons();
             ButtonFactory.useButtonIcons(false);
             UIManager.put("Panel.background", Color.WHITE);
             UIManager.put("OptionPane.background", Color.WHITE);
@@ -179,7 +179,9 @@ public class BuildInstaller {
             UIManager.put("ButtonUI", PatternflyButtonUI.class.getName());
             UIManager.put("FileChooserUI", PatternflyFileChooserUI.class.getName());
             UIManager.put("OptionPaneUI", PatternflyOptionPaneUI.class.getName());
+            UIManager.put("Button.foreground", new ColorUIResource(Color.RED));
             setUIFont(new FontUIResource(FontResources.getOpenSansRegular()));
+            FontResources.getFontAwesome();
         }
         catch(Exception e) {
             e.printStackTrace();
