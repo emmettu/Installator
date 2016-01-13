@@ -7,6 +7,8 @@ import java.util.List;
 
 /**
  * Created by eunderhi on 07/12/15.
+ * Controller that sets the unpack directory of a package from a
+ * textInputField
  */
 public class PathInputController extends TextInputController {
 
