@@ -21,7 +21,7 @@ public class ButtonEmporium {
     }
 
     public static JButton greyGradient(String text) {
-        JButton button = ButtonFactory.createButton("<html>" + text + " " + FontResources.buttonLeftIcon + "</html>");
+        JButton button = ButtonFactory.createButton("<html>" +FontResources.buttonLeftIcon + " " +  text + "</html>");
         return button;
     }
 
