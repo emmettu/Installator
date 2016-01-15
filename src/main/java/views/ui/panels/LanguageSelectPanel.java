@@ -5,6 +5,7 @@ import java.awt.*;
 
 /**
  * Created by eunderhi on 17/12/15.
+ * The panel that allows the user to select a language
  */
 public class LanguageSelectPanel extends GUIPanel {
 
@@ -13,7 +14,9 @@ public class LanguageSelectPanel extends GUIPanel {
     @Override
     public void build(JPanel contentPanel) {
         contentPanel.removeAll();
-        contentPanel.add(comboBox, BorderLayout.NORTH);
+        JPanel panel = new JPanel();
+        panel.add(comboBox);
+        contentPanel.add(panel, BorderLayout.NORTH);
     }
 
     public void setComboBox(JComboBox box) {

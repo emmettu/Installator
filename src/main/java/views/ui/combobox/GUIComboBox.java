@@ -1,5 +1,7 @@
 package views.ui.combobox;
 
+import views.lookandfeel.patternfly.PatternflyComboBoxUI;
+
 import javax.swing.*;
 
 /**
@@ -12,6 +14,7 @@ public class GUIComboBox extends ComboBox {
     public GUIComboBox(String...args) {
         super(args);
         box = new JComboBox<>(selections);
+        box.setUI(new PatternflyComboBoxUI());
         box.addActionListener((actionEvent) -> update());
     }
 
