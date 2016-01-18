@@ -82,7 +82,7 @@ public class PatternflyComboBoxUI extends MetalComboBoxUI {
             FontMetrics fm = getFontMetrics(getFont());
             int stringWidth = fm.stringWidth(selectedText);
             int iconWidth = getIcon().getIconWidth();
-            int iconTextGap = this.getWidth() - stringWidth - iconWidth - getMargin().left - getMargin().right;
+            int iconTextGap = comboBox.getWidth() - stringWidth - iconWidth - getMargin().left - getMargin().right + 25;
             setIconTextGap(iconTextGap);
             setText(selectedText);
         }
