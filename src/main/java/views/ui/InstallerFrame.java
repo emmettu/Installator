@@ -11,8 +11,9 @@ import java.util.List;
 
 /**
  * Created by eunderhi on 15/12/15.
+ * The frame that all the GUI panels fall into
  */
-public class Installer implements View {
+public class InstallerFrame implements View {
 
     private List<GUIPanel> panels = new ArrayList<>();
     private int currentPanelIndex = 0;
@@ -22,7 +23,7 @@ public class Installer implements View {
     public static final int WIDTH = 500;
     public static final int HEIGHT = 500;
 
-    public Installer() {
+    public InstallerFrame() {
         setUpFrame();
         contentPanel = new JPanel();
         contentPanel.setLayout(new BorderLayout());
@@ -35,7 +36,7 @@ public class Installer implements View {
     }
 
     private void setUpFrame() {
-        frame = new JFrame("Installer");
+        frame = new JFrame("InstallerFrame");
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(new BorderLayout());

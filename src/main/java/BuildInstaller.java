@@ -15,7 +15,7 @@ import views.lookandfeel.patternfly.PatternflyButtonUI;
 import views.lookandfeel.patternfly.PatternflyFileChooserUI;
 import views.lookandfeel.patternfly.PatternflyOptionPaneUI;
 import views.lookandfeel.patternfly.PatternflyScrollBarUI;
-import views.ui.Installer;
+import views.ui.InstallerFrame;
 import views.ui.button.ConsoleButton;
 import views.ui.button.GUIButton;
 import views.ui.combobox.ConsoleComboBox;
@@ -116,7 +116,7 @@ public class BuildInstaller {
         }
         PathInputPanel panel = new PathInputPanel();
 
-        Installer installer = new Installer();
+        InstallerFrame installer = new InstallerFrame();
 
         List<GUIProgressBar> bars = new ArrayList<>();
 
