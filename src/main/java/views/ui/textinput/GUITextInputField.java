@@ -1,6 +1,10 @@
 package views.ui.textinput;
 
+import controllers.exceptions.ValidationException;
+import views.lookandfeel.UiResources;
+
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 
@@ -28,6 +32,7 @@ public class GUITextInputField extends TextInputField {
     @Override
     public void update() {
         setText(textField.getText());
+        validate();
         notifyControllers();
     }
 
@@ -36,8 +41,20 @@ public class GUITextInputField extends TextInputField {
        textField.repaint();
     }
 
+    @Override
+    protected void onValidationFail(ValidationException e) {
+        textField.setToolTipText(e.getMessage());
+        textField.setBackground(UiResources.validationFail);
+    }
+
+    @Override
+    protected void onValidationSuccess() {
+        textField.setBackground(Color.WHITE);
+    }
+
     public JTextField getTextField() {
         return textField;
+
     }
 
 }

@@ -17,6 +17,7 @@ public class PathInputPanel extends GUIPanel {
     @Override
     public void build(JPanel contentPanel) {
         contentPanel.removeAll();
+        contentPanel.setLayout(new BorderLayout());
         button.setText("Install");
         contentPanel.add(field, BorderLayout.NORTH);
 

@@ -31,6 +31,7 @@ public class UiResources {
     public static final Color inactiveTextField = new Color(0xF5F5F5);
     public static final Color navPanelBackground = new Color(0xDDDDDD);
     public static final Color headingPanelBackground = new Color(0x212121);
+    public static final Color validationFail = new Color(0xFF8B91);
 
     public static Paint getGradientPaint(JComponent component, Color top, Color bottom){
         return new GradientPaint(component.getWidth()/2, 0, top, component.getWidth()/2, component.getHeight(), bottom);

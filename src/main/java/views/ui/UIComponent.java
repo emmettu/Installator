@@ -14,7 +14,7 @@ public abstract class UIComponent implements View {
     List<Controller> controllers = new ArrayList<>();
 
     public void notifyControllers() {
-        for(Controller controller : controllers) {
+        for (Controller controller : controllers) {
             controller.performAction();
         }
     }

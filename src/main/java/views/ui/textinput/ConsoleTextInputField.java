@@ -1,5 +1,7 @@
 package views.ui.textinput;
 
+import controllers.exceptions.ValidationException;
+
 /**
  * Created by eunderhi on 07/12/15.
  */
@@ -23,4 +25,16 @@ public class ConsoleTextInputField extends TextInputField {
     public void setPrompt(String prompt) {
         this.prompt = prompt;
     }
+
+    @Override
+    protected void onValidationFail(ValidationException e) {
+        System.out.println(e.getMessage());
+        update();
+    }
+
+    @Override
+    protected void onValidationSuccess() {
+
+    }
+
 }

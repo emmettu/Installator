@@ -3,6 +3,7 @@ import controllers.installer.NextPanelController;
 import controllers.installer.PreviousPanelController;
 import controllers.progressbar.ProgressBarController;
 import controllers.textinput.PathInputController;
+import controllers.textinput.PathValidator;
 import models.packaging.utils.PackageSet;
 import models.unpacking.Unpacker;
 import controllers.unpacker.UnpackerController;
@@ -105,6 +106,9 @@ public class BuildInstaller {
 
 
         GUITextInputField field = new GUITextInputField();
+        PathValidator pv = new PathValidator();
+        pv.setField(field);
+        field.addValidator(pv);
         GUIButton button = new GUIButton();
         PathInputController controller = new PathInputController();
         controller.setTextInputField(field);

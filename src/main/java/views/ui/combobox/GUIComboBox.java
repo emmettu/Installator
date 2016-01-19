@@ -1,5 +1,6 @@
 package views.ui.combobox;
 
+import controllers.exceptions.ValidationException;
 import views.lookandfeel.patternfly.PatternflyComboBoxUI;
 
 import javax.swing.*;
@@ -30,6 +31,16 @@ public class GUIComboBox extends ComboBox {
 
     public JComboBox<String> getBox() {
         return box;
+    }
+
+    @Override
+    protected void onValidationFail(ValidationException e) {
+
+    }
+
+    @Override
+    protected void onValidationSuccess() {
+
     }
 
 }

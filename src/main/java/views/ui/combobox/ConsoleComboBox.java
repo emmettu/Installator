@@ -1,5 +1,7 @@
 package views.ui.combobox;
 
+import controllers.exceptions.ValidationException;
+
 /**
  * Created by eunderhi on 18/12/15.
  */
@@ -39,4 +41,13 @@ public class ConsoleComboBox extends ComboBox {
         }
     }
 
+    @Override
+    protected void onValidationFail(ValidationException e) {
+
+    }
+
+    @Override
+    protected void onValidationSuccess() {
+
+    }
 }

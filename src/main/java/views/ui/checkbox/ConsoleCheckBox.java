@@ -1,5 +1,7 @@
 package views.ui.checkbox;
 
+import controllers.exceptions.ValidationException;
+
 /**
  * Created by eunderhi on 08/01/16.
  */
@@ -29,4 +31,12 @@ public class ConsoleCheckBox extends CheckBox {
         }
     }
 
+    @Override
+    protected void onValidationFail(ValidationException e) {
+    }
+
+    @Override
+    protected void onValidationSuccess() {
+
+    }
 }

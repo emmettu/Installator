@@ -1,23 +1,12 @@
 package controllers;
 
-import views.ui.UserInputView;
+import controllers.exceptions.ValidationException;
 
 /**
  * Created by eunderhi on 27/11/15.
  */
-public abstract class Validator implements Controller {
+public abstract class Validator {
 
-    private UserInputView userInputView;
-
-    @Override
-    public void performAction() {
-        validate();
-    }
-
-    protected abstract void validate();
-
-    public void setUserInputView(UserInputView userInputView) {
-        this.userInputView = userInputView;
-    }
+    public abstract void validate() throws ValidationException;
 
 }
