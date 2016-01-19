@@ -1,3 +1,4 @@
+import controllers.button.EnableButtonController;
 import controllers.combobox.ComboBoxController;
 import controllers.installer.NextPanelController;
 import controllers.installer.PreviousPanelController;
@@ -112,6 +113,12 @@ public class BuildInstaller {
         GUIButton button = new GUIButton();
         PathInputController controller = new PathInputController();
         controller.setTextInputField(field);
+
+        EnableButtonController ebc = new EnableButtonController();
+        ebc.setButton(button);
+        ebc.setView(field);
+        field.addController(ebc);
+
         for(StandardPackage pack : packages.getPackages()) {
             controller.addPackage(pack);
         }

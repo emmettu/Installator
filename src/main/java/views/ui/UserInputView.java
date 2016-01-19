@@ -11,7 +11,8 @@ import java.util.List;
  */
 public abstract class UserInputView extends UIComponent {
 
-    List<Validator> validators = new ArrayList<>();
+    private List<Validator> validators = new ArrayList<>();
+    private boolean isValid = false;
 
     public void addValidator(Validator validator) {
         validators.add(validator);
@@ -22,6 +23,7 @@ public abstract class UserInputView extends UIComponent {
             checkAllValidators();
         }
         catch (ValidationException e) {
+            setValid(false);
             onValidationFail(e);
         }
     }
@@ -30,12 +32,18 @@ public abstract class UserInputView extends UIComponent {
         for (Validator v : validators) {
             v.validate();
         }
-
+        setValid(true);
         onValidationSuccess();
-
     }
 
     protected abstract void onValidationFail(ValidationException e);
     protected abstract void onValidationSuccess();
 
+    public boolean isValid() {
+        return isValid;
+    }
+
+    public void setValid(boolean valid) {
+        isValid = valid;
+    }
 }
