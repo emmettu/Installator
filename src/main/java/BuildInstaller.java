@@ -22,6 +22,7 @@ import views.ui.button.ConsoleButton;
 import views.ui.button.GUIButton;
 import views.ui.combobox.ConsoleComboBox;
 import views.ui.combobox.GUIComboBox;
+import views.ui.gui.GUIFrame;
 import views.ui.panels.ConsolePanel;
 import views.ui.panels.LanguageSelectPanel;
 import views.ui.panels.PathInputPanel;
@@ -47,7 +48,8 @@ public class BuildInstaller {
             buildConsole();
         }
         else {
-            buildGUI();
+            //buildGUI();
+            testGUIRefactor();
         }
     }
 
@@ -209,4 +211,10 @@ public class BuildInstaller {
         }
     }
 
+    public static void testGUIRefactor() {
+        setLookAndFeel();
+        GUIFrame frame = new GUIFrame();
+        frame.addPanel(new views.ui.gui.GUIProgressBar());
+        frame.update();
+    }
 }

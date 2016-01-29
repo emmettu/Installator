@@ -5,10 +5,9 @@ import views.View;
 /**
  * Created by eunderhi on 26/01/16.
  */
-public abstract class Frame<T extends View> implements View {
+public interface Frame extends View {
 
-    abstract void addPanel(T panel);
-    abstract void removePanel(T panel);
     abstract void nextPanel();
     abstract void previousPanel();
+
 }

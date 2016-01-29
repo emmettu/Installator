@@ -1,7 +1,5 @@
 package views.ui.gui;
 
-import views.View;
-
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
@@ -10,19 +8,25 @@ import java.util.List;
 /**
  * Created by eunderhi on 26/01/16.
  */
-public class GUIFrame<T extends GUIComponent> extends Frame {
+public class GUIFrame implements Frame {
 
     private List<GUIComponent> panels = new ArrayList<>();
     private int currentPanelIndex = 0;
-    private JPanel contentPanel;
-    private JPanel buttonPanel;
+    private GUIPanel contentPanel = new GUIPanel();
+    private GUIPanel buttonPanel = new GUIPanel();
     public static final int WIDTH = 500;
     public static final int HEIGHT = 500;
-    private JFrame frame;
+    private JFrame frame = new JFrame();
 
     public GUIFrame() {
         frame.setPreferredSize(new Dimension(WIDTH, HEIGHT));
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setLayout(new BorderLayout());
+        frame.setVisible(true);
+    }
 
+    public void addPanel(GUIComponent panel) {
+        panels.add(panel);
     }
 
     @Override
@@ -32,34 +36,19 @@ public class GUIFrame<T extends GUIComponent> extends Frame {
 
     @Override
     public void display() {
-
-    }
-
-    void addPanel() {
-    }
-
-    void removePanel() {
-
+        frame.getContentPane().removeAll();
+        GUIComponent currentPanel = panels.get(currentPanelIndex);
+        frame.getContentPane().add(currentPanel.getJComponent());
     }
 
     @Override
-    void addPanel(View panel) {
-                
+    public void nextPanel() {
+        currentPanelIndex++;
     }
 
     @Override
-    void removePanel(View panel) {
-
-    }
-
-    @Override
-    void nextPanel() {
-
-    }
-
-    @Override
-    void previousPanel() {
-
+    public void previousPanel() {
+        currentPanelIndex--;
     }
 
 }

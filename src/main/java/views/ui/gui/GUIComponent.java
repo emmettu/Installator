@@ -38,4 +38,5 @@ public abstract class GUIComponent extends UIComponent {
         jComponent.setEnabled(enabled);
     }
 
+
 }
