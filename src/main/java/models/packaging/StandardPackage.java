@@ -17,7 +17,7 @@ import java.util.List;
 
 public class StandardPackage extends Package {
 
-    private List<Path> excludes = new ArrayList();
+    private List<Path> excludes = new ArrayList<>();
     private Path rootPath;
     private FileSystem jarFileSystem;
     private long size;

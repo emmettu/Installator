@@ -12,7 +12,7 @@ public class GUIProgressBar extends GUIComponent implements ProgressBar{
     private JProgressBar bar = new JProgressBar();
 
     public GUIProgressBar() {
-        getJComponent().add(bar);
+        setjComponent(bar);
         bar.setStringPainted(true);
         bar.setUI(new PatternflyProgressBarUI());
     }

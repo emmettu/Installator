@@ -46,4 +46,5 @@ public abstract class UserInputView extends UIComponent {
     public void setValid(boolean valid) {
         isValid = valid;
     }
+
 }

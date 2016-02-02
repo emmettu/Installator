@@ -9,7 +9,7 @@ import javax.swing.*;
  */
 public abstract class GUIComponent extends UIComponent {
 
-    private JComponent jComponent = new JPanel();
+    private JComponent jComponent;
 
     @Override
     public void update() {
@@ -22,7 +22,7 @@ public abstract class GUIComponent extends UIComponent {
     }
 
     public void addComponent(GUIComponent component) {
-        JComponent jComponent =component.getJComponent();
+        JComponent jComponent = component.getJComponent();
         this.jComponent.add(jComponent);
     }
 
