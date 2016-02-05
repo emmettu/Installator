@@ -1,5 +1,7 @@
 package views.ui.progressbar;
 
+import controllers.exceptions.ControllerFailException;
+import controllers.exceptions.ControllerWarnException;
 import views.lookandfeel.patternfly.PatternflyProgressBarUI;
 
 import javax.swing.*;
@@ -33,4 +35,13 @@ public class GUIProgressBar extends ProgressBar {
         return bar;
     }
 
+    @Override
+    protected void onControllerFail(ControllerFailException e) {
+
+    }
+
+    @Override
+    protected void onControllerWarn(ControllerWarnException e) {
+
+    }
 }

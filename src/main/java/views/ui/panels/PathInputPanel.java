@@ -9,7 +9,7 @@ import java.awt.*;
  */
 public class PathInputPanel extends GUIPanel {
 
-    private JTextField field;
+    private JPanel field;
     private JButton button;
     private JScrollPane stream;
     private JPanel progressPanel = new JPanel();
@@ -31,7 +31,7 @@ public class PathInputPanel extends GUIPanel {
         contentPanel.add(buttonsPanel, BorderLayout.SOUTH);
     }
 
-    public void setField(JTextField field) {
+    public void setField(JPanel field) {
         this.field = field;
     }
 

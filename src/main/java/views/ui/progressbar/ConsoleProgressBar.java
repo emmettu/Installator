@@ -1,5 +1,8 @@
 package views.ui.progressbar;
 
+import controllers.exceptions.ControllerFailException;
+import controllers.exceptions.ControllerWarnException;
+
 /**
  * Created by eunderhi on 16/12/15.
  * A progress bar view for console mode.
@@ -55,4 +58,13 @@ public class ConsoleProgressBar extends ProgressBar {
         this.length = length;
     }
 
+    @Override
+    protected void onControllerFail(ControllerFailException e) {
+
+    }
+
+    @Override
+    protected void onControllerWarn(ControllerWarnException e) {
+
+    }
 }

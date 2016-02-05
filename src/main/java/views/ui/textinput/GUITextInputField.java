@@ -4,6 +4,7 @@ import controllers.exceptions.ControllerFailException;
 import controllers.exceptions.ControllerWarnException;
 import views.lookandfeel.UiResources;
 import views.notification.ToastMessage;
+import views.notification.ToastMessage2;
 
 import javax.swing.*;
 import java.awt.*;
@@ -16,9 +17,12 @@ import java.awt.event.FocusListener;
 public class GUITextInputField extends TextInputField {
 
     private JTextField textField = new JTextField();
+    private JPanel panel = new JPanel();
 
     public GUITextInputField() {
 
+        panel.setLayout(new BorderLayout());
+        panel.add(textField, BorderLayout.NORTH);
         textField.addFocusListener(new FocusListener() {
             @Override
             public void focusGained(FocusEvent focusEvent) {}
@@ -40,14 +44,12 @@ public class GUITextInputField extends TextInputField {
 
     @Override
     public void display() {
-       textField.repaint();
+       panel.repaint();
     }
 
     @Override
     protected void onValidationFail(ControllerFailException e) {
-        textField.setToolTipText(e.getMessage());
-        textField.setBackground(UiResources.validationFail);
-        new ToastMessage(e.getMessage(), 4000, textField);
+        new ToastMessage2(e.getMessage(), getTextField());
     }
 
     @Override
@@ -55,8 +57,8 @@ public class GUITextInputField extends TextInputField {
         textField.setBackground(Color.WHITE);
     }
 
-    public JTextField getTextField() {
-        return textField;
+    public JPanel getTextField() {
+        return panel;
 
     }
 

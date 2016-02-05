@@ -1,5 +1,8 @@
 package views.ui.button;
 
+import controllers.exceptions.ControllerFailException;
+import controllers.exceptions.ControllerWarnException;
+
 /**
  * Created by eunderhi on 08/12/15.
  */
@@ -17,4 +20,13 @@ public class ConsoleButton extends Button {
         System.out.print(getText());
     }
 
+    @Override
+    protected void onControllerFail(ControllerFailException e) {
+
+    }
+
+    @Override
+    protected void onControllerWarn(ControllerWarnException e) {
+
+    }
 }
