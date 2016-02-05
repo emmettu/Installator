@@ -1,6 +1,7 @@
 package views.ui.combobox;
 
-import controllers.exceptions.ValidationException;
+import controllers.exceptions.ControllerFailException;
+import controllers.exceptions.ControllerWarnException;
 
 /**
  * Created by eunderhi on 18/12/15.
@@ -42,12 +43,22 @@ public class ConsoleComboBox extends ComboBox {
     }
 
     @Override
-    protected void onValidationFail(ValidationException e) {
+    protected void onValidationFail(ControllerFailException e) {
 
     }
 
     @Override
     protected void onValidationSuccess() {
+
+    }
+
+    @Override
+    protected void onControllerFail(ControllerFailException e) {
+
+    }
+
+    @Override
+    protected void onControllerWarn(ControllerWarnException e) {
 
     }
 }

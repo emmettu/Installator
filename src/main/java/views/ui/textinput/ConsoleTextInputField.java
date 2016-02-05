@@ -1,6 +1,7 @@
 package views.ui.textinput;
 
-import controllers.exceptions.ValidationException;
+import controllers.exceptions.ControllerFailException;
+import controllers.exceptions.ControllerWarnException;
 
 /**
  * Created by eunderhi on 07/12/15.
@@ -27,7 +28,7 @@ public class ConsoleTextInputField extends TextInputField {
     }
 
     @Override
-    protected void onValidationFail(ValidationException e) {
+    protected void onValidationFail(ControllerFailException e) {
         System.out.println(e.getMessage());
         update();
     }
@@ -37,4 +38,13 @@ public class ConsoleTextInputField extends TextInputField {
 
     }
 
+    @Override
+    protected void onControllerFail(ControllerFailException e) {
+
+    }
+
+    @Override
+    protected void onControllerWarn(ControllerWarnException e) {
+
+    }
 }

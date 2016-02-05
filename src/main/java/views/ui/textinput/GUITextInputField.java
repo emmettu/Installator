@@ -1,6 +1,7 @@
 package views.ui.textinput;
 
-import controllers.exceptions.ValidationException;
+import controllers.exceptions.ControllerFailException;
+import controllers.exceptions.ControllerWarnException;
 import views.lookandfeel.UiResources;
 import views.notification.ToastMessage;
 
@@ -43,7 +44,7 @@ public class GUITextInputField extends TextInputField {
     }
 
     @Override
-    protected void onValidationFail(ValidationException e) {
+    protected void onValidationFail(ControllerFailException e) {
         textField.setToolTipText(e.getMessage());
         textField.setBackground(UiResources.validationFail);
         new ToastMessage(e.getMessage(), 4000, textField);
@@ -59,4 +60,13 @@ public class GUITextInputField extends TextInputField {
 
     }
 
+    @Override
+    protected void onControllerFail(ControllerFailException e) {
+
+    }
+
+    @Override
+    protected void onControllerWarn(ControllerWarnException e) {
+
+    }
 }

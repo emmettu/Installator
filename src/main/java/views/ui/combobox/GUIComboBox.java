@@ -1,6 +1,7 @@
 package views.ui.combobox;
 
-import controllers.exceptions.ValidationException;
+import controllers.exceptions.ControllerFailException;
+import controllers.exceptions.ControllerWarnException;
 import views.lookandfeel.patternfly.PatternflyComboBoxUI;
 
 import javax.swing.*;
@@ -34,7 +35,7 @@ public class GUIComboBox extends ComboBox {
     }
 
     @Override
-    protected void onValidationFail(ValidationException e) {
+    protected void onValidationFail(ControllerFailException e) {
 
     }
 
@@ -43,4 +44,13 @@ public class GUIComboBox extends ComboBox {
 
     }
 
+    @Override
+    protected void onControllerFail(ControllerFailException e) {
+
+    }
+
+    @Override
+    protected void onControllerWarn(ControllerWarnException e) {
+
+    }
 }

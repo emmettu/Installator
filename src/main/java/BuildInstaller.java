@@ -48,8 +48,8 @@ public class BuildInstaller {
             buildConsole();
         }
         else {
-            //buildGUI();
-            testGUIRefactor();
+            buildGUI();
+            //testGUIRefactor();
         }
     }
 

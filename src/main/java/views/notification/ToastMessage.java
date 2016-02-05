@@ -30,6 +30,7 @@ public class ToastMessage extends JDialog {
 
         setBounds(component.getBounds());
         setLocationRelativeTo(component);
+        setLocation(component.getX(), component.getY() - component.getHeight());
         setVisible(true);
 
         new Thread(() -> {

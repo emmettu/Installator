@@ -1,7 +1,7 @@
 package views.ui;
 
 import controllers.Validator;
-import controllers.exceptions.ValidationException;
+import controllers.exceptions.ControllerFailException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,13 +22,13 @@ public abstract class UserInputView extends UIComponent {
         try {
             checkAllValidators();
         }
-        catch (ValidationException e) {
+        catch (ControllerFailException e) {
             setValid(false);
             onValidationFail(e);
         }
     }
 
-    private void checkAllValidators() throws ValidationException {
+    private void checkAllValidators() throws ControllerFailException {
         for (Validator v : validators) {
             v.validate();
         }
@@ -36,7 +36,7 @@ public abstract class UserInputView extends UIComponent {
         onValidationSuccess();
     }
 
-    protected abstract void onValidationFail(ValidationException e);
+    protected abstract void onValidationFail(ControllerFailException e);
     protected abstract void onValidationSuccess();
 
     public boolean isValid() {

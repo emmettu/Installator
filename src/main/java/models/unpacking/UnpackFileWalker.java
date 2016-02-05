@@ -16,7 +16,7 @@ public class UnpackFileWalker extends FileWalker {
     private Unpacker unpacker;
 
     @Override
-    public FileVisitResult visitFile(Path file, BasicFileAttributes attr) {
+    public FileVisitResult visitFile(Path file, BasicFileAttributes attr) throws IOException {
 
         copyFileToInstallationDirectory(file);
         unpacker.addUnpackedFile(file, attr.size());
@@ -24,18 +24,13 @@ public class UnpackFileWalker extends FileWalker {
         return FileVisitResult.CONTINUE;
     }
 
-    private void copyFileToInstallationDirectory(Path file) {
+    private void copyFileToInstallationDirectory(Path file) throws IOException {
         Path destination = Paths.get(getUnpackDirectory().toString(), file.subpath(1, file.getNameCount()).toString());
         File destinationFile = destination.toFile();
         destinationFile.mkdirs();
-        try {
-            Files.copy(file, destination, StandardCopyOption.REPLACE_EXISTING);
-            if(destinationFile.getName().endsWith(".sh")) {
-                destinationFile.setExecutable(true);
-            }
-        }
-        catch(IOException e) {
-            e.printStackTrace();
+        Files.copy(file, destination, StandardCopyOption.REPLACE_EXISTING);
+        if(destinationFile.getName().endsWith(".sh")) {
+            destinationFile.setExecutable(true);
         }
     }
 

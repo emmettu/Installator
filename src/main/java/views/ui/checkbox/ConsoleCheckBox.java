@@ -1,6 +1,7 @@
 package views.ui.checkbox;
 
-import controllers.exceptions.ValidationException;
+import controllers.exceptions.ControllerFailException;
+import controllers.exceptions.ControllerWarnException;
 
 /**
  * Created by eunderhi on 08/01/16.
@@ -32,11 +33,21 @@ public class ConsoleCheckBox extends CheckBox {
     }
 
     @Override
-    protected void onValidationFail(ValidationException e) {
+    protected void onValidationFail(ControllerFailException e) {
     }
 
     @Override
     protected void onValidationSuccess() {
+
+    }
+
+    @Override
+    protected void onControllerFail(ControllerFailException e) {
+
+    }
+
+    @Override
+    protected void onControllerWarn(ControllerWarnException e) {
 
     }
 }

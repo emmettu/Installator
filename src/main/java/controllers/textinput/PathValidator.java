@@ -1,7 +1,7 @@
 package controllers.textinput;
 
 import controllers.Validator;
-import controllers.exceptions.ValidationException;
+import controllers.exceptions.ControllerFailException;
 import views.ui.textinput.TextInputField;
 
 import java.io.File;
@@ -14,20 +14,20 @@ public class PathValidator extends Validator {
     private TextInputField field;
 
     @Override
-    public void validate() throws ValidationException {
+    public void validate() throws ControllerFailException {
 
         String pathName = field.getText();
         File file = new File(pathName);
 
         if (!file.exists()) {
-            throw new ValidationException("Path must exist");
+            throw new ControllerFailException("Path must exist");
         }
         else if (!file.isDirectory()) {
-            throw new ValidationException("Path must be a directory.");
+            throw new ControllerFailException("Path must be a directory.");
         }
 
         else if (!file.canWrite()) {
-            throw new ValidationException("Path must be write-able.");
+            throw new ControllerFailException("Path must be write-able.");
         }
     }
 
