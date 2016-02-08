@@ -48,8 +48,8 @@ public class BuildInstaller {
             buildConsole();
         }
         else {
-            buildGUI();
-            //testGUIRefactor();
+            //buildGUI();
+            testGUIRefactor();
         }
     }
 
@@ -214,7 +214,8 @@ public class BuildInstaller {
     public static void testGUIRefactor() {
         setLookAndFeel();
         GUIFrame frame = new GUIFrame();
-        frame.addPanel(new views.ui.gui.GUIProgressBar());
+        //frame.addPanel(new views.ui.gui.GUIProgressBar());
+        frame.addPanel(new views.ui.gui.GUIButton("Hello World!"));
         frame.update();
     }
 }

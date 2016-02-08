@@ -17,6 +17,7 @@ public class PackageSet {
     private List<Unpacker> unpackers = new ArrayList<>();
     private List<UnpackerController> controllers = new ArrayList<>();
     private String rootDirectory;
+    private long size = 0;
 
     public PackageSet add(String packageName) {
         packages.add(new StandardPackage(rootDirectory + packageName));
@@ -50,6 +51,12 @@ public class PackageSet {
 
     public void addMultiThreadedUnpackers() {
         addUnpackers(true);
+    }
+
+    public void calculateSize() {
+        for (StandardPackage p : packages) {
+            size += p.getSize();
+        }
     }
 
     private void addUnpackers(boolean multiThread) {

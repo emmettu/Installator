@@ -7,13 +7,14 @@ import views.notification.ToastMessage;
 import views.ui.UIComponent;
 
 import javax.swing.*;
+import java.awt.*;
 
 /**
  * Created by eunderhi on 25/01/16.
  */
 public abstract class GUIComponent extends UIComponent {
 
-    private JComponent jComponent;
+    private JPanel jComponent = new JPanel(new BorderLayout());
 
     @Override
     public void update() {
@@ -30,8 +31,8 @@ public abstract class GUIComponent extends UIComponent {
         this.jComponent.add(jComponent);
     }
 
-    public void setjComponent(JComponent jComponent) {
-        this.jComponent = jComponent;
+    public void setjComponent(JComponent comp) {
+        jComponent.add(comp, BorderLayout.NORTH);
     }
 
     public JComponent getJComponent() {
