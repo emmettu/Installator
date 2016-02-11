@@ -215,7 +215,7 @@ public class BuildInstaller {
         setLookAndFeel();
         GUIFrame frame = new GUIFrame();
         //frame.addPanel(new views.ui.gui.GUIProgressBar());
-        frame.addPanel(new views.ui.gui.GUIButton("Hello World!"));
+        frame.addPanel(new views.ui.gui.GUITextInputField());
         frame.update();
     }
 }
