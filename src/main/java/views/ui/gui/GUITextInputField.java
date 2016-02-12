@@ -22,4 +22,5 @@ public class GUITextInputField extends GUIComponent implements TextInputField{
     public void setText(String text) {
         field.setText(text);
     }
+
 }

@@ -22,6 +22,7 @@ import views.ui.button.ConsoleButton;
 import views.ui.button.GUIButton;
 import views.ui.combobox.ConsoleComboBox;
 import views.ui.combobox.GUIComboBox;
+import views.ui.gui.GUICombobox;
 import views.ui.gui.GUIFrame;
 import views.ui.gui.GUIPanel;
 import views.ui.panels.ConsolePanel;
@@ -219,6 +220,7 @@ public class BuildInstaller {
         firstPanel.addComponent(new views.ui.gui.GUIProgressBar());
         firstPanel.addComponent(new views.ui.gui.GUITextInputField());
         firstPanel.addComponent(new views.ui.gui.GUIButton("Test"));
+        firstPanel.addComponent(new GUICombobox<>("One", "Two", "Three"));
         frame.addPanel(firstPanel);
         frame.display();
     }
