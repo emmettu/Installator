@@ -23,6 +23,7 @@ import views.ui.button.GUIButton;
 import views.ui.combobox.ConsoleComboBox;
 import views.ui.combobox.GUIComboBox;
 import views.ui.gui.GUIFrame;
+import views.ui.gui.GUIPanel;
 import views.ui.panels.ConsolePanel;
 import views.ui.panels.LanguageSelectPanel;
 import views.ui.panels.PathInputPanel;
@@ -214,8 +215,12 @@ public class BuildInstaller {
     public static void testGUIRefactor() {
         setLookAndFeel();
         GUIFrame frame = new GUIFrame();
-        //frame.addPanel(new views.ui.gui.GUIProgressBar());
-        frame.addPanel(new views.ui.gui.GUITextInputField());
-        frame.update();
+        GUIPanel firstPanel = new GUIPanel();
+        firstPanel.addComponent(new views.ui.gui.GUIProgressBar());
+        firstPanel.addComponent(new views.ui.gui.GUITextInputField());
+        firstPanel.addComponent(new views.ui.gui.GUIButton("Test"));
+        frame.addPanel(firstPanel);
+        frame.display();
     }
+
 }

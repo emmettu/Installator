@@ -21,7 +21,7 @@ public class GUIFrame implements Frame {
     public GUIFrame() {
         frame.setPreferredSize(new Dimension(WIDTH, HEIGHT));
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setLayout(new BorderLayout());
+        frame.getContentPane().add(contentPanel.getJComponent());
         frame.setVisible(true);
     }
 
@@ -36,9 +36,10 @@ public class GUIFrame implements Frame {
 
     @Override
     public void display() {
-        frame.getContentPane().removeAll();
+        contentPanel.clear();
         GUIComponent currentPanel = panels.get(currentPanelIndex);
-        frame.getContentPane().add(currentPanel.getJComponent());
+        contentPanel.addComponent(currentPanel);
+        contentPanel.display();
     }
 
     @Override
