@@ -23,6 +23,7 @@ public abstract class UIComponent implements View {
         catch (ControllerFailException e) {
             onControllerFail(e);
         }
+        onControllerSuccess();
     }
 
     private void checkAllControllers() throws ControllerFailException {
@@ -32,16 +33,12 @@ public abstract class UIComponent implements View {
     }
 
     private void performAction(Controller c) throws ControllerFailException {
-        try {
-            c.performAction();
-        }
-        catch (ControllerWarnException e) {
-            onControllerWarn(e);
-        }
+        c.performAction();
     }
 
     protected abstract void onControllerFail(ControllerFailException e);
     protected abstract void onControllerWarn(ControllerWarnException e);
+    protected abstract void onControllerSuccess();
 
     public void addController(Controller controller) {
         controllers.add(controller);

@@ -1,10 +1,11 @@
-import controllers.button.EnableButtonController;
+import controllers.button.VisibilityController;
 import controllers.combobox.ComboBoxController;
 import controllers.installer.NextPanelController;
 import controllers.installer.PreviousPanelController;
 import controllers.progressbar.ProgressBarController;
 import controllers.textinput.PathInputController;
 import controllers.textinput.PathValidator;
+import models.ValidatorContainers.ValidatorContainer;
 import models.packaging.utils.PackageSet;
 import models.unpacking.Unpacker;
 import controllers.unpacker.UnpackerController;
@@ -46,7 +47,7 @@ import java.util.List;
 public class BuildInstaller {
 
     public static void main(String args[]) {
-        if(args.length >= 1 && args[0].equals("-console")) {
+        if (args.length >= 1 && args[0].equals("-console")) {
             buildConsole();
         }
         else {
@@ -109,7 +110,6 @@ public class BuildInstaller {
                 .add("welcome-content");
         packages.addMultiThreadedUnpackers();
 
-
         GUITextInputField field = new GUITextInputField();
         PathValidator pv = new PathValidator();
         pv.setField(field);
@@ -118,9 +118,7 @@ public class BuildInstaller {
         PathInputController controller = new PathInputController();
         controller.setTextInputField(field);
 
-        EnableButtonController ebc = new EnableButtonController();
-        ebc.setButton(button);
-        ebc.setView(field);
+        VisibilityController ebc = new VisibilityController(new GUICombobox<>("test", "test"), true);
         field.addController(ebc);
 
         for(StandardPackage pack : packages.getPackages()) {
@@ -214,6 +212,8 @@ public class BuildInstaller {
     }
 
     public static void testGUIRefactor() {
+        views.ui.gui.GUITextInputField field = new views.ui.gui.GUITextInputField();
+        field.getValidationContainer().addHook(new PathInputController(), ValidatorContainer.Type.SUCCESS);
         setLookAndFeel();
         GUIFrame frame = new GUIFrame();
         GUIPanel firstPanel = new GUIPanel();

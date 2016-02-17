@@ -31,7 +31,7 @@ public abstract class GUIComponent extends UIComponent {
         this.jComponent.add(jComponent);
     }
 
-    public void setjComponent(JComponent comp) {
+    public void setJComponent(JComponent comp) {
         jComponent.add(comp, BorderLayout.NORTH);
     }
 
@@ -41,6 +41,10 @@ public abstract class GUIComponent extends UIComponent {
 
     public void setEnabled(boolean enabled) {
         jComponent.setEnabled(enabled);
+    }
+
+    public boolean isEnabled() {
+        return jComponent.isEnabled();
     }
 
     @Override
@@ -56,5 +60,8 @@ public abstract class GUIComponent extends UIComponent {
         jComponent.setBackground(UiResources.validationWarn);
         new ToastMessage(e.getMessage(), 4000, jComponent);
     }
+
+    @Override
+    protected void onControllerSuccess() {}
 
 }

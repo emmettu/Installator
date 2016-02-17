@@ -71,4 +71,9 @@ public class GUITextInputField extends TextInputField {
     protected void onControllerWarn(ControllerWarnException e) {
 
     }
+
+    @Override
+    protected void onControllerSuccess() {
+
+    }
 }

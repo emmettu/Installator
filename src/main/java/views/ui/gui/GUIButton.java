@@ -14,7 +14,7 @@ public class GUIButton extends GUIComponent implements Button {
 
     public GUIButton(String text) {
         button = ButtonFactory.createButton(text);
-        setjComponent(button);
+        setJComponent(button);
         button.addActionListener(event -> onClick());
     }
 

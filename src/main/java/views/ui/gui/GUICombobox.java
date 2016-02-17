@@ -15,7 +15,7 @@ public class GUICombobox<T> extends GUIComponent implements Combobox<T> {
         for (T item : items) {
             addItem(item);
         }
-        setjComponent(box);
+        setJComponent(box);
         box.setUI(new PatternflyComboBoxUI());
     }
 
