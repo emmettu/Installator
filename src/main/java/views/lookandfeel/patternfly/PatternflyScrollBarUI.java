@@ -77,13 +77,12 @@ public class PatternflyScrollBarUI extends BasicScrollBarUI {
 
         public void paint(Graphics g) {
             Color origColor;
-            boolean isPressed, isEnabled;
+            boolean isEnabled;
             int w, h, size;
 
             w = getSize().width;
             h = getSize().height;
             origColor = g.getColor();
-            isPressed = getModel().isPressed();
             isEnabled = isEnabled();
 
             g.setColor(getBackground());

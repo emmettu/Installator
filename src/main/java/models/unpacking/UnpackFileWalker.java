@@ -36,7 +36,7 @@ public class UnpackFileWalker extends FileWalker {
 
     @Override
     public FileVisitResult visitFileFailed(Path file, IOException exc) {
-        System.err.println(exc);
+        exc.printStackTrace();
         return FileVisitResult.CONTINUE;
     }
 

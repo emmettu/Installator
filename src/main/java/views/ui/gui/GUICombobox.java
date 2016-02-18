@@ -11,6 +11,7 @@ public class GUICombobox<T> extends GUIComponent implements Combobox<T> {
 
     private JComboBox<T> box = new JComboBox<>();
 
+    @SafeVarargs
     public GUICombobox(T...items) {
         for (T item : items) {
             addItem(item);

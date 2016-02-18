@@ -1,6 +1,6 @@
 package views.ui.gui;
 
-import models.ValidatorContainers.FieldValidatorContainer;
+import models.ValidatorContainers.FieldValidation;
 
 import javax.swing.*;
 
@@ -10,7 +10,7 @@ import javax.swing.*;
 public class GUITextInputField extends GUIComponent implements TextInputField, Validated {
 
     private JTextField field = new JTextField();
-    private FieldValidatorContainer container = new FieldValidatorContainer(this);
+    private FieldValidation container = new FieldValidation(this);
 
     public GUITextInputField() {
         setJComponent(field);
@@ -39,7 +39,7 @@ public class GUITextInputField extends GUIComponent implements TextInputField, V
     }
 
     @Override
-    public FieldValidatorContainer getValidationContainer() {
+    public FieldValidation validation() {
         return container;
     }
 

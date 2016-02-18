@@ -8,12 +8,12 @@ import views.ui.gui.TextInputField;
 /**
  * Created by eunderhi on 16/02/16.
  */
-public class FieldValidatorContainer extends ValidatorContainer<String> {
+public class FieldValidation extends Validation<String> {
 
     private TextInputField field;
 
 
-    public FieldValidatorContainer(TextInputField field) {
+    public FieldValidation(TextInputField field) {
         this.field = field;
     }
 

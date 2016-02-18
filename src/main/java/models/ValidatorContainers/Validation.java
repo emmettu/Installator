@@ -12,12 +12,19 @@ import java.util.List;
  * Created by eunderhi on 16/02/16.
  * Encapsulates validation behaviour for some object
  */
-public abstract class ValidatorContainer<Data> {
+public abstract class Validation<Data> {
 
     List<Validator<Data>> validators = new ArrayList<>();
 
     private List<List<Controller>> controllers = new ArrayList<>(3);
+
     public enum Type { SUCCESS, WARN, FAIL }
+
+    public Validation() {
+        for (int i = 0; i < 3; i++) {
+            controllers.add(new ArrayList<>());
+        }
+    }
 
     public boolean validate() {
         try {
