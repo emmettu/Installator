@@ -1,3 +1,4 @@
+import controllers.Controller;
 import controllers.button.VisibilityController;
 import controllers.combobox.ComboBoxController;
 import controllers.installer.NextPanelController;
@@ -213,14 +214,12 @@ public class BuildInstaller {
 
     public static void testGUIRefactor() {
         views.ui.gui.GUITextInputField field = new views.ui.gui.GUITextInputField();
-        field.validation().addHook(null, Validation.Type.SUCCESS);
+        field.validation().addHook(() -> System.out.println("Validation good :D!"), Validation.Type.SUCCESS);
         setLookAndFeel();
         GUIFrame frame = new GUIFrame();
         GUIPanel firstPanel = new GUIPanel();
-        firstPanel.addComponent(new views.ui.gui.GUIProgressBar());
-        firstPanel.addComponent(new views.ui.gui.GUITextInputField());
-        firstPanel.addComponent(new views.ui.gui.GUIButton("Test"));
-        firstPanel.addComponent(new GUICombobox<>("One", "Two", "Three"));
+        firstPanel.addComponent(field);
+        firstPanel.addComponent(new views.ui.gui.GUIButton("Yes"));
         frame.addPanel(firstPanel);
         frame.display();
     }
