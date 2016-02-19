@@ -1,6 +1,7 @@
 package controllers.textinput;
 
 import models.packaging.Package;
+import views.ui.gui.TextInputField;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +14,10 @@ import java.util.List;
 public class PathInputController extends TextInputController {
 
     private List<Package> packages = new ArrayList<>();
+
+    public PathInputController(TextInputField field) {
+        super(field);
+    }
 
     @Override
     public void performAction() {

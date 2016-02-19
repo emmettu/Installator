@@ -2,6 +2,7 @@ package controllers.textinput;
 
 import controllers.Validator;
 import controllers.exceptions.ControllerFailException;
+import controllers.exceptions.ControllerWarnException;
 import views.ui.textinput.TextInputField;
 
 import java.io.File;
@@ -9,14 +10,11 @@ import java.io.File;
 /**
  * Created by eunderhi on 19/01/16.
  */
-public class PathValidator extends Validator {
-
-    private TextInputField field;
+public class PathValidator extends Validator<String> {
 
     @Override
-    public void validate() throws ControllerFailException {
+    public void validate(String pathName) throws ControllerFailException, ControllerWarnException {
 
-        String pathName = field.getText();
         File file = new File(pathName);
 
         if (!file.exists()) {
@@ -29,10 +27,6 @@ public class PathValidator extends Validator {
         else if (!file.canWrite()) {
             throw new ControllerFailException("Path must be write-able.");
         }
-    }
-
-    public void setField(TextInputField field) {
-        this.field = field;
     }
 
 }

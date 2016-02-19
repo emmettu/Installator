@@ -57,6 +57,10 @@ public abstract class Validation<Data> {
         controllers.get(t.ordinal()).forEach(Controller::performAction);
     }
 
+    public void add(Validator<Data> v) {
+        validators.add(v);
+    }
+
     protected abstract void validateComponent(Validator<Data> v) throws ControllerWarnException, ControllerFailException;
     protected abstract void handleWarn(ControllerWarnException e);
     protected abstract void handleFail(ControllerFailException e);

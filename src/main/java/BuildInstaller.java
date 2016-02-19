@@ -1,4 +1,3 @@
-import controllers.Controller;
 import controllers.button.VisibilityController;
 import controllers.combobox.ComboBoxController;
 import controllers.installer.NextPanelController;
@@ -66,8 +65,8 @@ public class BuildInstaller {
         field.setPrompt("Enter the unpacking directory: ");
         ConsoleButton button = new ConsoleButton();
         button.setText("Press enter to start unpacking.");
-        PathInputController controller = new PathInputController();
-        controller.setTextInputField(field);
+        PathInputController controller = new PathInputController(new views.ui.gui.GUITextInputField());
+        //controller.setTextInputField(field);
         controller.addPackage(standardPackage);
         button.addController(unpackerController);
         ConsolePanel panel = new ConsolePanel();
@@ -113,11 +112,11 @@ public class BuildInstaller {
 
         GUITextInputField field = new GUITextInputField();
         PathValidator pv = new PathValidator();
-        pv.setField(field);
+        //pv.setField(field);
         field.addValidator(pv);
         GUIButton button = new GUIButton();
-        PathInputController controller = new PathInputController();
-        controller.setTextInputField(field);
+        PathInputController controller = new PathInputController(new views.ui.gui.GUITextInputField());
+        //controller.setTextInputField(field);
 
         VisibilityController ebc = new VisibilityController(new GUICombobox<>("test", "test"), true);
         field.addController(ebc);
@@ -215,6 +214,8 @@ public class BuildInstaller {
     public static void testGUIRefactor() {
         views.ui.gui.GUITextInputField field = new views.ui.gui.GUITextInputField();
         field.validation().addHook(() -> System.out.println("Validation good :D!"), Validation.Type.SUCCESS);
+        field.validation().add(new PathValidator());
+        field.validation().addHook(() -> System.out.println("Validation failed D:!"), Validation.Type.FAIL);
         setLookAndFeel();
         GUIFrame frame = new GUIFrame();
         GUIPanel firstPanel = new GUIPanel();

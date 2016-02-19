@@ -1,22 +1,25 @@
 package controllers.textinput;
 
 import controllers.Controller;
-import views.ui.textinput.TextInputField;
+import views.ui.gui.TextInputField;
 
 /**
  * Created by eunderhi on 07/12/15.
  */
 public abstract class TextInputController implements Controller {
 
-    private TextInputField textInputField;
+    private TextInputField field;
+
+    public TextInputController(TextInputField field) {
+        this.field = field;
+    }
 
     public void setTextInputField(TextInputField textInputField) {
-        textInputField.addController(this);
-        this.textInputField = textInputField;
+        this.field = textInputField;
     }
 
     protected TextInputField getTextInputField() {
-        return textInputField;
+        return field;
     }
 
 }
