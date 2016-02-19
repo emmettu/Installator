@@ -1,6 +1,6 @@
 package views.ui.gui;
 
-import models.ValidatorContainers.FieldValidation;
+import models.validation.FieldValidation;
 
 import javax.swing.*;
 import java.awt.event.FocusEvent;

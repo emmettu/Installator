@@ -1,6 +1,6 @@
 package views.ui.gui;
 
-import models.ValidatorContainers.Validation;
+import models.validation.Validation;
 
 /**
  * Created by eunderhi on 12/02/16.

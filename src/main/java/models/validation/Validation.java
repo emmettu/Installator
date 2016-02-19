@@ -1,4 +1,4 @@
-package models.ValidatorContainers;
+package models.validation;
 
 import controllers.Controller;
 import controllers.Validator;
