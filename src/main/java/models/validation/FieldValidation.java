@@ -7,11 +7,11 @@ import views.ui.gui.TextInputField;
 
 /**
  * Created by eunderhi on 16/02/16.
+ * Validation class for TextInputFields
  */
 public class FieldValidation extends Validation<String> {
 
     private TextInputField field;
-
 
     public FieldValidation(TextInputField field) {
         this.field = field;

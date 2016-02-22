@@ -3,7 +3,6 @@ package controllers.textinput;
 import controllers.Validator;
 import controllers.exceptions.ControllerFailException;
 import controllers.exceptions.ControllerWarnException;
-import views.ui.textinput.TextInputField;
 
 import java.io.File;
 
