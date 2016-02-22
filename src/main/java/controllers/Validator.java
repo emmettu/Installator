@@ -6,8 +6,8 @@ import controllers.exceptions.ControllerWarnException;
 /**
  * Created by eunderhi on 27/11/15.
  */
-public abstract class Validator<Data> {
+public interface Validator<Data> {
 
-    public abstract void validate(Data data) throws ControllerFailException, ControllerWarnException;
+    void validate(Data data) throws ControllerFailException, ControllerWarnException;
 
 }

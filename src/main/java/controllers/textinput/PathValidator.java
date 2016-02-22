@@ -10,7 +10,7 @@ import java.io.File;
 /**
  * Created by eunderhi on 19/01/16.
  */
-public class PathValidator extends Validator<String> {
+public class PathValidator implements Validator<String> {
 
     @Override
     public void validate(String pathName) throws ControllerFailException, ControllerWarnException {
