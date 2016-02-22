@@ -24,17 +24,12 @@ public class FieldValidation extends Validation<String> {
 
     @Override
     public void handleWarn(ControllerWarnException e) {
-        runHooks(Type.WARN);
+        runHooks(Type.WARN, e);
     }
 
     @Override
     public void handleFail(ControllerFailException e) {
-        runHooks(Type.FAIL);
-    }
-
-    @Override
-    protected void handleSuccess() {
-        runHooks(Type.SUCCESS);
+        runHooks(Type.FAIL, e);
     }
 
 }

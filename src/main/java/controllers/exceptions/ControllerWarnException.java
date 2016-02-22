@@ -7,7 +7,6 @@ public class ControllerWarnException extends Exception {
 
     public ControllerWarnException(String message) {
         super(message);
-
     }
 
 }

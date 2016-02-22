@@ -5,6 +5,7 @@ import controllers.installer.PreviousPanelController;
 import controllers.progressbar.ProgressBarController;
 import controllers.textinput.PathInputController;
 import controllers.textinput.PathValidator;
+import models.validation.FailValidationAction;
 import models.validation.Validation;
 import models.packaging.utils.PackageSet;
 import models.unpacking.Unpacker;
@@ -214,8 +215,7 @@ public class BuildInstaller {
     public static void testGUIRefactor() {
         views.ui.gui.GUITextInputField field = new views.ui.gui.GUITextInputField();
         field.validation().add(new PathValidator());
-        field.validation().addHook(() -> System.out.println("Validation good :D!"), Validation.Type.SUCCESS);
-        field.validation().addHook(() -> System.out.println("Validation failed D:!"), Validation.Type.FAIL);
+        field.validation().addHook(new FailValidationAction(field), Validation.Type.FAIL);
         setLookAndFeel();
         GUIFrame frame = new GUIFrame();
         GUIPanel firstPanel = new GUIPanel();
