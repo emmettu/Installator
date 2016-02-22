@@ -22,9 +22,6 @@ public class PathValidator implements Validator<String> {
         else if (!file.isDirectory()) {
             throw new ControllerFailException("Path must be a directory.");
         }
-        else if (file.listFiles() != null && file.listFiles().length != 0) {
-            throw new ControllerFailException("Path must be empty");
-        }
         else if (!file.canWrite()) {
             throw new ControllerFailException("Path must be write-able.");
         }

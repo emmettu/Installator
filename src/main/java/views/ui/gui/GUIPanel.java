@@ -8,7 +8,6 @@ import java.awt.*;
 public class GUIPanel extends GUIComponent {
 
     public GUIPanel() {
-        getJComponent().setLayout(new FlowLayout());
     }
 
     public void clear() {

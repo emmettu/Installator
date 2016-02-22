@@ -27,6 +27,7 @@ public class GUIFrame implements Frame {
 
     public void addPanel(GUIComponent panel) {
         panels.add(panel);
+        frame.pack();
     }
 
     @Override
@@ -39,7 +40,6 @@ public class GUIFrame implements Frame {
         contentPanel.clear();
         GUIComponent currentPanel = panels.get(currentPanelIndex);
         contentPanel.addComponent(currentPanel);
-        frame.pack();
         contentPanel.display();
     }
 

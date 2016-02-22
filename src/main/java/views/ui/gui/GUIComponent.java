@@ -14,7 +14,7 @@ import java.awt.*;
  */
 public abstract class GUIComponent extends UIComponent {
 
-    private JPanel jComponent = new JPanel(new BorderLayout());
+    private JPanel jComponent = new JPanel();
 
     @Override
     public void update() {
@@ -32,7 +32,7 @@ public abstract class GUIComponent extends UIComponent {
     }
 
     public void setJComponent(JComponent comp) {
-        jComponent.add(comp, BorderLayout.NORTH);
+        jComponent.add(comp);
     }
 
     public JComponent getJComponent() {
@@ -61,7 +61,5 @@ public abstract class GUIComponent extends UIComponent {
         new ToastMessage(e.getMessage(), 4000, jComponent);
     }
 
-    @Override
-    protected void onControllerSuccess() {}
 
 }

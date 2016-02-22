@@ -52,11 +52,6 @@ public class GUITextInputField extends TextInputField {
         new ToastMessage2(e.getMessage(), getTextField());
     }
 
-    @Override
-    protected void onValidationSuccess() {
-        textField.setBackground(Color.WHITE);
-    }
-
     public JPanel getTextField() {
         return panel;
 
@@ -69,11 +64,6 @@ public class GUITextInputField extends TextInputField {
 
     @Override
     protected void onControllerWarn(ControllerWarnException e) {
-
-    }
-
-    @Override
-    protected void onControllerSuccess() {
 
     }
 }

@@ -30,14 +30,11 @@ public abstract class UserInputView extends UIComponent {
 
     private void checkAllValidators() throws ControllerFailException {
         for (Validator v : validators) {
-            v.validate();
         }
         setValid(true);
-        onValidationSuccess();
     }
 
     protected abstract void onValidationFail(ControllerFailException e);
-    protected abstract void onValidationSuccess();
 
     public boolean isValid() {
         return isValid;

@@ -2,7 +2,7 @@ package controllers.progressbar;
 
 import controllers.Controller;
 import models.unpacking.Unpacker;
-import views.ui.progressbar.ProgressBar;
+import views.ui.gui.ProgressBar;
 
 /**
  * Created by eunderhi on 16/12/15.
@@ -21,7 +21,6 @@ public class ProgressBarController implements Controller {
         int percentDone = getPercentDone();
         if(bar.getPercentDone() != percentDone) {
             bar.setPercentDone(percentDone);
-            bar.update();
         }
     }
 
@@ -33,4 +32,5 @@ public class ProgressBarController implements Controller {
     public void setUnpacker(Unpacker unpacker) {
         this.unpacker = unpacker;
     }
+
 }

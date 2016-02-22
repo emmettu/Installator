@@ -34,11 +34,6 @@ public class ConsoleTextInputField extends TextInputField {
     }
 
     @Override
-    protected void onValidationSuccess() {
-
-    }
-
-    @Override
     protected void onControllerFail(ControllerFailException e) {
 
     }

@@ -22,8 +22,8 @@ public class PathInputController extends TextInputController {
     @Override
     public void performAction() {
         String path = getTextInputField().getText();
-        for(Package thePackage : packages) {
-            thePackage.setUnpackDirectory(path);
+        for(Package p : packages) {
+            p.setUnpackDirectory(path);
         }
     }
 

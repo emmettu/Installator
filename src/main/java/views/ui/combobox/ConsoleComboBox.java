@@ -48,11 +48,6 @@ public class ConsoleComboBox extends ComboBox {
     }
 
     @Override
-    protected void onValidationSuccess() {
-
-    }
-
-    @Override
     protected void onControllerFail(ControllerFailException e) {
 
     }

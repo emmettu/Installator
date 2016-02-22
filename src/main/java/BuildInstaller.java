@@ -73,12 +73,9 @@ public class BuildInstaller {
         ConsolePanel panel = new ConsolePanel();
 
         ConsoleProgressBar bar = new ConsoleProgressBar();
-        ProgressBarController pbc = new ProgressBarController(bar);
         bar.setPrompt("Unpacking: ");
         bar.setLength(60);
         bar.setEndPrompt(" You did it. You unpacked the package.");
-        unpacker.addController(pbc);
-        pbc.setUnpacker(unpacker);
 
         ConsoleComboBox combo = new ConsoleComboBox("yeah", "sure", "maybe");
         ComboBoxController cbc = new ComboBoxController();
@@ -133,14 +130,6 @@ public class BuildInstaller {
         InstallerFrame installer = new InstallerFrame();
 
         List<GUIProgressBar> bars = new ArrayList<>();
-
-        for(Unpacker unpacker : packages.getUnpackers()) {
-            GUIProgressBar bar = new GUIProgressBar();
-            ProgressBarController pbc = new ProgressBarController(bar);
-            pbc.setUnpacker(unpacker);
-            unpacker.addController(pbc);
-            bars.add(bar);
-        }
 
         NextPanelController npc = new NextPanelController();
         npc.setInstaller(installer);
@@ -213,14 +202,57 @@ public class BuildInstaller {
     }
 
     public static void testGUIRefactor() {
+
+        PackageSet packages = new PackageSet();
+        packages.setRootDirectory("wildfly-10.0.0.CR4/");
+        packages.add("")
+                .exclude("docs").exclude("appclient").exclude("bin").exclude("domain")
+                .exclude("modules").exclude("standalone").exclude("welcome-content")
+                .add("docs")
+                .add("appclient")
+                .add("bin")
+                .add("domain")
+                .add("modules")
+                .add("standalone")
+                .add("welcome-content");
+        packages.addMultiThreadedUnpackers();
+
         views.ui.gui.GUITextInputField field = new views.ui.gui.GUITextInputField();
         field.validation().add(new PathValidator());
         field.validation().addHook(new FailValidationAction(field), Validation.Type.FAIL);
         setLookAndFeel();
+
+        views.ui.gui.GUIButton button = new views.ui.gui.GUIButton("Install");
+        PathInputController controller = new PathInputController(field);
+        field.addController(controller);
+
+        for(StandardPackage pack : packages.getPackages()) {
+            controller.addPackage(pack);
+        }
+        for(UnpackerController uc : packages.getControllers()) {
+            button.addController(uc);
+        }
+
+        List<views.ui.gui.GUIProgressBar> bars = new ArrayList<>();
+
+        for(Unpacker unpacker : packages.getUnpackers()) {
+            views.ui.gui.GUIProgressBar bar = new views.ui.gui.GUIProgressBar();
+            ProgressBarController pbc = new ProgressBarController(bar);
+            pbc.setUnpacker(unpacker);
+            unpacker.addController(pbc);
+            bars.add(bar);
+        }
+
         GUIFrame frame = new GUIFrame();
         GUIPanel firstPanel = new GUIPanel();
+
+        String[] packageNames = {"Wildfly", "docs", "appclient", "bin", "domain", "modules", "standalone", "welcome-content"};
+        for(int i = 0; i < packageNames.length; i++) {
+            firstPanel.addComponent(bars.get(i));
+        }
+
         firstPanel.addComponent(field);
-        firstPanel.addComponent(new views.ui.gui.GUIButton("Yes"));
+        firstPanel.addComponent(button);
         frame.addPanel(firstPanel);
         frame.display();
     }
