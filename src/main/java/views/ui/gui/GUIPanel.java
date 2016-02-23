@@ -12,6 +12,7 @@ public class GUIPanel extends GUIComponent {
 
     public void clear() {
         getJComponent().removeAll();
+        getJComponent().setLayout(new GridLayout(0, 1));
     }
 
 }

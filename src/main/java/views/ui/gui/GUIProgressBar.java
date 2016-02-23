@@ -26,4 +26,5 @@ public class GUIProgressBar extends GUIComponent implements ProgressBar{
     public void setPercentDone(int percentDone) {
         bar.setValue(percentDone);
     }
+
 }

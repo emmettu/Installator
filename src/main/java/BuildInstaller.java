@@ -246,13 +246,14 @@ public class BuildInstaller {
         GUIFrame frame = new GUIFrame();
         GUIPanel firstPanel = new GUIPanel();
 
+        firstPanel.addComponent(field);
+        firstPanel.addComponent(button);
+
         String[] packageNames = {"Wildfly", "docs", "appclient", "bin", "domain", "modules", "standalone", "welcome-content"};
         for(int i = 0; i < packageNames.length; i++) {
             firstPanel.addComponent(bars.get(i));
         }
 
-        firstPanel.addComponent(field);
-        firstPanel.addComponent(button);
         frame.addPanel(firstPanel);
         frame.display();
     }
