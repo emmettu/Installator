@@ -18,7 +18,9 @@ public abstract class InstallerModel implements Model {
             try {
                 controller.performAction();
             }
-            catch (Exception ignored) {}
+            catch (Exception ignored) {
+                ignored.printStackTrace();
+            }
         }
     }
 

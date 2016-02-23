@@ -127,7 +127,7 @@ public class BuildInstaller {
         for(StandardPackage pack : packages.getPackages()) {
             controller.addPackage(pack);
         }
-        for(UnpackerController uc : packages.getControllers()) {
+        for(UnpackerController uc : packages.getUnpackerControllers()) {
             button.addController(uc);
         }
         PathInputPanel panel = new PathInputPanel();
@@ -226,6 +226,7 @@ public class BuildInstaller {
                 .add("standalone")
                 .add("welcome-content");
         packages.addMultiThreadedUnpackers();
+        packages.calculateSize();
 
         views.ui.gui.GUITextInputField field = new views.ui.gui.GUITextInputField();
         field.validation().add(new PathValidator());
@@ -239,7 +240,7 @@ public class BuildInstaller {
         for(StandardPackage pack : packages.getPackages()) {
             controller.addPackage(pack);
         }
-        for(UnpackerController uc : packages.getControllers()) {
+        for(UnpackerController uc : packages.getUnpackerControllers()) {
             button.addController(uc);
         }
 
@@ -260,6 +261,7 @@ public class BuildInstaller {
         firstPanel.addComponent(button);
 
         String[] packageNames = {"Wildfly", "docs", "appclient", "bin", "domain", "modules", "standalone", "welcome-content"};
+
         for(int i = 0; i < packageNames.length; i++) {
             firstPanel.addComponent(bars.get(i));
         }
