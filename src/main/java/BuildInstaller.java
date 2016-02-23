@@ -97,8 +97,13 @@ public class BuildInstaller {
         PackageSet packages = new PackageSet();
         packages.setRootDirectory("wildfly-10.0.0.CR4/");
         packages.add("")
-                    .exclude("docs").exclude("appclient").exclude("bin").exclude("domain")
-                    .exclude("modules").exclude("standalone").exclude("welcome-content")
+                    .exclude("docs")
+                    .exclude("appclient")
+                    .exclude("bin")
+                    .exclude("domain")
+                    .exclude("modules")
+                    .exclude("standalone")
+                    .exclude("welcome-content")
                 .add("docs")
                 .add("appclient")
                 .add("bin")
@@ -206,8 +211,13 @@ public class BuildInstaller {
         PackageSet packages = new PackageSet();
         packages.setRootDirectory("wildfly-10.0.0.CR4/");
         packages.add("")
-                .exclude("docs").exclude("appclient").exclude("bin").exclude("domain")
-                .exclude("modules").exclude("standalone").exclude("welcome-content")
+                    .exclude("docs")
+                    .exclude("appclient")
+                    .exclude("bin")
+                    .exclude("domain")
+                    .exclude("modules")
+                    .exclude("standalone")
+                    .exclude("welcome-content")
                 .add("docs")
                 .add("appclient")
                 .add("bin")
