@@ -5,7 +5,6 @@ import controllers.installer.PreviousPanelController;
 import controllers.progressbar.ProgressBarController;
 import controllers.textinput.PathInputController;
 import controllers.textinput.PathValidator;
-import controllers.unpacker.PackageSetController;
 import models.packaging.PackageSetDoneController;
 import models.validation.FailValidationAction;
 import models.validation.Validation;
@@ -209,7 +208,6 @@ public class BuildInstaller {
     }
 
     public static void testGUIRefactor() {
-
         PackageSet packages = new PackageSet();
         packages.setRootDirectory("wildfly-10.0.0.CR4/");
         packages.add("")

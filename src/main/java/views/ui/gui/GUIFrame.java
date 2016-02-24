@@ -40,6 +40,7 @@ public class GUIFrame implements Frame {
         contentPanel.clear();
         GUIComponent currentPanel = panels.get(currentPanelIndex);
         contentPanel.addComponent(currentPanel);
+        frame.pack();
         contentPanel.display();
     }
 
