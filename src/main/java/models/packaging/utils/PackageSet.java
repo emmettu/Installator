@@ -82,4 +82,12 @@ public class PackageSet extends InstallerModel {
         notifyListeners();
     }
 
+    public long getUnpackedAmount() {
+        return unpackedAmount.get();
+    }
+
+    public long getSize() {
+        return size;
+    }
+
 }

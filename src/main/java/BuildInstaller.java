@@ -5,6 +5,8 @@ import controllers.installer.PreviousPanelController;
 import controllers.progressbar.ProgressBarController;
 import controllers.textinput.PathInputController;
 import controllers.textinput.PathValidator;
+import controllers.unpacker.PackageSetController;
+import models.packaging.PackageSetDoneController;
 import models.validation.FailValidationAction;
 import models.validation.Validation;
 import models.packaging.utils.PackageSet;
@@ -265,6 +267,8 @@ public class BuildInstaller {
         for(int i = 0; i < packageNames.length; i++) {
             firstPanel.addComponent(bars.get(i));
         }
+
+        packages.addController(new PackageSetDoneController(packages));
 
         frame.addPanel(firstPanel);
         frame.display();

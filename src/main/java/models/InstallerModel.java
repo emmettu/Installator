@@ -15,12 +15,7 @@ public abstract class InstallerModel implements Model {
     @Override
     public void notifyListeners() {
         for(Controller controller : controllers) {
-            try {
-                controller.performAction();
-            }
-            catch (Exception ignored) {
-                ignored.printStackTrace();
-            }
+            controller.performAction();
         }
     }
 
