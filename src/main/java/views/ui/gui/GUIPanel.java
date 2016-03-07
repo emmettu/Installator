@@ -16,4 +16,8 @@ public class GUIPanel extends GUIComponent {
         getJComponent().setLayout(new GridLayout(0, 1));
     }
 
+    public void setLayout(LayoutManager2 layout) {
+        getJComponent().setLayout(layout);
+    }
+
 }

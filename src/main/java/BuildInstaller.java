@@ -31,6 +31,7 @@ import views.ui.gui.GUIPanel;
 import views.ui.panels.ConsolePanel;
 import views.ui.panels.LanguageSelectPanel;
 import views.ui.panels.PathInputPanel;
+import views.ui.panels.TargetPanel;
 import views.ui.progressbar.ConsoleProgressBar;
 import views.ui.progressbar.GUIProgressBar;
 import views.ui.textinput.ConsoleTextInputField;
@@ -268,7 +269,7 @@ public class BuildInstaller {
 
         packages.addController(new PackageSetDoneController(packages));
 
-        frame.addPanel(firstPanel);
+        frame.addPanel(new TargetPanel());
         frame.display();
     }
 
