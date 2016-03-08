@@ -18,16 +18,16 @@ public class TargetPanel extends GUIPanel {
     public TargetPanel() {
         setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
-        gbc.anchor = GridBagConstraints.LAST_LINE_START;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.weightx = 0.5;
-        gbc.weighty = 0;
-        gbc.gridwidth = 1;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridx = 0;
         gbc.gridy = 0;
-        gbc.fill = GridBagConstraints.HORIZONTAL;
+        addComponent(new GUITextInputField(), gbc);
+        gbc.weighty = 0;
+        gbc.gridwidth = 1;
         getJComponent().add(Box.createGlue(), gbc);
         getJComponent().setBorder(BorderFactory.createEmptyBorder());
-        addComponent(new GUITextInputField(), gbc);
         gbc.gridx += 1;
         addComponent(new GUIButton("Install"), gbc);
     }

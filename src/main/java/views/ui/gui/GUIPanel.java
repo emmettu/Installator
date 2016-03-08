@@ -1,5 +1,6 @@
 package views.ui.gui;
 
+import javax.swing.*;
 import java.awt.*;
 
 /**
@@ -8,6 +9,7 @@ import java.awt.*;
 public class GUIPanel extends GUIComponent {
 
     public GUIPanel() {
+        setJComponent(new JPanel());
     }
 
     public void clear() {
@@ -18,6 +20,11 @@ public class GUIPanel extends GUIComponent {
 
     public void setLayout(LayoutManager2 layout) {
         getJComponent().setLayout(layout);
+    }
+
+    public void addComponent(GUIComponent component) {
+        JComponent jComponent = component.getJComponent();
+        getJComponent().add(jComponent);
     }
 
 }

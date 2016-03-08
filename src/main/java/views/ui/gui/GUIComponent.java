@@ -14,7 +14,7 @@ import java.awt.*;
  */
 public abstract class GUIComponent extends UIComponent {
 
-    private JPanel jComponent = new JPanel();
+    private JComponent jComponent;
 
     @Override
     public void update() {
@@ -26,13 +26,8 @@ public abstract class GUIComponent extends UIComponent {
         jComponent.repaint();
     }
 
-    public void addComponent(GUIComponent component) {
-        JComponent jComponent = component.getJComponent();
-        this.jComponent.add(jComponent);
-    }
-
     public void setJComponent(JComponent comp) {
-        jComponent.add(comp);
+        jComponent = comp;
     }
 
     public JComponent getJComponent() {
