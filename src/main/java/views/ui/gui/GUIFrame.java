@@ -1,7 +1,6 @@
 package views.ui.gui;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,9 +13,9 @@ public class GUIFrame implements Frame {
     private List<GUIComponent> panels = new ArrayList<>();
     private int currentPanelIndex = 0;
     private GUIPanel contentPanel = new GUIPanel();
-    private GUIPanel buttonPanel = new GUIPanel();
     public static final int WIDTH = 500;
     public static final int HEIGHT = 500;
+    public static final int HEADER_HEIGHT = 50;
     private JFrame frame = new JFrame();
 
     public GUIFrame() {
@@ -26,7 +25,7 @@ public class GUIFrame implements Frame {
         contentPanel.setLayout(new BorderLayout());
         GUIPanel header = new GUIPanel();
         header.setColor(Color.DARK_GRAY);
-        header.setSize(WIDTH, HEIGHT / 10);
+        header.setSize(WIDTH, HEIGHT / HEADER_HEIGHT);
         contentPanel.addComponent(header, BorderLayout.NORTH);
         frame.setVisible(true);
     }
