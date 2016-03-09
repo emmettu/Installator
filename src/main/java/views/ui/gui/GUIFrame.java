@@ -1,6 +1,7 @@
 package views.ui.gui;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +23,11 @@ public class GUIFrame implements Frame {
         frame.setPreferredSize(new Dimension(WIDTH, HEIGHT));
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().add(contentPanel.getJComponent());
+        contentPanel.setLayout(new BorderLayout());
+        GUIPanel header = new GUIPanel();
+        header.setColor(Color.DARK_GRAY);
+        header.setSize(WIDTH, HEIGHT / 10);
+        contentPanel.addComponent(header, BorderLayout.NORTH);
         frame.setVisible(true);
     }
 
@@ -37,9 +43,8 @@ public class GUIFrame implements Frame {
 
     @Override
     public void display() {
-        contentPanel.clear();
         GUIComponent currentPanel = panels.get(currentPanelIndex);
-        contentPanel.addComponent(currentPanel);
+        contentPanel.addComponent(currentPanel, BorderLayout.CENTER);
         frame.pack();
         contentPanel.display();
     }

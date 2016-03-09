@@ -1,6 +1,9 @@
 package views.ui.panels;
 
 
+import controllers.textinput.PathValidator;
+import models.validation.FailValidationAction;
+import models.validation.Validation;
 import views.ui.gui.GUIButton;
 import views.ui.gui.GUIComponent;
 import views.ui.gui.GUIPanel;
@@ -23,7 +26,7 @@ public class TargetPanel extends GUIPanel {
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridx = 0;
         gbc.gridy = 0;
-        addComponent(new GUITextInputField(), gbc);
+        addComponent(getTextInputField(), gbc);
         gbc.weighty = 0;
         gbc.gridwidth = 1;
         getJComponent().add(Box.createGlue(), gbc);
@@ -34,6 +37,13 @@ public class TargetPanel extends GUIPanel {
 
     public void addComponent(GUIComponent component, GridBagConstraints gbc) {
         getJComponent().add(component.getJComponent(), gbc);
+    }
+
+    private GUITextInputField getTextInputField() {
+        GUITextInputField field = new GUITextInputField();
+        field.validation().add(new PathValidator());
+        field.validation().addHook(new FailValidationAction(field), Validation.Type.FAIL);
+        return field;
     }
 
 }

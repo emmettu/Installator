@@ -27,4 +27,17 @@ public class GUIPanel extends GUIComponent {
         getJComponent().add(jComponent);
     }
 
+    public void addComponent(GUIComponent component, String pos) {
+        JComponent jComponent = component.getJComponent();
+        getJComponent().add(jComponent, pos);
+    }
+
+    public void setColor(Color col) {
+        getJComponent().setBackground(col);
+    }
+
+    public void setSize(int width, int height) {
+        getJComponent().setPreferredSize(new Dimension(width, height));
+    }
+
 }
