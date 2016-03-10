@@ -20,7 +20,7 @@ public class GUIButton extends GUIComponent implements Button {
 
     @Override
     public void onClick() {
-        notifyControllers();
+        update();
     }
 
     public void setText(String text) {

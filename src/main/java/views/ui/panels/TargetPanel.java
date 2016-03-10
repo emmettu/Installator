@@ -4,6 +4,7 @@ import controllers.textinput.PathValidator;
 import models.validation.FailValidationAction;
 import models.validation.Validation;
 import views.ui.gui.*;
+import views.ui.gui.GUIPanel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,10 +13,18 @@ import java.awt.*;
  * Created by eunderhi on 24/02/16.
  * The panel where user selects the installation path
  */
-public class TargetPanel extends GUIFramePanel {
+public class TargetPanel extends GUIPanel {
+
+    GUIPanel contentPanel;
+    GUIPanel buttonPanel;
 
     public TargetPanel() {
-        super("Target Panel");
+        setLayout(new BorderLayout());
+        contentPanel = new GUIPanel(new GridBagLayout());
+        buttonPanel = new GUIButtonPanel();
+        build();
+        addComponent(contentPanel, BorderLayout.CENTER);
+        addComponent(buttonPanel, BorderLayout.SOUTH);
     }
 
     private GUITextInputField getTextInputField() {
@@ -25,7 +34,6 @@ public class TargetPanel extends GUIFramePanel {
         return field;
     }
 
-    @Override
     protected void build() {
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.fill = GridBagConstraints.HORIZONTAL;
@@ -40,11 +48,6 @@ public class TargetPanel extends GUIFramePanel {
         contentPanel.getJComponent().setBorder(BorderFactory.createEmptyBorder());
         gbc.gridx += 1;
         contentPanel.addComponent(new GUIButton("Install"), gbc);
-    }
-
-    @Override
-    protected void buildButtonPanel() {
-        buttonPanel.addComponent(new GUIButtonPanel());
     }
 
 }
