@@ -7,10 +7,10 @@ import views.notification.ToastMessage;
 import views.ui.UIComponent;
 
 import javax.swing.*;
-import java.awt.*;
 
 /**
  * Created by eunderhi on 25/01/16.
+ * Class that wraps a jcomponent and provides a controller notification api
  */
 public abstract class GUIComponent extends UIComponent {
 
@@ -55,6 +55,5 @@ public abstract class GUIComponent extends UIComponent {
         jComponent.setBackground(UiResources.validationWarn);
         new ToastMessage(e.getMessage(), 4000, jComponent);
     }
-
 
 }

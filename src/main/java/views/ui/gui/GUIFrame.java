@@ -7,6 +7,7 @@ import java.util.List;
 
 /**
  * Created by eunderhi on 26/01/16.
+ * Installer frame
  */
 public class GUIFrame implements Frame {
 
@@ -25,14 +26,13 @@ public class GUIFrame implements Frame {
         contentPanel.setLayout(new BorderLayout());
         GUIPanel header = new GUIPanel();
         header.setColor(Color.DARK_GRAY);
-        header.setSize(WIDTH, HEIGHT / HEADER_HEIGHT);
+        header.setSize(WIDTH, HEADER_HEIGHT);
         contentPanel.addComponent(header, BorderLayout.NORTH);
         frame.setVisible(true);
     }
 
     public void addPanel(GUIComponent panel) {
         panels.add(panel);
-        frame.pack();
     }
 
     @Override

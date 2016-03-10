@@ -12,10 +12,8 @@ public class GUIPanel extends GUIComponent {
         setJComponent(new JPanel());
     }
 
-    public void clear() {
-        getJComponent().setPreferredSize(new Dimension(900, 600));
-        getJComponent().removeAll();
-        getJComponent().setLayout(new GridLayout(0, 1));
+    public GUIPanel(LayoutManager2 mngr) {
+        setJComponent(new JPanel(mngr));
     }
 
     public void setLayout(LayoutManager2 layout) {
@@ -30,6 +28,10 @@ public class GUIPanel extends GUIComponent {
     public void addComponent(GUIComponent component, String pos) {
         JComponent jComponent = component.getJComponent();
         getJComponent().add(jComponent, pos);
+    }
+
+    public void addComponent(GUIComponent component, GridBagConstraints gbc) {
+        getJComponent().add(component.getJComponent(), gbc);
     }
 
     public void setColor(Color col) {
