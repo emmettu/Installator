@@ -44,8 +44,7 @@ public class TargetPanel extends GUIPanel {
         contentPanel.addComponent(getTextInputField(), gbc);
         gbc.weighty = 0;
         gbc.gridwidth = 1;
-        contentPanel.getJComponent().add(Box.createGlue(), gbc);
-        contentPanel.getJComponent().setBorder(BorderFactory.createEmptyBorder());
+        contentPanel.setBorder(BorderFactory.createEmptyBorder());
         gbc.gridx += 1;
         contentPanel.addComponent(new GUIButton("Install"), gbc);
     }

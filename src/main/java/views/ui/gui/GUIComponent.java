@@ -7,6 +7,7 @@ import views.notification.ToastMessage;
 import views.ui.UIComponent;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 
 /**
  * Created by eunderhi on 25/01/16.
@@ -40,6 +41,10 @@ public abstract class GUIComponent extends UIComponent {
 
     public boolean isEnabled() {
         return jComponent.isEnabled();
+    }
+
+    public void setBorder(Border border) {
+        jComponent.setBorder(border);
     }
 
     @Override
