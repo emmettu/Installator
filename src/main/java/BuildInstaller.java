@@ -269,7 +269,11 @@ public class BuildInstaller {
 
         packages.addController(new PackageSetDoneController(packages));
 
-        frame.addPanel(new TargetPanel());
+        TargetPanel targetPanel = new TargetPanel();
+        PathInputController pic = new PathInputController(targetPanel.getField());
+        targetPanel.getField().addController(pic);
+        pic.addPackageSet(packages);
+        frame.addPanel(targetPanel);
         frame.display();
     }
 

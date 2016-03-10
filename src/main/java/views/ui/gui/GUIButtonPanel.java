@@ -7,7 +7,7 @@ public class GUIButtonPanel extends GUIPanel {
 
     public GUIButtonPanel() {
         GUIPanel panel = new GUIPanel();
-        panel.setSize(200, 200);
+        panel.setSize(500, 50);
         panel.addComponent(new GUIButton("Next"));
         panel.addComponent(new GUIButton("Previous"));
         panel.addComponent(new GUIButton("Quit"));

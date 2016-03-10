@@ -1,6 +1,8 @@
 package controllers.textinput;
 
 import models.packaging.Package;
+import models.packaging.StandardPackage;
+import models.packaging.utils.PackageSet;
 import views.ui.gui.TextInputField;
 
 import java.util.ArrayList;
@@ -11,6 +13,7 @@ import java.util.List;
  * Controller that sets the unpack directory of a package from a
  * textInputField
  */
+
 public class PathInputController extends TextInputController {
 
     private List<Package> packages = new ArrayList<>();
@@ -24,6 +27,12 @@ public class PathInputController extends TextInputController {
         String path = getTextInputField().getText();
         for(Package p : packages) {
             p.setUnpackDirectory(path);
+        }
+    }
+
+    public void addPackageSet(PackageSet packages) {
+        for (StandardPackage pack : packages.getPackages()) {
+            addPackage(pack);
         }
     }
 
