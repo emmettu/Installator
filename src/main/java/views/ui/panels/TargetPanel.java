@@ -17,7 +17,7 @@ import java.awt.*;
 public class TargetPanel extends GUIPanel {
 
     private GUIPanel contentPanel;
-    private GUIPanel buttonPanel;
+    private GUIButtonPanel buttonPanel;
     public static final int WIDTH = 500;
     public static final int HEIGHT = 500;
     private GUITextInputField field = new GUITextInputField();
@@ -55,6 +55,10 @@ public class TargetPanel extends GUIPanel {
 
     public GUITextInputField getField() {
         return field;
+    }
+
+    public GUIButtonPanel getButtonPanel() {
+        return buttonPanel;
     }
 
 }

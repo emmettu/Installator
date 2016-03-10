@@ -42,6 +42,7 @@ public class GUIFrame implements Frame {
 
     @Override
     public void display() {
+        contentPanel.clear();
         GUIComponent currentPanel = panels.get(currentPanelIndex);
         contentPanel.addComponent(currentPanel, BorderLayout.CENTER);
         frame.pack();
@@ -51,11 +52,13 @@ public class GUIFrame implements Frame {
     @Override
     public void nextPanel() {
         currentPanelIndex++;
+        display();
     }
 
     @Override
     public void previousPanel() {
         currentPanelIndex--;
+        display();
     }
 
 }

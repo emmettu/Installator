@@ -7,7 +7,7 @@ import views.View;
  */
 public interface Frame extends View {
 
-    abstract void nextPanel();
-    abstract void previousPanel();
+    void nextPanel();
+    void previousPanel();
 
 }

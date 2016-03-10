@@ -1,3 +1,4 @@
+import controllers.PanelController;
 import controllers.button.VisibilityController;
 import controllers.combobox.ComboBoxController;
 import controllers.installer.NextPanelController;
@@ -263,8 +264,8 @@ public class BuildInstaller {
 
         String[] packageNames = {"Wildfly", "docs", "appclient", "bin", "domain", "modules", "standalone", "welcome-content"};
 
-        for(int i = 0; i < packageNames.length; i++) {
-            firstPanel.addComponent(bars.get(i));
+        for(views.ui.gui.GUIProgressBar bar : bars) {
+            firstPanel.addComponent(bar);
         }
 
         packages.addController(new PackageSetDoneController(packages));
@@ -273,7 +274,16 @@ public class BuildInstaller {
         PathInputController pic = new PathInputController(targetPanel.getField());
         targetPanel.getField().addController(pic);
         pic.addPackageSet(packages);
+
+        PanelController nextPanel = new PanelController(frame);
+        targetPanel.getButtonPanel().getNext().addController(nextPanel);
+
+        PanelController prevPanel = new PanelController(frame);
+        prevPanel.setReverse();
+        targetPanel.getButtonPanel().getPrev().addController(prevPanel);
+
         frame.addPanel(targetPanel);
+        frame.addPanel(firstPanel);
         frame.display();
     }
 

@@ -2,8 +2,6 @@ package views.ui.textinput;
 
 import controllers.exceptions.ControllerFailException;
 import controllers.exceptions.ControllerWarnException;
-import views.lookandfeel.UiResources;
-import views.notification.ToastMessage;
 import views.notification.ToastMessage2;
 
 import javax.swing.*;
@@ -66,4 +64,5 @@ public class GUITextInputField extends TextInputField {
     protected void onControllerWarn(ControllerWarnException e) {
 
     }
+
 }

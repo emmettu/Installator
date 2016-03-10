@@ -42,4 +42,8 @@ public class GUIPanel extends GUIComponent {
         getJComponent().setPreferredSize(new Dimension(width, height));
     }
 
+    public void clear() {
+        getJComponent().removeAll();
+    }
+
 }
