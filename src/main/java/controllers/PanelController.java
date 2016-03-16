@@ -23,7 +23,9 @@ public class PanelController implements Controller {
         if (reverse) {
             frame.previousPanel();
         }
-        frame.nextPanel();
+        else {
+            frame.nextPanel();
+        }
     }
 
 }

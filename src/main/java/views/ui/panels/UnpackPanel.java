@@ -3,7 +3,6 @@ package views.ui.panels;
 import views.ui.gui.GUIButtonPanel;
 import views.ui.gui.GUIPanel;
 import views.ui.gui.GUIProgressBar;
-import views.ui.gui.GUITextInputField;
 
 import java.awt.*;
 

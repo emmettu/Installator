@@ -268,6 +268,7 @@ public class BuildInstaller {
         packages.addController(new PackageSetDoneController(packages));
 
         TargetPanel targetPanel = new TargetPanel();
+        UnpackPanel unpackPanel = new UnpackPanel();
         PathInputController pic = new PathInputController(targetPanel.getField());
         targetPanel.getField().addController(pic);
         pic.addPackageSet(packages);
@@ -277,10 +278,10 @@ public class BuildInstaller {
 
         PanelController prevPanel = new PanelController(frame);
         prevPanel.setReverse();
-        targetPanel.getButtonPanel().getPrev().addController(prevPanel);
+        unpackPanel.getButtonPanel().getPrev().addController(prevPanel);
 
         frame.addPanel(targetPanel);
-        frame.addPanel(new UnpackPanel());
+        frame.addPanel(unpackPanel);
         frame.display();
     }
 
