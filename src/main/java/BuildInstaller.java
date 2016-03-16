@@ -1,4 +1,5 @@
 import controllers.PanelController;
+import controllers.QuitController;
 import controllers.button.VisibilityController;
 import controllers.combobox.ComboBoxController;
 import controllers.installer.NextPanelController;
@@ -279,6 +280,7 @@ public class BuildInstaller {
         PanelController prevPanel = new PanelController(frame);
         prevPanel.setReverse();
         unpackPanel.getButtonPanel().getPrev().addController(prevPanel);
+        unpackPanel.getButtonPanel().getQuit().addController(new QuitController(frame));
 
         frame.addPanel(targetPanel);
         frame.addPanel(unpackPanel);

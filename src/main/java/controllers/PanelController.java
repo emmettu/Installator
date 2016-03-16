@@ -4,6 +4,9 @@ import views.ui.gui.Frame;
 
 /**
  * Created by eunderhi on 10/03/16.
+ * Controller that causes Frame to move to
+ * next panel or previous panel (if setReverse)
+ * has been called.
  */
 public class PanelController implements Controller {
 

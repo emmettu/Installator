@@ -9,5 +9,6 @@ public interface Frame extends View {
 
     void nextPanel();
     void previousPanel();
+    void quit();
 
 }
