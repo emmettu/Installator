@@ -29,10 +29,7 @@ import views.ui.combobox.GUIComboBox;
 import views.ui.gui.GUICombobox;
 import views.ui.gui.GUIFrame;
 import views.ui.gui.GUIPanel;
-import views.ui.panels.ConsolePanel;
-import views.ui.panels.LanguageSelectPanel;
-import views.ui.panels.PathInputPanel;
-import views.ui.panels.TargetPanel;
+import views.ui.panels.*;
 import views.ui.progressbar.ConsoleProgressBar;
 import views.ui.progressbar.GUIProgressBar;
 import views.ui.textinput.ConsoleTextInputField;
@@ -283,7 +280,7 @@ public class BuildInstaller {
         targetPanel.getButtonPanel().getPrev().addController(prevPanel);
 
         frame.addPanel(targetPanel);
-        frame.addPanel(firstPanel);
+        frame.addPanel(new UnpackPanel());
         frame.display();
     }
 

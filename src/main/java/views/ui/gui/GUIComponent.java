@@ -24,6 +24,7 @@ public abstract class GUIComponent extends UIComponent {
 
     @Override
     public void display() {
+        jComponent.revalidate();
         jComponent.repaint();
     }
 

@@ -5,16 +5,16 @@ package views.ui.gui;
  */
 public class GUIButtonPanel extends GUIPanel {
 
-    private GUIButton next = new GUIButton("next");
-    private GUIButton prev = new GUIButton("prev");
     private GUIButton quit = new GUIButton("quit");
+    private GUIButton prev = new GUIButton("prev");
+    private GUIButton next = new GUIButton("next");
 
     public GUIButtonPanel() {
         GUIPanel panel = new GUIPanel();
         panel.setSize(500, 50);
-        panel.addComponent(next);
-        panel.addComponent(prev);
         panel.addComponent(quit);
+        panel.addComponent(prev);
+        panel.addComponent(next);
         setJComponent(panel.getJComponent());
     }
 
