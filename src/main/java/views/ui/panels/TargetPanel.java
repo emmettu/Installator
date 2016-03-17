@@ -28,6 +28,7 @@ public class TargetPanel extends GUIPanel {
         contentPanel.setSize(WIDTH, HEIGHT);
         buttonPanel = new GUIButtonPanel();
         build();
+        makeTextInputField();
         addComponent(contentPanel, BorderLayout.CENTER);
         addComponent(buttonPanel, BorderLayout.SOUTH);
     }
@@ -38,20 +39,34 @@ public class TargetPanel extends GUIPanel {
         return field;
     }
 
-    protected void build() {
+    private void build() {
+        GridBagConstraints gbc = getBasicConstraints();
+
+        //JLabel info = LabelFactory.create(idata.langpack.getString("TargetPanel.info"));
+        gbc.gridy++;
+        //contentPanel.add(info, gbc);
+        gbc.gridy++;
+        gbc.weightx = 1.0;
+        gbc.weighty = 1.0;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        contentPanel.addComponent(field, gbc);
+    }
+
+    GridBagConstraints getBasicConstraints() {
         GridBagConstraints gbc = new GridBagConstraints();
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.weightx = 0.5;
-        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.anchor = GridBagConstraints.NORTHWEST;
+        gbc.insets = new Insets(2, 20, 2, 20);
+        gbc.gridheight = 1;
+        gbc.gridwidth = 1;
+        gbc.weightx = 0;
+        gbc.weighty = 0;
+        gbc.fill = GridBagConstraints.NONE;
         gbc.gridx = 0;
         gbc.gridy = 0;
-        contentPanel.addComponent(makeTextInputField(), gbc);
-        gbc.weighty = 0;
-        gbc.gridwidth = 1;
-        contentPanel.setBorder(BorderFactory.createEmptyBorder());
-        gbc.gridx += 1;
-        contentPanel.addComponent(new GUIButton("Install"), gbc);
+        return gbc;
     }
+
+
 
     public GUITextInputField getField() {
         return field;
