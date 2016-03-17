@@ -45,6 +45,7 @@ public class GUIFrame implements Frame {
         GUIComponent currentPanel = panels.get(currentPanelIndex);
         contentPanel.addComponent(currentPanel, BorderLayout.CENTER);
         currentPanel.display();
+        frame.pack();
     }
 
     @Override

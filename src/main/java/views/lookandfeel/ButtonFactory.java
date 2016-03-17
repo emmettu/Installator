@@ -89,19 +89,6 @@ public class ButtonFactory {
             }
         }
 
-        if (text != null) {
-            if (mnemonic == 0) {
-                String key = findMnemonic(text);
-                if (key != null) {
-                    btn.setMnemonic(key.charAt(0));
-                    buttonMnemonicMap.put(key, text);
-                }
-            } else {
-                btn.setMnemonic(mnemonic);
-                buttonMnemonicMap.put(String.valueOf(mnemonic), text);
-            }
-        }
-
         btn.setFont(FontResources.getOpenSansRegular());
         return btn;
 
