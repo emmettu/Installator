@@ -25,6 +25,7 @@ public class GUIPathComponent extends GUIComponent implements TextInputField, Va
         fileChooser = new JFileChooser();
         fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         browseButton = ButtonFactory.createButton("Browse");
+        browseButton.setText("Browse");
         pathField = new JTextField();
         container = new JPanel();
         setJComponent(container);
@@ -42,11 +43,16 @@ public class GUIPathComponent extends GUIComponent implements TextInputField, Va
             }
         });
         container.setLayout(new GridLayout(1, 2));
+        setText(getDefaultPath());
     }
 
     private File getCurrentDirectory() {
-        File currentDir = new File(getText());
-        return currentDir;
+        File curDir = new File(getText());
+        return curDir.exists() ? curDir : new File(getDefaultPath());
+    }
+
+    private String getDefaultPath() {
+        return System.getProperty("user.home");
     }
 
     @Override
