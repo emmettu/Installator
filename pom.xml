@@ -45,6 +45,8 @@
                                     <exclude>junit:junit</exclude>
                                     <exclude>org.hamcrest:*</exclude>
                                     <exclude>org.mockito:*</exclude>
+                                    <exclude>net.bytebuddy:*</exclude>
+                                    <exclude>org.objenesis:*</exclude>
                                 </excludes>
                             </artifactSet>
                             <transformers>
