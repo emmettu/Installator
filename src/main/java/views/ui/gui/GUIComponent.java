@@ -1,9 +1,5 @@
 package views.ui.gui;
 
-import controllers.exceptions.ControllerFailException;
-import controllers.exceptions.ControllerWarnException;
-import views.lookandfeel.UiResources;
-import views.notification.ToastMessage;
 import views.ui.UIComponent;
 
 import javax.swing.*;
@@ -46,20 +42,6 @@ public abstract class GUIComponent extends UIComponent {
 
     public void setBorder(Border border) {
         jComponent.setBorder(border);
-    }
-
-    @Override
-    protected void onControllerFail(ControllerFailException e) {
-        jComponent.setToolTipText(e.getMessage());
-        jComponent.setBackground(UiResources.validationFail);
-        new ToastMessage(e.getMessage(), 4000, jComponent);
-    }
-
-    @Override
-    protected void onControllerWarn(ControllerWarnException e) {
-        jComponent.setToolTipText(e.getMessage());
-        jComponent.setBackground(UiResources.validationWarn);
-        new ToastMessage(e.getMessage(), 4000, jComponent);
     }
 
 }
