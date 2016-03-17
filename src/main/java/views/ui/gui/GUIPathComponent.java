@@ -33,6 +33,7 @@ public class GUIPathComponent extends GUIComponent implements TextInputField, Va
         browseButton.setAction(new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
+                fileChooser.setCurrentDirectory(getCurrentDirectory());
                 fileChooser.showDialog(container, "Choose");
                 File chosenFile = fileChooser.getSelectedFile();
                 if (chosenFile != null) {
@@ -41,6 +42,11 @@ public class GUIPathComponent extends GUIComponent implements TextInputField, Va
             }
         });
         container.setLayout(new GridLayout(1, 2));
+    }
+
+    private File getCurrentDirectory() {
+        File currentDir = new File(getText());
+        return currentDir;
     }
 
     @Override
