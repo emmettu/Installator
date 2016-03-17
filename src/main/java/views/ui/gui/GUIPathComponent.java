@@ -7,6 +7,7 @@ import views.lookandfeel.ButtonFactory;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.io.File;
 
 /**
  * Created by eunderhi on 17/03/16.
@@ -33,8 +34,10 @@ public class GUIPathComponent extends GUIComponent implements TextInputField, Va
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 fileChooser.showDialog(container, "Choose");
-                String chosenFile = fileChooser.getSelectedFile().getPath();
-                setText(chosenFile);
+                File chosenFile = fileChooser.getSelectedFile();
+                if (chosenFile != null) {
+                    setText(chosenFile.getPath());
+                }
             }
         });
         container.setLayout(new GridLayout(1, 2));
