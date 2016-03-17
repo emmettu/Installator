@@ -1,8 +1,5 @@
 package views.ui.textstream;
 
-import controllers.exceptions.ControllerFailException;
-import controllers.exceptions.ControllerWarnException;
-
 /**
  * Created by eunderhi on 14/12/15.
  */
