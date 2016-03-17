@@ -41,13 +41,4 @@ public class GUIButton extends Button {
         return button;
     }
 
-    @Override
-    protected void onControllerFail(ControllerFailException e) {
-
-    }
-
-    @Override
-    protected void onControllerWarn(ControllerWarnException e) {
-
-    }
 }

@@ -1,8 +1,5 @@
 package views.ui.textstream;
 
-import controllers.exceptions.ControllerFailException;
-import controllers.exceptions.ControllerWarnException;
-
 import javax.swing.*;
 import java.awt.*;
 
@@ -38,13 +35,4 @@ public class GUITextStream extends TextStream {
         return scroller;
     }
 
-    @Override
-    protected void onControllerFail(ControllerFailException e) {
-
-    }
-
-    @Override
-    protected void onControllerWarn(ControllerWarnException e) {
-
-    }
 }

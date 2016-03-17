@@ -20,13 +20,4 @@ public class ConsoleButton extends Button {
         System.out.print(getText());
     }
 
-    @Override
-    protected void onControllerFail(ControllerFailException e) {
-
-    }
-
-    @Override
-    protected void onControllerWarn(ControllerWarnException e) {
-
-    }
 }

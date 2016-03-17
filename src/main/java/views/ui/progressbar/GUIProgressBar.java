@@ -35,13 +35,4 @@ public class GUIProgressBar extends ProgressBar {
         return bar;
     }
 
-    @Override
-    protected void onControllerFail(ControllerFailException e) {
-
-    }
-
-    @Override
-    protected void onControllerWarn(ControllerWarnException e) {
-
-    }
 }

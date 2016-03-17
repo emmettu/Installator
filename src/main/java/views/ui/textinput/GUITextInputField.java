@@ -1,7 +1,6 @@
 package views.ui.textinput;
 
 import controllers.exceptions.ControllerFailException;
-import controllers.exceptions.ControllerWarnException;
 import views.notification.ToastMessage2;
 
 import javax.swing.*;
@@ -52,16 +51,6 @@ public class GUITextInputField extends TextInputField {
 
     public JPanel getTextField() {
         return panel;
-
-    }
-
-    @Override
-    protected void onControllerFail(ControllerFailException e) {
-
-    }
-
-    @Override
-    protected void onControllerWarn(ControllerWarnException e) {
 
     }
 

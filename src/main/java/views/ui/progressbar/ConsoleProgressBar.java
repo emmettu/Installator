@@ -58,13 +58,4 @@ public class ConsoleProgressBar extends ProgressBar {
         this.length = length;
     }
 
-    @Override
-    protected void onControllerFail(ControllerFailException e) {
-
-    }
-
-    @Override
-    protected void onControllerWarn(ControllerWarnException e) {
-
-    }
 }

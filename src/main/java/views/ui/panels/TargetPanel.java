@@ -1,12 +1,8 @@
 package views.ui.panels;
 
-import controllers.textinput.PathValidator;
-import models.validation.FailValidationAction;
-import models.validation.Validation;
 import views.ui.gui.*;
 import views.ui.gui.GUIPanel;
 
-import javax.swing.*;
 import java.awt.*;
 
 /**
@@ -20,7 +16,7 @@ public class TargetPanel extends GUIPanel {
     private GUIButtonPanel buttonPanel;
     public static final int WIDTH = 500;
     public static final int HEIGHT = 500;
-    private GUITextInputField field = new GUITextInputField();
+    private GUIPathComponent field = new GUIPathComponent();
 
     public TargetPanel() {
         setLayout(new BorderLayout());
@@ -28,15 +24,8 @@ public class TargetPanel extends GUIPanel {
         contentPanel.setSize(WIDTH, HEIGHT);
         buttonPanel = new GUIButtonPanel();
         build();
-        makeTextInputField();
         addComponent(contentPanel, BorderLayout.CENTER);
         addComponent(buttonPanel, BorderLayout.SOUTH);
-    }
-
-    private GUITextInputField makeTextInputField() {
-        field.validation().add(new PathValidator());
-        field.validation().addHook(new FailValidationAction(field), Validation.Type.FAIL);
-        return field;
     }
 
     private void build() {
@@ -68,7 +57,7 @@ public class TargetPanel extends GUIPanel {
 
 
 
-    public GUITextInputField getField() {
+    public GUIPathComponent getField() {
         return field;
     }
 

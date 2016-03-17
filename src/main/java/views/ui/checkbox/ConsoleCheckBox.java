@@ -36,13 +36,4 @@ public class ConsoleCheckBox extends CheckBox {
     protected void onValidationFail(ControllerFailException e) {
     }
 
-    @Override
-    protected void onControllerFail(ControllerFailException e) {
-
-    }
-
-    @Override
-    protected void onControllerWarn(ControllerWarnException e) {
-
-    }
 }

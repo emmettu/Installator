@@ -18,13 +18,4 @@ public class ConsoleTextStream extends TextStream {
         System.out.println(text);
     }
 
-    @Override
-    protected void onControllerFail(ControllerFailException e) {
-
-    }
-
-    @Override
-    protected void onControllerWarn(ControllerWarnException e) {
-
-    }
 }

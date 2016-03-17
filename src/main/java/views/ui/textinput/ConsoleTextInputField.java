@@ -33,13 +33,4 @@ public class ConsoleTextInputField extends TextInputField {
         update();
     }
 
-    @Override
-    protected void onControllerFail(ControllerFailException e) {
-
-    }
-
-    @Override
-    protected void onControllerWarn(ControllerWarnException e) {
-
-    }
 }

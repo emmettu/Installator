@@ -39,13 +39,4 @@ public class GUIComboBox extends ComboBox {
 
     }
 
-    @Override
-    protected void onControllerFail(ControllerFailException e) {
-
-    }
-
-    @Override
-    protected void onControllerWarn(ControllerWarnException e) {
-
-    }
 }
