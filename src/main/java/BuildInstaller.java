@@ -191,10 +191,16 @@ public class BuildInstaller {
             UIManager.put("Button.foreground", new ColorUIResource(Color.RED));
             setUIFont(new FontUIResource(FontResources.getOpenSansRegular()));
             FontResources.getFontAwesome();
+            loadIcons();
         }
         catch(Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private static void loadIcons() {
+        ImageIcon icon =  new ImageIcon(BuildInstaller.class.getResource("/img/folder_4d5258_18.png"));
+        UIManager.put("FileView.directoryIcon", icon);
     }
 
     public static void setUIFont(javax.swing.plaf.FontUIResource f) {
