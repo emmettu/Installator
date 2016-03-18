@@ -30,6 +30,7 @@ import views.ui.combobox.GUIComboBox;
 import views.ui.gui.GUICombobox;
 import views.ui.gui.GUIFrame;
 import views.ui.gui.GUIPanel;
+import views.ui.gui.GUIPathComponent;
 import views.ui.panels.*;
 import views.ui.progressbar.ConsoleProgressBar;
 import views.ui.progressbar.GUIProgressBar;

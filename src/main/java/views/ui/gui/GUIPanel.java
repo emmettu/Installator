@@ -12,11 +12,11 @@ public class GUIPanel extends GUIComponent {
         setJComponent(new JPanel());
     }
 
-    public GUIPanel(LayoutManager2 mngr) {
+    public GUIPanel(LayoutManager mngr) {
         setJComponent(new JPanel(mngr));
     }
 
-    public void setLayout(LayoutManager2 layout) {
+    public void setLayout(LayoutManager layout) {
         getJComponent().setLayout(layout);
     }
 

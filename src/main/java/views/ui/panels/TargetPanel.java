@@ -57,8 +57,8 @@ public class TargetPanel extends GUIPanel {
 
 
 
-    public GUIPathComponent getField() {
-        return field;
+    public GUITextInputField getField() {
+        return field.getField();
     }
 
     public GUIButtonPanel getButtonPanel() {

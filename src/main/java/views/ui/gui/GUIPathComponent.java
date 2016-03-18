@@ -1,53 +1,43 @@
 package views.ui.gui;
 
-import models.validation.FieldValidation;
+import controllers.textinput.PathValidator;
+import models.validation.FailValidationAction;
 import models.validation.Validation;
-import views.lookandfeel.ButtonFactory;
 
-import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.io.File;
 
 /**
  * Created by eunderhi on 17/03/16.
  * A text input field but with a file chooser.
  */
-public class GUIPathComponent extends GUIComponent implements TextInputField, Validated {
+public class GUIPathComponent extends GUIPanel {
 
-    private JFileChooser fileChooser;
-    private JButton browseButton;
-    private JTextField pathField;
-    private JPanel container;
-    private FieldValidation validator = new FieldValidation(this);
+    private FileChooser fileChooser = new FileChooser();
+    private GUIButton browseButton = new GUIButton("Browse");
+    private GUITextInputField pathField = new GUITextInputField();
 
     public GUIPathComponent() {
-        fileChooser = new JFileChooser();
-        fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-        browseButton = ButtonFactory.createButton("Browse");
-        browseButton.setText("Browse");
-        pathField = new JTextField();
-        container = new JPanel();
-        setJComponent(container);
-        container.add(pathField);
-        container.add(browseButton);
-        browseButton.setAction(new AbstractAction() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                fileChooser.setCurrentDirectory(getCurrentDirectory());
-                fileChooser.showDialog(container, "Choose");
-                File chosenFile = fileChooser.getSelectedFile();
-                if (chosenFile != null) {
-                    setText(chosenFile.getPath());
-                }
+        setLayout(new GridLayout(1, 2));
+        fileChooser.directoriesOnly();
+
+        browseButton.addController(() -> {
+            fileChooser.setCurrentDirectory(getCurrentDirectory());
+            fileChooser.showDialog(pathField, "Choose");
+            File chosenFile = fileChooser.getSelectedFile();
+            if (chosenFile != null) {
+                pathField.setText(chosenFile.getPath());
             }
         });
-        container.setLayout(new GridLayout(1, 2));
-        setText(getDefaultPath());
+        pathField.setText(getDefaultPath());
+        pathField.validation().add(new PathValidator());
+        pathField.validation().addHook(new FailValidationAction(pathField), Validation.Type.FAIL);
+        addComponent(pathField);
+        addComponent(browseButton);
     }
 
     private File getCurrentDirectory() {
-        File curDir = new File(getText());
+        File curDir = new File(pathField.getText());
         return curDir.exists() ? curDir : new File(getDefaultPath());
     }
 
@@ -55,31 +45,8 @@ public class GUIPathComponent extends GUIComponent implements TextInputField, Va
         return System.getProperty("user.home");
     }
 
-    @Override
-    public void update() {
-        if (validator.validate()) {
-            super.update();
-        }
-    }
-
-    @Override
-    public String getText() {
-        return pathField.getText();
-    }
-
-    @Override
-    public void setText(String text) {
-        pathField.setText(text);
-    }
-
-    @Override
-    public void validate() {
-        validation().validate();
-    }
-
-    @Override
-    public Validation validation() {
-        return validator;
+    public GUITextInputField getField() {
+        return pathField;
     }
 
 }
