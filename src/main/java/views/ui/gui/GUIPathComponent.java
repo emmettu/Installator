@@ -21,7 +21,7 @@ public class GUIPathComponent extends GUIPanel {
         GUIButton browseButton = new GUIButton("Browse");
         browseButton.addController(() -> {
             fileChooser.setCurrentDirectory(getCurrentDirectory());
-            fileChooser.showDialog(pathField, "Choose");
+            fileChooser.showDialog(GUIPathComponent.this, "Choose");
             File chosenFile = fileChooser.getSelectedFile();
             if (chosenFile != null) {
                 pathField.setText(chosenFile.getPath());
