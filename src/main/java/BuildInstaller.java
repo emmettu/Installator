@@ -280,9 +280,10 @@ public class BuildInstaller {
         nextButton.setEnabled(false);
         UnpackPanel unpackPanel = new UnpackPanel();
         PathInputController pic = new PathInputController(targetPanel.getField());
-        views.ui.gui.GUITextInputField pathField = targetPanel.getField();
+        views.ui.gui.FancyGUITextField pathField = targetPanel.getField();
         pathField.validation().addHook(e -> nextButton.setEnabled(false), Validation.Type.FAIL);
         pathField.validation().addHook(e -> nextButton.setEnabled(true), Validation.Type.SUCCESS);
+        pathField.validate();
         targetPanel.getField().addController(pic);
         pic.addPackageSet(packages);
 

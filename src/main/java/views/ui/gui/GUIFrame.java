@@ -50,14 +50,14 @@ public class GUIFrame implements Frame {
 
     @Override
     public void nextPanel() {
-        contentPanel.remove(panels.get(currentPanelIndex));
+        contentPanel.removeComponent(panels.get(currentPanelIndex));
         currentPanelIndex++;
         display();
     }
 
     @Override
     public void previousPanel() {
-        contentPanel.remove(panels.get(currentPanelIndex));
+        contentPanel.removeComponent(panels.get(currentPanelIndex));
         currentPanelIndex--;
         display();
     }

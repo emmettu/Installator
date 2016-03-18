@@ -46,7 +46,7 @@ public class GUIPanel extends GUIComponent {
         getJComponent().removeAll();
     }
 
-    public void remove(GUIComponent component) {
+    public void removeComponent(GUIComponent component) {
         getJComponent().remove(component.getJComponent());
     }
 

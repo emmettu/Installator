@@ -1,7 +1,6 @@
 package views.ui.gui;
 
 import controllers.textinput.PathValidator;
-import models.validation.FailValidationAction;
 import models.validation.Validation;
 
 import java.awt.*;
@@ -15,7 +14,7 @@ public class GUIPathComponent extends GUIPanel {
 
     private FileChooser fileChooser = new FileChooser();
     private GUIButton browseButton = new GUIButton("Browse");
-    private GUITextInputField pathField = new GUITextInputField();
+    private FancyGUITextField pathField = new FancyGUITextField();
 
     public GUIPathComponent() {
         setLayout(new GridLayout(1, 2));
@@ -32,7 +31,8 @@ public class GUIPathComponent extends GUIPanel {
         });
         pathField.setText(getDefaultPath());
         pathField.validation().add(new PathValidator());
-        pathField.validation().addHook(new FailValidationAction(pathField), Validation.Type.FAIL);
+        pathField.validation().addHook(e -> pathField.fail(e.getMessage()), Validation.Type.FAIL);
+        pathField.validation().addHook(e -> pathField.succeed(), Validation.Type.SUCCESS);
         addComponent(pathField);
         addComponent(browseButton);
     }
@@ -46,7 +46,7 @@ public class GUIPathComponent extends GUIPanel {
         return System.getProperty("user.home");
     }
 
-    public GUITextInputField getField() {
+    public FancyGUITextField getField() {
         return pathField;
     }
 

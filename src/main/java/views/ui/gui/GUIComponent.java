@@ -44,4 +44,8 @@ public abstract class GUIComponent extends UIComponent {
         jComponent.setBorder(border);
     }
 
+    public void setVisible(boolean visibility) {
+        jComponent.setVisible(visibility);
+    }
+
 }

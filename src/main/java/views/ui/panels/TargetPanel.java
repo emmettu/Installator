@@ -55,9 +55,7 @@ public class TargetPanel extends GUIPanel {
         return gbc;
     }
 
-
-
-    public GUITextInputField getField() {
+    public FancyGUITextField getField() {
         return field.getField();
     }
 
