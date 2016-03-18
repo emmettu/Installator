@@ -9,6 +9,7 @@ import controllers.textinput.PathInputController;
 import controllers.textinput.PathValidator;
 import models.packaging.PackageSetDoneController;
 import models.validation.FailValidationAction;
+import models.validation.ValidateAction;
 import models.validation.Validation;
 import models.packaging.utils.PackageSet;
 import models.unpacking.Unpacker;
@@ -275,8 +276,13 @@ public class BuildInstaller {
         packages.addController(new PackageSetDoneController(packages));
 
         TargetPanel targetPanel = new TargetPanel();
+        views.ui.gui.GUIButton nextButton = targetPanel.getButtonPanel().getNext();
+        nextButton.setEnabled(false);
         UnpackPanel unpackPanel = new UnpackPanel();
         PathInputController pic = new PathInputController(targetPanel.getField());
+        views.ui.gui.GUITextInputField pathField = targetPanel.getField();
+        pathField.validation().addHook(e -> nextButton.setEnabled(false), Validation.Type.FAIL);
+        pathField.validation().addHook(e -> nextButton.setEnabled(true), Validation.Type.SUCCESS);
         targetPanel.getField().addController(pic);
         pic.addPackageSet(packages);
 

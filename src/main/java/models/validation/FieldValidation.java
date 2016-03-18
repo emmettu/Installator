@@ -32,4 +32,9 @@ public class FieldValidation extends Validation<String> {
         runHooks(Type.FAIL, e);
     }
 
+    @Override
+    protected void handleSuccess() {
+        runHooks(Type.SUCCESS, null);
+    }
+
 }

@@ -17,10 +17,10 @@ public abstract class Validation<Data> {
 
     private List<List<ValidateAction>> controllers = new ArrayList<>(2);
 
-    public enum Type { WARN, FAIL }
+    public enum Type { WARN, FAIL, SUCCESS }
 
     public Validation() {
-        for (int i = 0; i < 2; i++) {
+        for (int i = 0; i < 3; i++) {
             controllers.add(new ArrayList<>());
         }
     }
@@ -45,6 +45,7 @@ public abstract class Validation<Data> {
                 handleWarn(e);
             }
         }
+        handleSuccess();
     }
 
     public void addHook(ValidateAction c, Type t) {
@@ -62,5 +63,6 @@ public abstract class Validation<Data> {
     protected abstract void validateComponent(Validator<Data> v) throws ControllerWarnException, ControllerFailException;
     protected abstract void handleWarn(ControllerWarnException e);
     protected abstract void handleFail(ControllerFailException e);
+    protected abstract void handleSuccess();
 
 }
