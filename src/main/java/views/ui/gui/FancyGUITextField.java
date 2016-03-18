@@ -39,7 +39,7 @@ public class FancyGUITextField extends GUIPanel implements Validated, TextInputF
     }
 
     @Override
-    public Validation validation() {
+    public Validation<String> validation() {
         return field.validation();
     }
 

@@ -13,13 +13,12 @@ import java.io.File;
 public class GUIPathComponent extends GUIPanel {
 
     private FileChooser fileChooser = new FileChooser();
-    private GUIButton browseButton = new GUIButton("Browse");
     private FancyGUITextField pathField = new FancyGUITextField();
 
     public GUIPathComponent() {
-        setLayout(new GridLayout(1, 2));
+        setLayout(new BorderLayout());
         fileChooser.directoriesOnly();
-
+        GUIButton browseButton = new GUIButton("Browse");
         browseButton.addController(() -> {
             fileChooser.setCurrentDirectory(getCurrentDirectory());
             fileChooser.showDialog(pathField, "Choose");
@@ -33,8 +32,8 @@ public class GUIPathComponent extends GUIPanel {
         pathField.validation().add(new PathValidator());
         pathField.validation().addHook(e -> pathField.fail(e.getMessage()), Validation.Type.FAIL);
         pathField.validation().addHook(e -> pathField.succeed(), Validation.Type.SUCCESS);
-        addComponent(pathField);
-        addComponent(browseButton);
+        addComponent(pathField, BorderLayout.WEST);
+        addComponent(browseButton, BorderLayout.EAST);
     }
 
     private File getCurrentDirectory() {
