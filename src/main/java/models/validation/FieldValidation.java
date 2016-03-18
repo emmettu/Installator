@@ -37,4 +37,9 @@ public class FieldValidation extends Validation<String> {
         runHooks(Type.SUCCESS, null);
     }
 
+    @Override
+    protected void handleConditionalSuccess() {
+        runHooks(Type.CONDITIONAL_SUCCESS, null);
+    }
+
 }

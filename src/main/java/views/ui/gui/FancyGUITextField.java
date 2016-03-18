@@ -45,11 +45,18 @@ public class FancyGUITextField extends GUIPanel implements Validated, TextInputF
 
     public void fail(String errorMsg) {
         message.setText(errorMsg);
+        message.setColor(UiResources.validationFail);
         message.setVisible(true);
     }
 
     public void succeed() {
         message.setVisible(false);
+    }
+
+    public void warn(String warnMsg) {
+        message.setText(warnMsg);
+        message.setColor(UiResources.validationWarn);
+        message.setVisible(true);
     }
 
 }

@@ -32,6 +32,7 @@ public class GUIPathComponent extends GUIPanel {
         pathField.validation().add(new PathValidator());
         pathField.validation().addHook(e -> pathField.fail(e.getMessage()), Validation.Type.FAIL);
         pathField.validation().addHook(e -> pathField.succeed(), Validation.Type.SUCCESS);
+        pathField.validation().addHook(e -> pathField.warn(e.getMessage()), Validation.Type.WARN);
         addComponent(pathField, BorderLayout.WEST);
         addComponent(browseButton, BorderLayout.EAST);
     }
