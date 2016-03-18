@@ -27,6 +27,7 @@ public class GUIPathComponent extends GUIPanel {
             File chosenFile = fileChooser.getSelectedFile();
             if (chosenFile != null) {
                 pathField.setText(chosenFile.getPath());
+                pathField.validate();
             }
         });
         pathField.setText(getDefaultPath());
