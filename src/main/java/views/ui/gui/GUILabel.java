@@ -10,6 +10,11 @@ public class GUILabel extends GUIComponent implements Label {
 
     private JLabel jLabel = new JLabel();
 
+    public GUILabel(String name) {
+        setJComponent(jLabel);
+        jLabel.setText(name);
+    }
+
     public GUILabel() {
         setJComponent(jLabel);
     }

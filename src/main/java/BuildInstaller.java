@@ -279,7 +279,7 @@ public class BuildInstaller {
         TargetPanel targetPanel = new TargetPanel();
         views.ui.gui.GUIButton nextButton = targetPanel.getButtonPanel().getNext();
         nextButton.setEnabled(false);
-        UnpackPanel unpackPanel = new UnpackPanel();
+        UnpackPanel unpackPanel = new UnpackPanel(packages, packageNames);
         PathInputController pic = new PathInputController(targetPanel.getField());
         views.ui.gui.FancyGUITextField pathField = targetPanel.getField();
         pathField.validation().addHook(e -> nextButton.setEnabled(false), Validation.Type.FAIL);
@@ -290,6 +290,10 @@ public class BuildInstaller {
         pic.addPackageSet(packages);
 
         PanelController nextPanel = new PanelController(frame);
+        views.ui.gui.GUIButton targetNextButton = targetPanel.getButtonPanel().getNext();
+        for (UnpackerController uc : packages.getUnpackerControllers()) {
+            targetNextButton.addController(uc);
+        }
         targetPanel.getButtonPanel().getNext().addController(nextPanel);
 
         PanelController prevPanel = new PanelController(frame);

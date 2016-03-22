@@ -1,8 +1,10 @@
 package views.ui.panels;
 
+import models.packaging.utils.PackageSet;
 import views.ui.gui.GUIButtonPanel;
 import views.ui.gui.GUIPanel;
 import views.ui.gui.GUIProgressBar;
+import views.ui.gui.PackageProgressPanel;
 
 import java.awt.*;
 
@@ -16,12 +18,13 @@ public class UnpackPanel extends GUIPanel {
     private int WIDTH = 500;
     private int HEIGHT = 500;
 
-    public UnpackPanel() {
+    public UnpackPanel(PackageSet set, String[] names) {
         setLayout(new BorderLayout());
         contentPanel = new GUIPanel(new GridBagLayout());
         contentPanel.setSize(WIDTH, HEIGHT);
         buttonPanel = new GUIButtonPanel();
-        build();
+        //build();
+        contentPanel.addComponent(new PackageProgressPanel(set, names));
         addComponent(contentPanel, BorderLayout.CENTER);
         addComponent(buttonPanel, BorderLayout.SOUTH);
     }
