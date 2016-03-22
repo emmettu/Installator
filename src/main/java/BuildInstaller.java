@@ -300,6 +300,7 @@ public class BuildInstaller {
         prevPanel.setReverse();
         unpackPanel.getButtonPanel().getPrev().addController(prevPanel);
         unpackPanel.getButtonPanel().getQuit().addController(new QuitController(frame));
+        packages.addController(() -> unpackPanel.getButtonPanel().getNext().setEnabled(true));
 
         frame.addPanel(targetPanel);
         frame.addPanel(unpackPanel);

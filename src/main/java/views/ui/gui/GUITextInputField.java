@@ -46,8 +46,8 @@ public class GUITextInputField extends GUIComponent implements TextInputField, V
     }
 
     @Override
-    public void validate() {
-        container.validate();
+    public boolean validate() {
+        return container.validate();
     }
 
     @Override

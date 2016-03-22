@@ -27,6 +27,7 @@ public class UnpackPanel extends GUIPanel {
         contentPanel.addComponent(new PackageProgressPanel(set, names));
         addComponent(contentPanel, BorderLayout.CENTER);
         addComponent(buttonPanel, BorderLayout.SOUTH);
+        buttonPanel.getNext().setEnabled(false);
     }
 
     private void build() {
