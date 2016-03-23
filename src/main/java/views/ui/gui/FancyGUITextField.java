@@ -1,6 +1,5 @@
 package views.ui.gui;
 
-import controllers.Controller;
 import models.validation.Validation;
 import views.lookandfeel.UiResources;
 
@@ -22,6 +21,7 @@ public class FancyGUITextField extends GUIPanel implements Validated, TextInputF
         addComponent(field, BorderLayout.NORTH);
         addComponent(message, BorderLayout.SOUTH);
         message.setColor(UiResources.validationFail);
+        field.addController(FancyGUITextField.this::notifyControllers);
     }
 
     @Override
@@ -42,11 +42,6 @@ public class FancyGUITextField extends GUIPanel implements Validated, TextInputF
     @Override
     public Validation<String> validation() {
         return field.validation();
-    }
-
-    @Override
-    public void addController(Controller controller) {
-        field.addController(controller);
     }
 
     public void fail(String errorMsg) {
