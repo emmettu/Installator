@@ -24,6 +24,7 @@ public class PackageSetController implements Controller {
     public void performAction() {
         try {
             packages.addSize(Files.size(unpacker.getUnpackedFiles().peek()));
+            packages.setCurrentFile(unpacker.getUnpackedFiles().peek());
         }
         catch (IOException e) {
             e.printStackTrace();

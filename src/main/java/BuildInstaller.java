@@ -286,7 +286,7 @@ public class BuildInstaller {
         pathField.validation().addHook((e) ->{
             nextButton.setEnabled(false);
             nextButton.setEnabled(true);
-        } , Validation.Type.CONDITIONAL_SUCCESS);
+        }, Validation.Type.CONDITIONAL_SUCCESS);
 
         pathField.validate();
         targetPanel.getField().addController(pic);

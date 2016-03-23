@@ -6,6 +6,7 @@ import models.unpacking.Unpacker;
 
 import javax.swing.*;
 import java.awt.*;
+import java.nio.file.Path;
 
 /**
  * Created by eunderhi on 18/03/16.
@@ -15,8 +16,11 @@ public class PackageProgressPanel extends GUIPanel {
 
     public PackageProgressPanel(PackageSet packages, String[] names) {
         setJComponent(new JPanel());
-        setLayout(new GridLayout(names.length, 1));
+        setLayout(new GridLayout(names.length + 2, 1));
+        GUILabel currentFile = new GUILabel();
 
+        addComponent(currentFile);
+        addComponent(new GUIPanel());
         for (Unpacker unpacker : packages.getUnpackers()) {
             GUIProgressBar bar = setUpProgressBar(unpacker);
             GUIPanel panel = new GUIPanel(new GridLayout(1, 2));
@@ -24,6 +28,12 @@ public class PackageProgressPanel extends GUIPanel {
             panel.addComponent(new GUILabel("Test"));
             addComponent(panel);
         }
+        packages.addController(() -> {
+            Path unpackedFile = packages.getCurrentFile();
+            if (unpackedFile != null) {
+                currentFile.setText("Unpacking: " + unpackedFile.toString());
+            }
+        });
     }
 
     private GUIProgressBar setUpProgressBar(Unpacker unpacker) {

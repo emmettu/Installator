@@ -6,9 +6,11 @@ import models.InstallerModel;
 import models.packaging.StandardPackage;
 import models.unpacking.Unpacker;
 
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
+import java.util.concurrent.atomic.AtomicReference;
 
 /**
  * Created by eunderhi on 08/01/16.
@@ -21,6 +23,7 @@ public class PackageSet extends InstallerModel {
     private List<UnpackerController> controllers = new ArrayList<>();
     private String rootDirectory;
     private AtomicLong unpackedAmount = new AtomicLong();
+    private AtomicReference<Path> currentFile = new AtomicReference<>();
     private long size;
 
     public PackageSet add(String packageName) {
@@ -90,4 +93,11 @@ public class PackageSet extends InstallerModel {
         return size;
     }
 
+    public Path getCurrentFile() {
+        return currentFile.get();
+    }
+
+    public void setCurrentFile(Path file) {
+        currentFile.set(file);
+    }
 }
