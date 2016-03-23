@@ -283,7 +283,11 @@ public class BuildInstaller {
         views.ui.gui.FancyGUITextField pathField = targetPanel.getField();
         pathField.validation().addHook(e -> nextButton.setEnabled(false), Validation.Type.FAIL);
         pathField.validation().addHook(e -> nextButton.setEnabled(true), Validation.Type.SUCCESS);
-        pathField.validation().addHook(e -> nextButton.setEnabled(true), Validation.Type.CONDITIONAL_SUCCESS);
+        pathField.validation().addHook((e) ->{
+            nextButton.setEnabled(false);
+            nextButton.setEnabled(true);
+        } , Validation.Type.CONDITIONAL_SUCCESS);
+
         pathField.validate();
         targetPanel.getField().addController(pic);
         pic.addPackageSet(packages);
