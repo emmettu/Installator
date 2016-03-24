@@ -11,10 +11,15 @@ import java.awt.event.FocusListener;
  */
 public class GUITextInputField extends GUIComponent implements TextInputField, Validated {
 
-    private JTextField field = new JTextField();
+    protected JTextField field;
     private FieldValidation container = new FieldValidation(this);
 
     public GUITextInputField() {
+        field = new JTextField();
+        setUpJComponent();
+    }
+
+    protected void setUpJComponent() {
         setJComponent(field);
         field.setColumns(20);
         field.addFocusListener(new FocusListener() {

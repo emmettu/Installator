@@ -13,10 +13,11 @@ import java.awt.*;
 
 public class FancyGUITextField extends GUIPanel implements Validated, TextInputField {
 
-    private GUITextInputField field = new GUITextInputField();
+    protected GUITextInputField field;
     private GUILabel message = new GUILabel();
 
     public FancyGUITextField() {
+        setField();
         setLayout(new BorderLayout());
         addComponent(field, BorderLayout.NORTH);
         addComponent(message, BorderLayout.SOUTH);
@@ -25,6 +26,10 @@ public class FancyGUITextField extends GUIPanel implements Validated, TextInputF
         validation().addHook(e -> fail(e.getMessage()), Validation.Type.FAIL);
         validation().addHook(e -> succeed(), Validation.Type.SUCCESS);
         validation().addHook(e -> warn(e.getMessage()), Validation.Type.WARN);
+    }
+
+    protected void setField() {
+        field = new GUITextInputField();
     }
 
     @Override
