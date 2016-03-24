@@ -55,4 +55,8 @@ public class GUITextInputField extends GUIComponent implements TextInputField, V
         return container;
     }
 
+    public void setColumns(int size) {
+        field.setColumns(size);
+    }
+
 }

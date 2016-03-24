@@ -1,7 +1,6 @@
 package views.ui.gui;
 
 import controllers.textinput.PathValidator;
-import models.validation.Validation;
 
 import java.awt.*;
 import java.io.File;
@@ -32,9 +31,6 @@ public class GUIPathComponent extends GUIPanel {
         });
         pathField.setText(getDefaultPath());
         pathField.validation().add(new PathValidator());
-        pathField.validation().addHook(e -> pathField.fail(e.getMessage()), Validation.Type.FAIL);
-        pathField.validation().addHook(e -> pathField.succeed(), Validation.Type.SUCCESS);
-        pathField.validation().addHook(e -> pathField.warn(e.getMessage()), Validation.Type.WARN);
         addComponent(pathField);
         addComponent(buttonContainer);
     }

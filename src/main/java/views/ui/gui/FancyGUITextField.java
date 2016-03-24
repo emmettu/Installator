@@ -22,6 +22,9 @@ public class FancyGUITextField extends GUIPanel implements Validated, TextInputF
         addComponent(message, BorderLayout.SOUTH);
         message.setColor(UiResources.validationFail);
         field.addController(FancyGUITextField.this::notifyControllers);
+        validation().addHook(e -> fail(e.getMessage()), Validation.Type.FAIL);
+        validation().addHook(e -> succeed(), Validation.Type.SUCCESS);
+        validation().addHook(e -> warn(e.getMessage()), Validation.Type.WARN);
     }
 
     @Override
