@@ -20,6 +20,12 @@ public class UnpackerController implements Controller {
         this.unpacker = unpacker;
     }
 
+    /**
+     * Tell the unpacker to start unpacking. Do this in a blocking fashion if runner is null
+     * (i.e. multiThread() has not been called to initialize the ExecutorService). Otherwise
+     * submit a new unpacking runnable to the executor so the action is performed in a new
+     * thread. This allows multiple independent packages to be unpacked simultaneously.
+     */
     @Override
     public void performAction() {
         if(runner == null) {
@@ -30,6 +36,9 @@ public class UnpackerController implements Controller {
         }
     }
 
+    /**
+     * Initialize the executor service so that future unpacking jobs are non-blocking.
+     */
     public void multiThread() {
         runner = Executors.newSingleThreadExecutor();
     }

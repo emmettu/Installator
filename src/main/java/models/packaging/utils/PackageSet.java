@@ -40,6 +40,10 @@ public class PackageSet extends InstallerModel {
         this.rootDirectory = rootDirectory;
     }
 
+    public String getRootDirectory() {
+        return rootDirectory;
+    }
+
     public List<StandardPackage> getPackages() {
         return packages;
     }
