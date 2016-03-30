@@ -2,6 +2,9 @@ package models.jobs;
 
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.Assert.*;
 
 /**
@@ -11,59 +14,50 @@ public class JobExecutorTest {
 
     @Test
     public void testRunRunnableJobs() throws Exception {
+        List<String> jobResults = new ArrayList<>();
         JobExecutor executor = new JobExecutor();
         InstallerJob job1 = new InstallerJob("Job1") {
             @Override
             protected void runJob() {
-                System.out.println("1");
+                jobResults.add("1");
             }
         };
 
         InstallerJob job2 = new InstallerJob("Job2") {
             @Override
             protected void runJob() {
-                System.out.println("2");
+                jobResults.add("2");
             }
         };
 
         InstallerJob job3 = new InstallerJob("Job3") {
             @Override
             protected void runJob() {
-                System.out.println("3");
+                jobResults.add("3");
             }
         };
 
-        InstallerJob job4 = new InstallerJob("Independent1") {
-            @Override
-            protected void runJob() {
-                System.out.println("I can be in any order");
-            }
-        };
-
-        InstallerJob job5 = new InstallerJob("Independent2") {
-            @Override
-            protected void runJob() {
-                System.out.println("yo.");
-            }
-        };
-
-        InstallerJob job6 = new InstallerJob("Independent3") {
-            @Override
-            protected void runJob() {
-                System.out.println("whatever.");
-            }
-        };
+        for (int i = 0; i < 1000; i++) {
+            executor.addJob(
+                    new InstallerJob("test"+i) {
+                        @Override
+                        protected void runJob() {
+                            jobResults.add("test");
+                        }
+                    }
+            );
+        }
 
         job3.addDependency(job2);
         job2.addDependency(job1);
         executor.addJob(job1);
         executor.addJob(job2);
         executor.addJob(job3);
-        executor.addJob(job4);
-        executor.addJob(job5);
-        executor.addJob(job6);
 
         executor.runRunnableJobs();
+
+        assertTrue(jobResults.indexOf("1") < jobResults.indexOf("2") && jobResults.indexOf("2") < jobResults.indexOf("3"));
+        assertEquals(1003, jobResults.size());
     }
 
 }
