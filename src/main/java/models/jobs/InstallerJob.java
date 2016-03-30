@@ -12,7 +12,6 @@ public abstract class InstallerJob extends InstallerModel implements Job {
 
     private HashMap<String, Job> dependencies = new HashMap<>();
     private HashMap<String, Job> dependents = new HashMap<>();
-    private JobExecutor executor;
     private String id;
     private Object lock;
 
