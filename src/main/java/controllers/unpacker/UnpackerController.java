@@ -3,6 +3,9 @@ package controllers.unpacker;
 import controllers.Controller;
 import models.unpacking.Unpacker;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 /**
  * Created by eunderhi on 14/12/15.
  * Controller to trigger the unpacking action. This is done in a new thread
@@ -11,7 +14,7 @@ import models.unpacking.Unpacker;
 public class UnpackerController implements Controller {
 
     private Unpacker unpacker;
-    private Thread unpackingThread;
+    private ExecutorService runner;
 
     public UnpackerController(Unpacker unpacker) {
         this.unpacker = unpacker;
@@ -19,16 +22,16 @@ public class UnpackerController implements Controller {
 
     @Override
     public void performAction() {
-        if(unpackingThread == null) {
+        if(runner == null) {
             unpacker.unpack();
         }
         else {
-            unpackingThread.start();
+            runner.submit((Runnable) () -> unpacker.unpack());
         }
     }
 
     public void multiThread() {
-        unpackingThread = new Thread(unpacker::unpack);
+        runner = Executors.newSingleThreadExecutor();
     }
 
 }

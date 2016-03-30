@@ -40,4 +40,8 @@ public class JobExecutor {
         jobPool.put(job.getId(), job);
     }
 
+    private void removeJob(InstallerJob job) {
+        jobPool.remove(job.getId());
+    }
+
 }

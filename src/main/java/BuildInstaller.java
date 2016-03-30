@@ -311,7 +311,7 @@ public class BuildInstaller {
         });
 
         frame.addPanel(targetPanel);
-        frame.addPanel(new UserCreationPanel());
+        //frame.addPanel(new UserCreationPanel());
         frame.addPanel(unpackPanel);
         frame.display();
     }
