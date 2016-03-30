@@ -1,6 +1,7 @@
 package views.ui.gui;
 
 import controllers.exceptions.ControllerFailException;
+import controllers.exceptions.ControllerWarnException;
 
 import java.awt.*;
 
@@ -21,9 +22,15 @@ public class UserCreationPanel extends GUIPanel {
         addComponent(userNameField);
         addComponent(passwordField);
         addComponent(confirmPasswordField);
+
         userNameField.validation().add((String data) -> {
             if (data.contains("$")) {
                 throw new ControllerFailException("no dollar signs bro");
+            }
+        });
+        userNameField.validation().add((String data) -> {
+            if (data.isEmpty()) {
+                throw new ControllerWarnException("Username is empty");
             }
         });
         passwordField.validation().add((String data) -> {

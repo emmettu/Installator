@@ -25,6 +25,6 @@ public abstract class InstallerModel implements Model {
 
     public void addController(Controller controller) {
         controllers.add(controller);
-
     }
+
 }

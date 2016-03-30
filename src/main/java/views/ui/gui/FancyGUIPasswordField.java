@@ -9,4 +9,5 @@ public class FancyGUIPasswordField extends FancyGUITextField {
     protected void setField() {
         field = new GUIPasswordField();
     }
+
 }
