@@ -1,0 +1,25 @@
+How to make process panel better?
+MultiThread?
+Do away with conditions?
+
+Dependency analysis of jobs?
+
+JOB NAME | DEPS
+a        |
+b        | a
+c        |
+d        | a
+e        | c
+f        | d a
+
+
+
+
+a
+|\
+v v
+b c
+
+
+Of the jobs that we have now, if they have no dependencies, run them.
+When any given job finishes, notify the executor so it can check if more jobs can be run.

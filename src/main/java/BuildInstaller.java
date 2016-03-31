@@ -60,7 +60,6 @@ public class BuildInstaller {
 
     public static void buildConsole() {
         StandardPackage standardPackage = new StandardPackage("wildfly-10.0.0.CR4");
-        standardPackage.addExclude("docs/contrib");
         Unpacker unpacker = new Unpacker(standardPackage);
         UnpackerController unpackerController = new UnpackerController(unpacker);
         ConsoleTextInputField field = new ConsoleTextInputField();
@@ -87,6 +86,7 @@ public class BuildInstaller {
         panel.addComponent(button);
         panel.addComponent(combo);
 
+        new views.ui.console.ConsoleCombobox<>("Test", "Test1", "Test2").display();
         panel.display();
 
     }

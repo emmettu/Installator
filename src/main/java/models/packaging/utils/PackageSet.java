@@ -104,4 +104,5 @@ public class PackageSet extends InstallerModel {
     public void setCurrentFile(Path file) {
         currentFile.set(file);
     }
+
 }

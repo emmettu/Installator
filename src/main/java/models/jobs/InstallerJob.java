@@ -7,6 +7,7 @@ import java.util.Map;
 
 /**
  * Created by eunderhi on 29/03/16.
+ * Base job class that can be executed by JobExecutor
  */
 public abstract class InstallerJob extends InstallerModel implements Job {
 
@@ -14,6 +15,8 @@ public abstract class InstallerJob extends InstallerModel implements Job {
     private HashMap<String, Job> dependents = new HashMap<>();
     private String id;
     private Object lock;
+    public enum State { RUNNING, FINISHED, WAITING }
+    private State state = State.WAITING;
 
     public InstallerJob(String id) {
         this.id = id;
@@ -48,10 +51,12 @@ public abstract class InstallerJob extends InstallerModel implements Job {
     @Override
     public void run() {
         synchronized (lock) {
+            state = State.RUNNING;
             runJob();
             for (Job job : dependents.values()) {
                 job.removeDependency(this);
             }
+            state = State.FINISHED;
             lock.notify();
         }
     }
@@ -65,6 +70,10 @@ public abstract class InstallerJob extends InstallerModel implements Job {
 
     public void setLock(Object lock) {
         this.lock = lock;
+    }
+
+    public State getState() {
+        return state;
     }
 
 }

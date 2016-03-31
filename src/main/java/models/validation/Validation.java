@@ -20,7 +20,7 @@ public abstract class Validation<Data> {
     public enum Type { WARN, FAIL, SUCCESS, CONDITIONAL_SUCCESS }
 
     public Validation() {
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < Type.values().length; i++) {
             controllers.add(new ArrayList<>());
         }
     }
