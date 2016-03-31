@@ -86,7 +86,11 @@ public class BuildInstaller {
         panel.addComponent(button);
         panel.addComponent(combo);
 
-        new views.ui.console.ConsoleCombobox<>("Test", "Test1", "Test2").display();
+        views.ui.console.ConsoleTextInputField textInputField = new views.ui.console.ConsoleTextInputField();
+        textInputField.validation().add(new PathValidator());
+        textInputField.validation().addHook((e) -> System.out.println("WARN: " + e.getMessage()), Validation.Type.WARN);
+        textInputField.validation().addHook((e) -> System.out.println("FAIL: " + e.getMessage()), Validation.Type.FAIL);
+        textInputField.display();
         panel.display();
 
     }
