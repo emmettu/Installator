@@ -17,6 +17,7 @@ public class UserModel extends InstallerModel {
 
     public void setUserName(String userName) {
         this.userName = userName;
+        notifyListeners();
     }
 
     public String getPassword() {
@@ -25,6 +26,7 @@ public class UserModel extends InstallerModel {
 
     public void setPassword(String password) {
         this.password = password;
+        notifyListeners();
     }
 
 }

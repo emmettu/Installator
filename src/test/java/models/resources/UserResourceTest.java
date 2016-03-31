@@ -11,7 +11,7 @@ public class UserResourceTest {
 
     @Test
     public void testAddUser() throws Exception {
-        new UserResource().addUser("admin", "qwer`123");
+        //new UserResource().addUser("admin", "qwer`123");
     }
 
 }

@@ -1,8 +1,9 @@
 package models.resources;
 
+import models.packaging.InstallLocationModel;
+
 import java.io.IOException;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 
 /**
  * Created by eunderhi on 30/03/16.
@@ -10,11 +11,16 @@ import java.nio.file.Paths;
  */
 public class UserResource {
 
-    String installPath  = "";
-    String name = "";
+    private InstallLocationModel loc;
+
+    public UserResource(InstallLocationModel loc) {
+        this.loc = loc;
+    }
 
     public void addUser(String userName, String password) {
-        Path script = Paths.get(installPath, name, "bin", "add-user.sh");
+
+        Path script = loc.getInstallLocation().resolve("bin")
+                                              .resolve("add-user.sh");
         try {
             new ProcessBuilder(
                 script.toString(),

@@ -7,7 +7,9 @@ import controllers.installer.PreviousPanelController;
 import controllers.progressbar.ProgressBarController;
 import controllers.textinput.PathInputController;
 import controllers.textinput.PathValidator;
+import models.packaging.InstallLocationModel;
 import models.packaging.PackageSetDoneController;
+import models.resources.UserResource;
 import models.validation.FailValidationAction;
 import models.validation.Validation;
 import models.packaging.utils.PackageSet;
@@ -30,6 +32,7 @@ import views.ui.combobox.GUIComboBox;
 import views.ui.gui.GUICombobox;
 import views.ui.gui.GUIFrame;
 import views.ui.gui.GUIPanel;
+import views.ui.gui.UserCreationPanel;
 import views.ui.panels.*;
 import views.ui.progressbar.ConsoleProgressBar;
 import views.ui.progressbar.GUIProgressBar;
@@ -237,19 +240,9 @@ public class BuildInstaller {
                 .add("welcome-content");
         packages.addMultiThreadedUnpackers();
         packages.calculateSize();
-
-        views.ui.gui.GUITextInputField field = new views.ui.gui.GUITextInputField();
-        field.validation().add(new PathValidator());
-        field.validation().addHook(new FailValidationAction(field), Validation.Type.FAIL);
         setLookAndFeel();
 
         views.ui.gui.GUIButton button = new views.ui.gui.GUIButton("Install");
-        PathInputController controller = new PathInputController(field);
-        field.addController(controller);
-
-        for(StandardPackage pack : packages.getPackages()) {
-            controller.addPackage(pack);
-        }
 
         for(UnpackerController uc : packages.getUnpackerControllers()) {
             button.addController(uc);
@@ -267,9 +260,6 @@ public class BuildInstaller {
 
         GUIFrame frame = new GUIFrame();
         GUIPanel firstPanel = new GUIPanel();
-
-        firstPanel.addComponent(field);
-        firstPanel.addComponent(button);
 
         String[] packageNames = {"Wildfly", "docs", "appclient", "bin", "domain", "modules", "standalone", "welcome-content"};
 
@@ -301,7 +291,10 @@ public class BuildInstaller {
         for (UnpackerController uc : packages.getUnpackerControllers()) {
             targetNextButton.addController(uc);
         }
+        InstallLocationModel ilm = new InstallLocationModel();
         targetPanel.getButtonPanel().getNext().addController(nextPanel);
+        views.ui.gui.FancyGUITextField field = targetPanel.getField();
+        field.addController(() -> ilm.setInstallLocation(field.getText()));
 
         PanelController prevPanel = new PanelController(frame);
         prevPanel.setReverse();
@@ -313,6 +306,7 @@ public class BuildInstaller {
             }
         });
 
+        unpackPanel.getButtonPanel().getNext().addController(() -> new UserResource(ilm).addUser("admin", "qwer#1234"));
         frame.addPanel(targetPanel);
         //frame.addPanel(new UserCreationPanel());
         frame.addPanel(unpackPanel);
