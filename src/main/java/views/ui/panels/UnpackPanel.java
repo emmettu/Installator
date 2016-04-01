@@ -10,13 +10,14 @@ import java.awt.*;
 
 /**
  * Created by eunderhi on 16/03/16.
+ * Panel that displays unpacking progress
  */
 public class UnpackPanel extends GUIPanel {
 
     private GUIPanel contentPanel;
     private GUIButtonPanel buttonPanel;
-    private int WIDTH = 500;
-    private int HEIGHT = 500;
+    public static final int WIDTH = 500;
+    public static final int HEIGHT = 500;
 
     public UnpackPanel(PackageSet set, String[] names) {
         setLayout(new BorderLayout());

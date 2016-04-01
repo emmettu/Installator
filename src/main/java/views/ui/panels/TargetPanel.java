@@ -41,7 +41,7 @@ public class TargetPanel extends GUIPanel {
         contentPanel.addComponent(field, gbc);
     }
 
-    GridBagConstraints getBasicConstraints() {
+    private GridBagConstraints getBasicConstraints() {
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.anchor = GridBagConstraints.NORTHWEST;
         gbc.insets = new Insets(2, 20, 2, 20);

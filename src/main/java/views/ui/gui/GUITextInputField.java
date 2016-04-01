@@ -3,8 +3,12 @@ package views.ui.gui;
 import models.validation.FieldValidation;
 
 import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  * Created by eunderhi on 11/02/16.
@@ -28,6 +32,20 @@ public class GUITextInputField extends GUIComponent implements TextInputField, V
 
             @Override
             public void focusLost(FocusEvent focusEvent) {
+                update();
+            }
+        });
+        field.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent documentEvent) {
+                update();
+            }
+            @Override
+            public void removeUpdate(DocumentEvent documentEvent) {
+                update();
+            }
+            @Override
+            public void changedUpdate(DocumentEvent documentEvent) {
                 update();
             }
         });
