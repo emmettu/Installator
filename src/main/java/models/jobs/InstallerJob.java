@@ -15,8 +15,9 @@ public abstract class InstallerJob extends InstallerModel implements Job {
     private HashMap<String, Job> dependents = new HashMap<>();
     private String id;
     private Object lock;
-    public enum State { RUNNING, FINISHED, WAITING }
+    public enum State { RUNNING, FINISHED, WAITING, FAILED }
     private State state;
+    private String status;
 
     public InstallerJob(String id) {
         this.id = id;
@@ -79,6 +80,15 @@ public abstract class InstallerJob extends InstallerModel implements Job {
 
     private void setState(State state) {
         this.state = state;
+        notifyListeners();
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
         notifyListeners();
     }
 
