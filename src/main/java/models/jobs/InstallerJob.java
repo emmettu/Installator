@@ -16,10 +16,11 @@ public abstract class InstallerJob extends InstallerModel implements Job {
     private String id;
     private Object lock;
     public enum State { RUNNING, FINISHED, WAITING }
-    private State state = State.WAITING;
+    private State state;
 
     public InstallerJob(String id) {
         this.id = id;
+        setState(State.WAITING);
     }
 
     @Override
@@ -51,12 +52,12 @@ public abstract class InstallerJob extends InstallerModel implements Job {
     @Override
     public void run() {
         synchronized (lock) {
-            state = State.RUNNING;
+            setState(State.RUNNING);
             runJob();
             for (Job job : dependents.values()) {
                 job.removeDependency(this);
             }
-            state = State.FINISHED;
+            setState(State.FINISHED);
             lock.notify();
         }
     }
@@ -74,6 +75,11 @@ public abstract class InstallerJob extends InstallerModel implements Job {
 
     public State getState() {
         return state;
+    }
+
+    private void setState(State state) {
+        this.state = state;
+        notifyListeners();
     }
 
 }

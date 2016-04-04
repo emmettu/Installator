@@ -7,8 +7,6 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 /**
  * Created by eunderhi on 11/02/16.
