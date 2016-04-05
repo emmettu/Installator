@@ -1,6 +1,7 @@
 package models.panels;
 
 import models.InstallerModel;
+import org.jboss.as.security.vault.VaultSession;
 
 import java.nio.file.Path;
 
@@ -11,10 +12,11 @@ public class VaultModel extends InstallerModel {
 
     private String alias;
     private String salt;
-    private String iterationCount;
+    private int iterationCount;
     private String password;
     private Path storeLocation;
     private Path fileDirectory;
+    private VaultSession vaultSession;
 
     public String getAlias() {
         return alias;
@@ -34,11 +36,11 @@ public class VaultModel extends InstallerModel {
         notifyListeners();
     }
 
-    public String getIterationCount() {
+    public int getIterationCount() {
         return iterationCount;
     }
 
-    public void setIterationCount(String iterationCount) {
+    public void setIterationCount(int iterationCount) {
         this.iterationCount = iterationCount;
         notifyListeners();
     }
@@ -68,6 +70,21 @@ public class VaultModel extends InstallerModel {
     public void setFileDirectory(Path fileDirectory) {
         this.fileDirectory = fileDirectory;
         notifyListeners();
+    }
+
+    public void createSession() {
+        try {
+            vaultSession = new VaultSession(
+                    storeLocation.toString(),
+                    password,
+                    fileDirectory.toString(),
+                    salt,
+                    iterationCount,
+                    true);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }
