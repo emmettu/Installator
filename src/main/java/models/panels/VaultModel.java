@@ -72,6 +72,10 @@ public class VaultModel extends InstallerModel {
         notifyListeners();
     }
 
+    public VaultSession getVaultSession() {
+        return vaultSession;
+    }
+
     public void createSession() {
         try {
             vaultSession = new VaultSession(
