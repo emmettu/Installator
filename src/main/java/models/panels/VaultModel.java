@@ -15,7 +15,7 @@ public class VaultModel extends InstallerModel {
     private int iterationCount;
     private String password;
     private Path storeLocation;
-    private Path fileDirectory;
+    private Path encrDirectory;
     private VaultSession vaultSession;
 
     public String getAlias() {
@@ -63,25 +63,28 @@ public class VaultModel extends InstallerModel {
         notifyListeners();
     }
 
-    public Path getFileDirectory() {
-        return fileDirectory;
+    public Path getEncrDirectory() {
+        return encrDirectory;
     }
 
-    public void setFileDirectory(Path fileDirectory) {
-        this.fileDirectory = fileDirectory;
+    public void setEncrDirectory(Path encrDirectory) {
+        this.encrDirectory = encrDirectory;
         notifyListeners();
     }
 
     public VaultSession getVaultSession() {
+        if (vaultSession == null) {
+            createSession();
+        }
         return vaultSession;
     }
 
-    public void createSession() {
+    private void createSession() {
         try {
             vaultSession = new VaultSession(
                     storeLocation.toString(),
                     password,
-                    fileDirectory.toString(),
+                    encrDirectory.toString(),
                     salt,
                     iterationCount,
                     true);

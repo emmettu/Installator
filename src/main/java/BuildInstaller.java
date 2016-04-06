@@ -7,9 +7,14 @@ import controllers.installer.PreviousPanelController;
 import controllers.progressbar.ProgressBarController;
 import controllers.textinput.PathInputController;
 import controllers.textinput.PathValidator;
+import models.jobs.InstallerJob;
+import models.jobs.JobExecutor;
 import models.packaging.InstallLocationModel;
 import models.packaging.PackageSetDoneController;
+import models.panels.VaultModel;
+import models.resources.ServerResource;
 import models.resources.UserResource;
+import models.resources.VaultResource;
 import models.validation.Validation;
 import models.packaging.utils.PackageSet;
 import models.unpacking.Unpacker;
@@ -305,11 +310,37 @@ public class BuildInstaller {
             }
         });
 
-        unpackPanel.getButtonPanel().getNext().addController(() -> new UserResource(ilm).addUser("admin", "qwer#1234"));
+        unpackPanel.getButtonPanel().getNext().addController(() -> createServer(ilm));
         frame.addPanel(targetPanel);
-        frame.addPanel(new UserCreationPanel());
         frame.addPanel(unpackPanel);
+        frame.addPanel(new UserCreationPanel());
         frame.display();
+    }
+
+    private static void createServer(InstallLocationModel ilm) {
+        JobExecutor executor = new JobExecutor();
+        executor.addJob(new InstallerJob("userCreation") {
+            @Override
+            protected void runJob() {
+                new UserResource(ilm).addUser("thedude", "qwer#1234");
+            }
+        });
+        ServerResource server = new ServerResource(ilm.getInstallLocation().toString(), "standalone.xml");
+        VaultResource vault = new VaultResource(server);
+        VaultModel vaultModel = new VaultModel();
+        vaultModel.setAlias("vault");
+        vaultModel.setEncrDirectory(ilm.getInstallationPath().resolve("vault"));
+        vaultModel.setIterationCount(44);
+        vaultModel.setStoreLocation(ilm.getInstallLocation().resolve("vault.keystore"));
+        vaultModel.setPassword("testpassword");
+
+        executor.addJob(new InstallerJob("add vault") {
+            @Override
+            protected void runJob() {
+                vault.makeVault(vaultModel);
+            }
+        });
+        executor.runRunnableJobs();
     }
 
 }
