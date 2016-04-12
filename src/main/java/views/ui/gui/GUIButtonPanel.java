@@ -23,6 +23,8 @@ public class GUIButtonPanel extends GUIPanel {
         setLayout(new GridBagLayout());
         setBorder(BorderFactory.createEmptyBorder(8, 8, 8, 8));
         GridBagConstraints gbc = new GridBagConstraints();
+        gbc.weightx = 1.0;
+        //gbc.weighty = 1.0;
         gbc.anchor = GridBagConstraints.LINE_END;
         gbc.insets = new Insets(3, 3, 3, 3);
         addComponent(quit, gbc);

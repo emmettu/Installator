@@ -44,4 +44,8 @@ public class JobExecutor {
         jobPool.remove(job.getId());
     }
 
+    public void shutDown() {
+        executor.shutdown();
+    }
+
 }

@@ -353,6 +353,8 @@ public class BuildInstaller {
         executor.addJob(makeKeyStore);
         executor.addJob(addVault);
         executor.runRunnableJobs();
+        executor.shutDown();
+        server.shutDown();
     }
 
 }

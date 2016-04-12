@@ -51,4 +51,8 @@ public class ServerResource {
         }
     }
 
+    public synchronized void shutDown() {
+        cc.terminateSession();
+    }
+
 }
