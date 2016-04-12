@@ -1,5 +1,8 @@
 package views.ui.gui;
 
+import javax.swing.*;
+import java.awt.*;
+
 /**
  * Created by eunderhi on 09/03/16.
  */
@@ -12,10 +15,19 @@ public class GUIButtonPanel extends GUIPanel {
     public GUIButtonPanel() {
         GUIPanel panel = new GUIPanel();
         panel.setSize(500, 50);
-        panel.addComponent(quit);
-        panel.addComponent(prev);
-        panel.addComponent(next);
         setJComponent(panel.getJComponent());
+        initializeLayout();
+    }
+
+    private void initializeLayout() {
+        setLayout(new GridBagLayout());
+        setBorder(BorderFactory.createEmptyBorder(8, 8, 8, 8));
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.anchor = GridBagConstraints.LINE_END;
+        gbc.insets = new Insets(3, 3, 3, 3);
+        addComponent(quit, gbc);
+        addComponent(prev, gbc);
+        addComponent(next, gbc);
     }
 
     public GUIButton getNext() {

@@ -1,7 +1,5 @@
 package views.ui.button;
 
-import controllers.exceptions.ControllerFailException;
-import controllers.exceptions.ControllerWarnException;
 import views.lookandfeel.ButtonFactory;
 
 import javax.swing.*;

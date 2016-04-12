@@ -10,6 +10,7 @@ import java.io.File;
 
 /**
  * Created by eunderhi on 05/04/16.
+ * The resource responsible for executing server commands
  */
 public class ServerResource {
 

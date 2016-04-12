@@ -7,6 +7,7 @@ import java.nio.file.Path;
 
 /**
  * Created by eunderhi on 04/04/16.
+ * The model class that holds information on the vault.
  */
 public class VaultModel extends InstallerModel {
 

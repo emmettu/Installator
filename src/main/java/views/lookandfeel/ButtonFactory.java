@@ -75,18 +75,10 @@ public class ButtonFactory {
 
     public static JButton createButton(String text, Icon icon, Color color, int mnemonic) {
         JButton btn = null;
-        if (useHighlightButtons) {
-            if (useButtonIcons && icon != null) {
-                btn = new HighlightJButton(text, icon, color);
-            } else {
-                btn = new HighlightJButton(text, color);
-            }
+        if (useButtonIcons && icon != null) {
+            btn = new AutoSizedButton(text, icon);
         } else {
-            if (useButtonIcons && icon != null) {
-                btn = new AutoSizedButton(text, icon);
-            } else {
-                btn = new AutoSizedButton(text);
-            }
+            btn = new AutoSizedButton(text);
         }
 
         btn.setFont(FontResources.getOpenSansRegular());
