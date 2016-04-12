@@ -6,6 +6,9 @@ import java.util.concurrent.Executors;
 
 /**
  * Created by eunderhi on 29/03/16.
+ * Maintains a job pool and using runRunnableJobs method will execute all
+ * jobs (with dependencies being removed at each step) until the job pool
+ * is empty.
  */
 public class JobExecutor {
 
@@ -13,6 +16,12 @@ public class JobExecutor {
     private ConcurrentHashMap<String, Job> jobPool = new ConcurrentHashMap<>();
     private final Object lock = new Object();
 
+    /**
+     * Runs all currently runnable jobs. If the job pool is not
+     * empty it recursively calls itself again, running the next
+     * set of jobs that may have had dependencies on the previous
+     * set.
+     */
     public void runRunnableJobs() {
         synchronized (lock) {
             jobPool.values().forEach(this::run);
