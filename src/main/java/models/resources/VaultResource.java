@@ -17,7 +17,7 @@ public class VaultResource {
     public synchronized void makeVault(VaultModel vault) {
         String masked = vault.getVaultSession().getKeystoreMaskedPassword();
         String command = "/core-service=vault:add(vault-options=[(\"KEYSTORE_URL\" => \""
-                + vault.getStoreLocation().toString().replaceAll("\\\\", "/") + "\"), "
+                + vault.getStoreLocation().toString().replaceAll("\\\\", "/") + "/\"), "
                 + "(\"KEYSTORE_PASSWORD\" => \""
                 + masked + "\"), "
                 + "(\"KEYSTORE_ALIAS\" => \""
@@ -27,7 +27,7 @@ public class VaultResource {
                 + "(\"ITERATION_COUNT\" => \""
                 + vault.getIterationCount() + "\"), "
                 + "(\"ENC_FILE_DIR\" => \""
-                + vault.getEncrDirectory().toString().replaceAll("\\\\", "/") + "\")])";
+                + vault.getEncrDirectory().toString().replaceAll("\\\\", "/") + "/\")])";
         try {
             server.submit(command);
         } catch (CommandFailedException e) {

@@ -29,15 +29,18 @@ public class UserResource {
     public void addUser(String userName, String password) {
         Path script = loc.getInstallLocation().resolve("bin")
                                               .resolve("add-user.sh");
-        try {
-            new ProcessBuilder(
+        ProcessBuilder pb = new ProcessBuilder(
                 script.toString(),
                 "-s",
                 "-u", userName,
                 "-p", password
-            ).start();
+        );
+        pb.redirectErrorStream(true);
+        try {
+            Process p = pb.start();
+            p.waitFor();
         }
-        catch (IOException e) {
+        catch (IOException | InterruptedException e) {
             e.printStackTrace();
         }
     }

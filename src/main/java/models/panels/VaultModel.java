@@ -88,6 +88,7 @@ public class VaultModel extends InstallerModel {
                     salt,
                     iterationCount,
                     true);
+            vaultSession.startVaultSession(alias);
         }
         catch (Exception e) {
             e.printStackTrace();

@@ -12,6 +12,7 @@ import models.jobs.JobExecutor;
 import models.packaging.InstallLocationModel;
 import models.packaging.PackageSetDoneController;
 import models.panels.VaultModel;
+import models.resources.KeyStore;
 import models.resources.ServerResource;
 import models.resources.UserResource;
 import models.resources.VaultResource;
@@ -329,17 +330,28 @@ public class BuildInstaller {
         VaultResource vault = new VaultResource(server);
         VaultModel vaultModel = new VaultModel();
         vaultModel.setAlias("vault");
-        vaultModel.setEncrDirectory(ilm.getInstallationPath().resolve("vault"));
+        vaultModel.setEncrDirectory(ilm.getInstallLocation().resolve("vault"));
         vaultModel.setIterationCount(44);
         vaultModel.setStoreLocation(ilm.getInstallLocation().resolve("vault.keystore"));
         vaultModel.setPassword("testpassword");
+        vaultModel.setSalt("12345678");
 
-        executor.addJob(new InstallerJob("add vault") {
+        InstallerJob makeKeyStore = new InstallerJob("create keystore") {
+            @Override
+            protected void runJob() {
+                new KeyStore().make(vaultModel);
+            }
+        };
+        InstallerJob addVault = new InstallerJob("add vault") {
             @Override
             protected void runJob() {
                 vault.makeVault(vaultModel);
             }
-        });
+        };
+
+        addVault.addDependency(makeKeyStore);
+        executor.addJob(makeKeyStore);
+        executor.addJob(addVault);
         executor.runRunnableJobs();
     }
 
