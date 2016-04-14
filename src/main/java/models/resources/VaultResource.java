@@ -31,7 +31,7 @@ public class VaultResource {
         try {
             server.submit(command);
         } catch (CommandFailedException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
     }
 

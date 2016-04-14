@@ -12,7 +12,7 @@ import java.util.concurrent.Executors;
  */
 public class JobExecutor {
 
-    private ExecutorService executor = Executors.newFixedThreadPool(10);
+    private ExecutorService executor = Executors.newFixedThreadPool(4);
     private ConcurrentHashMap<String, Job> jobPool = new ConcurrentHashMap<>();
     private final Object lock = new Object();
 

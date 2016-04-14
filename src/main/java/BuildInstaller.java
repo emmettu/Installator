@@ -11,11 +11,10 @@ import models.jobs.InstallerJob;
 import models.jobs.JobExecutor;
 import models.packaging.InstallLocationModel;
 import models.packaging.PackageSetDoneController;
+import models.panels.SSLModel;
 import models.panels.VaultModel;
-import models.resources.KeyStore;
-import models.resources.ServerResource;
-import models.resources.UserResource;
-import models.resources.VaultResource;
+import models.resources.*;
+import models.resources.exceptions.CommandFailedException;
 import models.validation.Validation;
 import models.packaging.utils.PackageSet;
 import models.unpacking.Unpacker;
@@ -48,6 +47,7 @@ import javax.swing.*;
 import javax.swing.plaf.ColorUIResource;
 import javax.swing.plaf.FontUIResource;
 import java.awt.*;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -349,9 +349,28 @@ public class BuildInstaller {
             }
         };
 
+        SSLResource sslRes = new SSLResource(server);
+        SSLModel sslMod = new SSLModel();
+        sslMod.setVault(vaultModel);
+        sslMod.setKeyStoreLocation(Paths.get("/home/eunderhi/vault/vault.keystore"));
+        sslMod.setPassword("qwer`123");
+
+        InstallerJob addSSL = new InstallerJob("add ssl") {
+            @Override
+            protected void runJob() {
+                try {
+                    sslRes.installSSL(sslMod);
+                } catch (CommandFailedException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+
         addVault.addDependency(makeKeyStore);
+        addSSL.addDependency(addVault);
         executor.addJob(makeKeyStore);
         executor.addJob(addVault);
+        executor.addJob(addSSL);
         executor.runRunnableJobs();
         executor.shutDown();
         server.shutDown();
