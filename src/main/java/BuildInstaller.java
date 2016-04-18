@@ -15,6 +15,8 @@ import models.panels.SSLModel;
 import models.panels.VaultModel;
 import models.resources.*;
 import models.resources.exceptions.CommandFailedException;
+import models.resources.servers.ServerBuilder;
+import models.resources.servers.ServerResource;
 import models.validation.Validation;
 import models.packaging.utils.PackageSet;
 import models.unpacking.Unpacker;
@@ -326,7 +328,8 @@ public class BuildInstaller {
                 new UserResource(ilm).addUser("thedude", "qwer#1234");
             }
         });
-        ServerResource server = new ServerResource(ilm.getInstallLocation().toString(), "standalone.xml");
+        ServerBuilder builder = new ServerBuilder(ilm);
+        ServerResource server = builder.newStandaloneServer("standalone.xml");
         VaultResource vault = new VaultResource(server);
         VaultModel vaultModel = new VaultModel();
         vaultModel.setAlias("vault");

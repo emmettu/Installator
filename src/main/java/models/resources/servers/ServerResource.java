@@ -1,12 +1,10 @@
-package models.resources;
+package models.resources.servers;
 
 import models.resources.exceptions.CommandFailedException;
 import org.jboss.as.cli.CliInitializationException;
 import org.jboss.as.cli.CommandContext;
 import org.jboss.as.cli.CommandContextFactory;
 import org.jboss.as.cli.CommandLineException;
-
-import java.io.File;
 
 /**
  * Created by eunderhi on 05/04/16.
@@ -15,11 +13,11 @@ import java.io.File;
 public class ServerResource {
 
     private CommandContext cc;
+    private String startCommand;
 
-    public ServerResource(String jbossHome, String serverFile) {
+    ServerResource() {
         System.setProperty("java.util.logging.manager", "org.jboss.logmanager.LogManager");
         cc = createCommandContext();
-        setupCommandContext(jbossHome, serverFile);
     }
 
     private CommandContext createCommandContext() {
@@ -33,10 +31,10 @@ public class ServerResource {
         return cc;
     }
 
-    private void setupCommandContext(String home, String serverFile) {
+    void setupCommandContext() {
         cc.setSilent(true);
         try {
-            cc.handle(String.format("embed-server --jboss-home=%s --server-config=%s", home + File.separator, serverFile));
+            cc.handle(startCommand);
         } catch (CommandLineException e) {
             e.printStackTrace();
         }
@@ -53,6 +51,10 @@ public class ServerResource {
 
     public synchronized void shutDown() {
         cc.terminateSession();
+    }
+
+    void setStartCommand(String command) {
+        startCommand = command;
     }
 
 }

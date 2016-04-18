@@ -29,9 +29,6 @@ public class PathValidator implements Validator<String> {
         else if (!file.canWrite()) {
             throw new ControllerFailException("The path must be write-able.");
         }
-        else if(file.getName().equals("emmett")) {
-            throw new ControllerWarnException("This file name is TOO good.");
-        }
     }
 
 }

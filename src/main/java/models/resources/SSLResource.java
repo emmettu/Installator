@@ -2,6 +2,7 @@ package models.resources;
 
 import models.panels.SSLModel;
 import models.resources.exceptions.CommandFailedException;
+import models.resources.servers.ServerResource;
 
 /**
  * Created by eunderhi on 14/04/16.
