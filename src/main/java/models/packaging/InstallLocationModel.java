@@ -32,8 +32,4 @@ public class InstallLocationModel extends InstallerModel {
         notifyListeners();
     }
 
-    public Path getInstallationPath() {
-        return installLocation;
-    }
-
 }

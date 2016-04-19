@@ -270,7 +270,7 @@ public class BuildInstaller {
 
         String[] packageNames = {"Wildfly", "docs", "appclient", "bin", "domain", "modules", "standalone", "welcome-content"};
 
-        for(views.ui.gui.GUIProgressBar bar : bars) {
+        for (views.ui.gui.GUIProgressBar bar : bars) {
             firstPanel.addComponent(bar);
         }
 

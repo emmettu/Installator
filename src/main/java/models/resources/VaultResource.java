@@ -6,6 +6,7 @@ import models.resources.servers.ServerResource;
 
 /**
  * Created by eunderhi on 05/04/16.
+ * Runs commands to install vault.
  */
 public class VaultResource {
 
