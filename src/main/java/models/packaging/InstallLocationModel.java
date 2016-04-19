@@ -7,6 +7,8 @@ import java.nio.file.Paths;
 
 /**
  * Created by eunderhi on 31/03/16.
+ * Model responsible for holding information about where the installation
+ * is located.
  */
 
 public class InstallLocationModel extends InstallerModel {

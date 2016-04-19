@@ -3,10 +3,9 @@ package models.resources.servers;
 import models.resources.exceptions.CommandFailedException;
 import models.resources.servers.formatters.CommandFormatter;
 import models.resources.servers.formatters.DefaultFormatter;
-import org.jboss.as.cli.CliInitializationException;
-import org.jboss.as.cli.CommandContext;
-import org.jboss.as.cli.CommandContextFactory;
-import org.jboss.as.cli.CommandLineException;
+import org.jboss.as.cli.*;
+import org.jboss.as.controller.client.ModelControllerClient;
+import org.jboss.dmr.ModelNode;
 
 /**
  * Created by eunderhi on 05/04/16.
@@ -49,6 +48,15 @@ public class ServerResource {
             cc.handle(command);
         }
         catch (CommandLineException e) {
+            throw new CommandFailedException(e.getMessage());
+        }
+    }
+
+    public synchronized ModelNode getModelNodeResult(String command) throws CommandFailedException {
+        ModelControllerClient mcc = cc.getModelControllerClient();
+        try {
+            return mcc.execute(cc.buildRequest(command));
+        } catch (Exception e) {
             throw new CommandFailedException(e.getMessage());
         }
     }

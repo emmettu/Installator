@@ -3,6 +3,7 @@ package models.resources;
 import models.panels.SSLModel;
 import models.resources.exceptions.CommandFailedException;
 import models.resources.servers.ServerResource;
+import org.jboss.dmr.ModelNode;
 
 /**
  * Created by eunderhi on 14/04/16.
@@ -38,6 +39,24 @@ public class SSLResource {
 
         server.submit(addSSLCommand);
         server.submit(addTrustStoreCommand);
+        addHttps();
+    }
+
+    private void addHttps() throws CommandFailedException {
+        String redefine = "/core-service=management/management-interface=http-interface:undefine-attribute(name=security-realm)";
+        String addCommand = "/core-service=management/management-interface=http-interface:write-attribute(name=security-realm,value=\"ManagementRealm\")";
+        server.submit(redefine);
+        server.submit(addCommand);
+
+        String undefineHttp = "/core-service=management/management-interface=http-interface:undefine-attribute(name=socket-binding";
+        String defineHttps = "/core-service=management/management-interface=http-interface:write-attribute(name=secure-socket-binding,value=management-https)";
+        ModelNode check = server.getModelNodeResult("/core-service=management:read-children-names(child-type=management-interface)");
+        for (ModelNode c : check.get("result").asList()) {
+            if (c.asString().equals("http-interface")) {
+                server.submit(undefineHttp);
+                server.submit(defineHttps);
+            }
+        }
     }
 
 }
