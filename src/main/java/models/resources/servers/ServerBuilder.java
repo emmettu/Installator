@@ -1,6 +1,7 @@
 package models.resources.servers;
 
 import models.packaging.InstallLocationModel;
+import models.resources.servers.formatters.HostFormatter;
 
 /**
  * Created by eunderhi on 18/04/16.
@@ -21,6 +22,7 @@ public class ServerBuilder {
                 " --host-config=" +
                 hostFile);
         sr.setupCommandContext();
+        sr.setFormatter(new HostFormatter());
         return sr;
     }
 

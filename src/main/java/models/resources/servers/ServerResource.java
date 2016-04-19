@@ -1,6 +1,8 @@
 package models.resources.servers;
 
 import models.resources.exceptions.CommandFailedException;
+import models.resources.servers.formatters.CommandFormatter;
+import models.resources.servers.formatters.DefaultFormatter;
 import org.jboss.as.cli.CliInitializationException;
 import org.jboss.as.cli.CommandContext;
 import org.jboss.as.cli.CommandContextFactory;
@@ -14,6 +16,7 @@ public class ServerResource {
 
     private CommandContext cc;
     private String startCommand;
+    private CommandFormatter formatter = new DefaultFormatter();
 
     ServerResource() {
         System.setProperty("java.util.logging.manager", "org.jboss.logmanager.LogManager");
@@ -41,12 +44,17 @@ public class ServerResource {
     }
 
     public synchronized void submit(String command) throws CommandFailedException {
+        command = formatter.format(command);
         try {
             cc.handle(command);
         }
         catch (CommandLineException e) {
             throw new CommandFailedException(e.getMessage());
         }
+    }
+
+    void setFormatter(CommandFormatter formatter) {
+        this.formatter = formatter;
     }
 
     public synchronized void shutDown() {
