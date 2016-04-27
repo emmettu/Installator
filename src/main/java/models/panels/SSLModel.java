@@ -24,9 +24,7 @@ public class SSLModel extends InstallerModel {
     }
 
     public String getPassword() {
-        if (vault.isPresent()) {
-            return getMaskedPassword(password);
-        }
+        vault.ifPresent(nul -> password = getMaskedPassword(password));
         return password;
     }
 
