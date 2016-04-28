@@ -24,22 +24,21 @@ public class SSLModel extends InstallerModel {
     }
 
     public String getPassword() {
-        vault.ifPresent(nul -> password = getMaskedPassword(password));
+        vault.ifPresent(nul -> maskPassword());
         return password;
     }
 
-    private String getMaskedPassword(String password) {
+    private void maskPassword() {
         try {
-            return "${" +
+            password =
+                    "${" +
                     vault
                     .get()
                     .getVaultSession()
                     .addSecuredAttribute("ssl", "password", password.toCharArray()) +
                     "}";
         }
-        catch (Exception e) {
-            return password;
-        }
+        catch (Exception ignored) {}
     }
 
     public void setPassword(String password) {
