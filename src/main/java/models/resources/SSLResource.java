@@ -19,6 +19,7 @@ public class SSLResource {
     }
 
     public void installSSL(SSLModel model) throws CommandFailedException {
+        model.vaultPassword();
         String realm = "ManagementRealm";
         String addSSLCommand =
                 "/core-service=management/security-realm=" +

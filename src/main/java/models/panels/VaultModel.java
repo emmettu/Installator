@@ -80,6 +80,18 @@ public class VaultModel extends InstallerModel {
         return vaultSession;
     }
 
+    public String vaultPassword(String block, String attribute, String password) {
+        vaultSession = getVaultSession();
+        try {
+            return "${" +
+                    vaultSession.addSecuredAttribute(block, attribute, password.toCharArray()) +
+                    "}";
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return password;
+    }
+
     private void createSession() {
         try {
             vaultSession = new VaultSession(

@@ -24,21 +24,7 @@ public class SSLModel extends InstallerModel {
     }
 
     public String getPassword() {
-        vault.ifPresent(nul -> maskPassword());
         return password;
-    }
-
-    private void maskPassword() {
-        try {
-            password =
-                    "${" +
-                    vault
-                    .get()
-                    .getVaultSession()
-                    .addSecuredAttribute("ssl", "password", password.toCharArray()) +
-                    "}";
-        }
-        catch (Exception ignored) {}
     }
 
     public void setPassword(String password) {
@@ -51,6 +37,10 @@ public class SSLModel extends InstallerModel {
 
     public void setVault(Optional<VaultModel> vault) {
         this.vault = vault;
+    }
+
+    public void vaultPassword() {
+        vault.ifPresent(v -> password = v.vaultPassword("ldap", "password", password));
     }
 
 }
