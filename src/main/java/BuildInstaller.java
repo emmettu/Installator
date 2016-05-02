@@ -329,8 +329,10 @@ public class BuildInstaller {
             }
         });
         ServerBuilder builder = new ServerBuilder(ilm);
-        ServerResource server = builder.newStandaloneServer("standalone.xml");
-        VaultResource vault = new VaultResource(server);
+        ServerResource standalone = builder.newStandaloneServer("standalone.xml");
+        ServerResource host = builder.newHostServer("host.xml");
+        VaultResource vault = new VaultResource(standalone);
+        VaultResource hostVault = new VaultResource(host);
         VaultModel vaultModel = new VaultModel();
         vaultModel.setAlias("vault");
         vaultModel.setEncrDirectory(ilm.getInstallLocation().resolve("vault"));
@@ -349,10 +351,11 @@ public class BuildInstaller {
             @Override
             protected void runJob() {
                 vault.makeVault(vaultModel);
+                hostVault.makeVault(vaultModel);
             }
         };
 
-        SSLResource sslRes = new SSLResource(server);
+        SSLResource sslRes = new SSLResource(standalone);
         SSLModel sslMod = new SSLModel();
         sslMod.setVault(vaultModel);
         sslMod.setKeyStoreLocation(Paths.get("/home/eunderhi/vault/vault.keystore"));
@@ -376,7 +379,7 @@ public class BuildInstaller {
         executor.addJob(addSSL);
         executor.runRunnableJobs();
         executor.shutDown();
-        server.shutDown();
+        standalone.shutDown();
     }
 
 }

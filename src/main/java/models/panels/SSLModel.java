@@ -40,7 +40,7 @@ public class SSLModel extends InstallerModel {
     }
 
     public void vaultPassword() {
-        vault.ifPresent(v -> password = v.vaultPassword("ldap", "password", password));
+        vault.ifPresent(v -> password = v.vaultPassword("ssl", "password", password));
     }
 
 }
