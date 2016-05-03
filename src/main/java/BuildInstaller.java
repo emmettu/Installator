@@ -11,10 +11,12 @@ import models.jobs.InstallerJob;
 import models.jobs.JobExecutor;
 import models.packaging.InstallLocationModel;
 import models.packaging.PackageSetDoneController;
+import models.panels.LdapModel;
 import models.panels.SSLModel;
 import models.panels.VaultModel;
 import models.resources.*;
 import models.resources.exceptions.CommandFailedException;
+import models.resources.exceptions.LDAPResource;
 import models.resources.servers.ServerBuilder;
 import models.resources.servers.ServerResource;
 import models.validation.Validation;
@@ -330,9 +332,9 @@ public class BuildInstaller {
         });
         ServerBuilder builder = new ServerBuilder(ilm);
         ServerResource standalone = builder.newStandaloneServer("standalone.xml");
-        ServerResource host = builder.newHostServer("host.xml");
+        //ServerResource host = builder.newHostServer("host.xml");
         VaultResource vault = new VaultResource(standalone);
-        VaultResource hostVault = new VaultResource(host);
+        //VaultResource hostVault = new VaultResource(host);
         VaultModel vaultModel = new VaultModel();
         vaultModel.setAlias("vault");
         vaultModel.setEncrDirectory(ilm.getInstallLocation().resolve("vault"));
@@ -351,7 +353,7 @@ public class BuildInstaller {
             @Override
             protected void runJob() {
                 vault.makeVault(vaultModel);
-                hostVault.makeVault(vaultModel);
+                //hostVault.makeVault(vaultModel);
             }
         };
 
@@ -372,14 +374,36 @@ public class BuildInstaller {
             }
         };
 
+        LDAPResource ldapRes = new LDAPResource(standalone);
+        LdapModel ldap = new LdapModel();
+        ldap.setName("test");
+        ldap.setPassword("test");
+        ldap.setUrl("test");
+        ldap.setdN("test");
+        ldap.setVaultModel(vaultModel);
+
+        InstallerJob addLDAP = new InstallerJob("add ldap") {
+            @Override
+            protected void runJob() {
+                try {
+                    ldapRes.installLdap(ldap);
+                }
+                catch (CommandFailedException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+
         addVault.addDependency(makeKeyStore);
         addSSL.addDependency(addVault);
+        addLDAP.addDependency(addVault);
         executor.addJob(makeKeyStore);
         executor.addJob(addVault);
         executor.addJob(addSSL);
+        executor.addJob(addLDAP);
         executor.runRunnableJobs();
-        executor.shutDown();
-        standalone.shutDown();
+        //executor.shutDown();
+        //standalone.shutDown();
     }
 
 }

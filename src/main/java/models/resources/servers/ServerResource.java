@@ -20,6 +20,7 @@ public class ServerResource {
     ServerResource() {
         System.setProperty("java.util.logging.manager", "org.jboss.logmanager.LogManager");
         cc = createCommandContext();
+        cc.setResolveParameterValues(false);
     }
 
     private CommandContext createCommandContext() {
