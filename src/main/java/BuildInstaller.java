@@ -399,16 +399,26 @@ public class BuildInstaller {
             }
         };
 
+        InstallerJob shutDown = new InstallerJob("bye bye") {
+            @Override
+            protected void runJob() {
+                System.out.println("Installation complete, shutting down");
+                executor.shutDown();
+                standalone.shutDown();
+            }
+        };
+
         addVault.addDependency(makeKeyStore);
         addSSL.addDependency(addVault);
         addLDAP.addDependency(addVault);
+        shutDown.addDependency(addSSL);
+        shutDown.addDependency(addLDAP);
         executor.addJob(makeKeyStore);
         executor.addJob(addVault);
         executor.addJob(addSSL);
         executor.addJob(addLDAP);
+        executor.addJob(shutDown);
         executor.runRunnableJobs();
-        //executor.shutDown();
-        //standalone.shutDown();
     }
 
 }
