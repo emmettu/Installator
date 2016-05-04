@@ -65,6 +65,7 @@ public class GUIFrame implements Frame {
     @Override
     public void quit() {
         frame.dispose();
+        System.exit(0);
     }
 
 }
