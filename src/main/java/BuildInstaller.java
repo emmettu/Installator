@@ -381,6 +381,10 @@ public class BuildInstaller {
         ldap.setUrl("test");
         ldap.setdN("test");
         ldap.setVaultModel(vaultModel);
+        ldap.setRecursive(true);
+        ldap.setFilterType(LdapModel.FilterType.ADVANCED);
+        ldap.setFilter("test");
+        ldap.setBaseDN("test");
 
         InstallerJob addLDAP = new InstallerJob("add ldap") {
             @Override

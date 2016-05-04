@@ -103,8 +103,8 @@ public class LdapModel extends InstallerModel {
 
     public enum FilterType {
 
-        USERNAME(",username-attribute="),
-        ADVANCED(",advanced-filter=");
+        USERNAME(",username-attribute=\""),
+        ADVANCED(",advanced-filter=\"");
 
         String command;
         FilterType(String command) {
