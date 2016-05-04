@@ -385,6 +385,7 @@ public class BuildInstaller {
         ldap.setFilterType(LdapModel.FilterType.ADVANCED);
         ldap.setFilter("test");
         ldap.setBaseDN("test");
+        ldap.setRealmName("test");
 
         InstallerJob addLDAP = new InstallerJob("add ldap") {
             @Override
