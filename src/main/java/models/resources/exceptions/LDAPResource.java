@@ -77,8 +77,12 @@ public class LDAPResource {
                 if (c.asString().equals(interfaceName)) {
                     String writeSecurityRealmCmd =
                             "/core-service=management/management-interface=" +
-                            interfaceName + "/:" +
-                            "write-attribute(name=security-realm" + ",value=" + realmName + ")";
+                             interfaceName +
+                             "/:" +
+                             "write-attribute(name=security-realm" +
+                             ",value=" +
+                             realmName +
+                             ")";
 
                     server.submit(writeSecurityRealmCmd);
                 }

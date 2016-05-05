@@ -11,11 +11,13 @@ import models.jobs.InstallerJob;
 import models.jobs.JobExecutor;
 import models.packaging.InstallLocationModel;
 import models.packaging.PackageSetDoneController;
+import models.panels.InfinispanModel;
 import models.panels.LdapModel;
 import models.panels.SSLModel;
 import models.panels.VaultModel;
 import models.resources.*;
 import models.resources.exceptions.CommandFailedException;
+import models.resources.exceptions.InfinispanResource;
 import models.resources.exceptions.LDAPResource;
 import models.resources.servers.ServerBuilder;
 import models.resources.servers.ServerResource;
@@ -24,6 +26,8 @@ import models.packaging.utils.PackageSet;
 import models.unpacking.Unpacker;
 import controllers.unpacker.UnpackerController;
 import models.packaging.StandardPackage;
+import org.infinispan.configuration.cache.TransactionMode;
+import org.infinispan.eviction.EvictionStrategy;
 import views.lookandfeel.ButtonFactory;
 import views.lookandfeel.FontResources;
 import views.lookandfeel.UiResources;
@@ -332,9 +336,8 @@ public class BuildInstaller {
         });
         ServerBuilder builder = new ServerBuilder(ilm);
         ServerResource standalone = builder.newStandaloneServer("standalone.xml");
-        //ServerResource host = builder.newHostServer("host.xml");
+        ServerResource domain = builder.newHostServer("host.xml");
         VaultResource vault = new VaultResource(standalone);
-        //VaultResource hostVault = new VaultResource(host);
         VaultModel vaultModel = new VaultModel();
         vaultModel.setAlias("vault");
         vaultModel.setEncrDirectory(ilm.getInstallLocation().resolve("vault"));
@@ -377,6 +380,7 @@ public class BuildInstaller {
         };
 
         LDAPResource ldapRes = new LDAPResource(standalone);
+        LDAPResource ldapHost = new LDAPResource(domain);
         LdapModel ldap = new LdapModel();
         ldap.setName("test");
         ldap.setPassword("test");
@@ -387,7 +391,7 @@ public class BuildInstaller {
         ldap.setFilterType(LdapModel.FilterType.ADVANCED);
         ldap.setFilter("test");
         ldap.setBaseDN("test");
-        ldap.setRealmName("test");
+        ldap.setRealmName("ldap");
         ldap.setSSL(sslMod);
 
         InstallerJob addLDAP = new InstallerJob("add ldap") {
@@ -395,6 +399,29 @@ public class BuildInstaller {
             protected void runJob() {
                 try {
                     ldapRes.installLdap(ldap);
+                    //ldapHost.installLdap(ldap);
+                }
+                catch (CommandFailedException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+
+        InfinispanResource infiniRes = new InfinispanResource(standalone);
+        InfinispanModel infiniMod = new InfinispanModel();
+        infiniMod.setContainer("test");
+        infiniMod.setEvictionStrategy(EvictionStrategy.LIRS);
+        infiniMod.setJndiName("test");
+        infiniMod.setMaxEntries(1000);
+        infiniMod.setMaxIdle(500);
+        infiniMod.setTransactionMode(TransactionMode.FULL_XA);
+        infiniMod.setLocalCache("test");
+
+        InstallerJob addInfinispan = new InstallerJob("infinispan") {
+            @Override
+            protected void runJob() {
+                try {
+                    infiniRes.installInfinispan(infiniMod);
                 }
                 catch (CommandFailedException e) {
                     e.printStackTrace();
@@ -413,13 +440,15 @@ public class BuildInstaller {
 
         addVault.addDependency(makeKeyStore);
         addSSL.addDependency(addVault);
-        addLDAP.addDependency(addVault);
+        addLDAP.addDependency(addSSL);
         shutDown.addDependency(addSSL);
         shutDown.addDependency(addLDAP);
+        shutDown.addDependency(addInfinispan);
         executor.addJob(makeKeyStore);
         executor.addJob(addVault);
         executor.addJob(addSSL);
         executor.addJob(addLDAP);
+        executor.addJob(addInfinispan);
         executor.addJob(shutDown);
         executor.runRunnableJobs();
     }
