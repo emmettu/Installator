@@ -20,6 +20,7 @@ public class LdapModel extends InstallerModel {
     private FilterType filterType;
     private String filter;
     private Optional<VaultModel> vault = Optional.empty();
+    private Optional<SSLModel> ssl = Optional.empty();
 
     public String getName() {
         return name;
@@ -99,6 +100,14 @@ public class LdapModel extends InstallerModel {
 
     public void vaultPassword() {
         vault.ifPresent(v -> password = v.vaultPassword("ldap", name + ".password", password));
+    }
+
+    public void setSSL(SSLModel ssl) {
+        this.ssl = Optional.of(ssl);
+    }
+
+    public Optional<SSLModel> getSSL() {
+        return ssl;
     }
 
     public enum FilterType {

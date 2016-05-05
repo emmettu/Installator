@@ -1,6 +1,8 @@
 package models.resources.exceptions;
 
 import models.panels.LdapModel;
+import models.panels.SSLModel;
+import models.resources.SSLResource;
 import models.resources.servers.ServerResource;
 import org.jboss.as.controller.client.helpers.Operations;
 import org.jboss.dmr.ModelNode;
@@ -21,6 +23,7 @@ public class LDAPResource {
         createLdapConnection(model);
         createLdapSecurityRealm(model);
         installLdapToInterfaces(model);
+        installSSL(model);
     }
 
     private synchronized void createLdapConnection(LdapModel model) throws CommandFailedException {
@@ -80,6 +83,14 @@ public class LDAPResource {
                     server.submit(writeSecurityRealmCmd);
                 }
             }
+        }
+    }
+
+    private void installSSL(LdapModel model) throws CommandFailedException {
+        if (model.getSSL().isPresent()) {
+            SSLModel sslModel = model.getSSL().get();
+            sslModel.setRealm(model.getRealmName());
+            new SSLResource(server).installSSL(sslModel);
         }
     }
 

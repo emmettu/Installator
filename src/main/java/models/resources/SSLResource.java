@@ -20,10 +20,9 @@ public class SSLResource {
 
     public void installSSL(SSLModel model) throws CommandFailedException {
         model.vaultPassword();
-        String realm = "ManagementRealm";
         String addSSLCommand =
                 "/core-service=management/security-realm=" +
-                realm +
+                model.getRealm() +
                 "/server-identity=ssl:add(keystore-path=\"" +
                 model.getKeyStoreLocation() +
                 "\",keystore-password=\"" +
@@ -31,7 +30,7 @@ public class SSLResource {
                 "\")";
         String addTrustStoreCommand =
                 "/core-service=management/security-realm=" +
-                realm +
+                model.getRealm() +
                 "/authentication=truststore:add(keystore-path=\"" +
                 model.getKeyStoreLocation() +
                 "\",keystore-password=\"" +
@@ -40,10 +39,9 @@ public class SSLResource {
 
         server.submit(addSSLCommand);
         server.submit(addTrustStoreCommand);
-        addHttps();
     }
 
-    private void addHttps() throws CommandFailedException {
+    public void addHttps() throws CommandFailedException {
         String redefine = "/core-service=management/management-interface=http-interface:undefine-attribute(name=security-realm)";
         String addCommand = "/core-service=management/management-interface=http-interface:write-attribute(name=security-realm,value=\"ManagementRealm\")";
         server.submit(redefine);

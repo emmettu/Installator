@@ -13,6 +13,7 @@ public class SSLModel extends InstallerModel {
 
     private Path keyStoreLocation;
     private String password;
+    private String realm;
     private Optional<VaultModel> vault = Optional.empty();
 
     public Path getKeyStoreLocation() {
@@ -41,6 +42,14 @@ public class SSLModel extends InstallerModel {
 
     public void vaultPassword() {
         vault.ifPresent(v -> password = v.vaultPassword("ssl", "password", password));
+    }
+
+    public String getRealm() {
+        return realm;
+    }
+
+    public void setRealm(String realm) {
+        this.realm = realm;
     }
 
 }

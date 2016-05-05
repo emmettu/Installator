@@ -362,12 +362,14 @@ public class BuildInstaller {
         sslMod.setVault(vaultModel);
         sslMod.setKeyStoreLocation(Paths.get("/home/eunderhi/vault/vault.keystore"));
         sslMod.setPassword("qwer`123");
+        sslMod.setRealm("ManagementRealm");
 
         InstallerJob addSSL = new InstallerJob("add ssl") {
             @Override
             protected void runJob() {
                 try {
                     sslRes.installSSL(sslMod);
+                    sslRes.addHttps();
                 } catch (CommandFailedException e) {
                     e.printStackTrace();
                 }
@@ -386,6 +388,7 @@ public class BuildInstaller {
         ldap.setFilter("test");
         ldap.setBaseDN("test");
         ldap.setRealmName("test");
+        ldap.setSSL(sslMod);
 
         InstallerJob addLDAP = new InstallerJob("add ldap") {
             @Override
