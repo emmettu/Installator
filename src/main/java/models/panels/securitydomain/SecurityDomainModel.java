@@ -1,0 +1,16 @@
+package models.panels.securitydomain;
+
+import java.util.List;
+
+/**
+ * Created by eunderhi on 06/05/16.
+ */
+public class SecurityDomainModel {
+
+    private String name;
+    private CacheType cacheType;
+    private List<AuthenticationElement> authenticationElements;
+    private List<AuthorizationElement> authorizationElements;
+    private List<MappingElement> mappingElements;
+
+}
