@@ -5,13 +5,13 @@ import java.util.Map;
 /**
  * Created by eunderhi on 06/05/16.
  */
-public class AuthenticationElement {
+public class AuthorizationElement {
 
-    private AuthenticationCode code;
+    private AuthorizationCode code;
     private AuthenticationFlag flag;
     private Map<String, String> options;
 
-    public AuthenticationCode getCode() {
+    public AuthorizationCode getCode() {
         return code;
     }
 
@@ -23,7 +23,7 @@ public class AuthenticationElement {
         return options;
     }
 
-    public void setCode(AuthenticationCode code) {
+    public void setCode(AuthorizationCode code) {
         this.code = code;
     }
 

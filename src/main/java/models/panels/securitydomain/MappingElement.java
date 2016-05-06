@@ -5,30 +5,30 @@ import java.util.Map;
 /**
  * Created by eunderhi on 06/05/16.
  */
-public class AuthenticationElement {
+public class MappingElement {
 
-    private AuthenticationCode code;
-    private AuthenticationFlag flag;
+    private MappingCode code;
+    private MappingType mapType;
     private Map<String, String> options;
 
-    public AuthenticationCode getCode() {
+    public MappingCode getCode() {
         return code;
     }
 
-    public AuthenticationFlag getFlag() {
-        return flag;
+    public MappingType getMapType() {
+        return mapType;
     }
 
     public Map<String, String> getOptions() {
         return options;
     }
 
-    public void setCode(AuthenticationCode code) {
+    public void setCode(MappingCode code) {
         this.code = code;
     }
 
-    public void setFlag(AuthenticationFlag flag) {
-        this.flag = flag;
+    public void setMapType(MappingType mapType) {
+        this.mapType = mapType;
     }
 
     public void setOptions(Map<String, String> options) {
