@@ -13,4 +13,20 @@ public class SecurityDomainModel {
     private List<AuthorizationElement> authorizationElements;
     private List<MappingElement> mappingElements;
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public CacheType getCacheType() {
+        return cacheType;
+    }
+
+    public void setCacheType(CacheType cacheType) {
+        this.cacheType = cacheType;
+    }
+
 }
