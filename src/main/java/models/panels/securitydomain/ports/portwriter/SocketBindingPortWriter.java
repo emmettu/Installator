@@ -13,7 +13,6 @@ public class SocketBindingPortWriter implements PortWriter {
     private String socketBindingGroup;
     private String socketBinding;
     private String attribute;
-    private String portValue;
 
     public static Builder Builder() {
         return new Builder();
@@ -24,7 +23,6 @@ public class SocketBindingPortWriter implements PortWriter {
         builder.socketBindingGroup = socketBindingGroup;
         builder.socketBinding = socketBinding;
         builder.attribute = attribute;
-        builder.portValue = portValue;
     }
 
     @Override
@@ -36,7 +34,7 @@ public class SocketBindingPortWriter implements PortWriter {
                 ":write-attribute(name=" +
                 attribute +
                 ",value=" +
-                portValue +
+                port +
                 ")"
         );
     }
@@ -46,7 +44,6 @@ public class SocketBindingPortWriter implements PortWriter {
         private String socketBindingGroup;
         private String socketBinding;
         private String attribute;
-        private String portValue;
 
         private Builder() {}
 
@@ -67,11 +64,6 @@ public class SocketBindingPortWriter implements PortWriter {
 
         public Builder setAttribute(String attribute) {
             this.attribute = attribute;
-            return this;
-        }
-
-        public Builder setPortValue(String portValue) {
-            this.portValue = portValue;
             return this;
         }
 
