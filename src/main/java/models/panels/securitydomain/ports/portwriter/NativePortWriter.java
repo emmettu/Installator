@@ -1,5 +1,6 @@
-package models.panels.securitydomain.ports;
+package models.panels.securitydomain.ports.portwriter;
 
+import models.panels.securitydomain.ports.Port;
 import models.resources.exceptions.CommandFailedException;
 import models.resources.servers.ServerResource;
 
@@ -8,16 +9,15 @@ import models.resources.servers.ServerResource;
  */
 public class NativePortWriter implements PortWriter {
 
-    private ServerResource server;
+    private ManagementPortWriter writer;
 
     public NativePortWriter(ServerResource sr) {
-        server = sr;
+        writer = new ManagementPortWriter("native-interface", sr);
     }
 
     @Override
     public void writePort(Port port) throws CommandFailedException {
-        String command = "/core-service=management/management-interface=native-interface:write-attribute(name=port,value="+port+")";
-        server.submit(command);
+        writer.writePort(port);
     }
 
 }
