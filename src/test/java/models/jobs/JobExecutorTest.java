@@ -54,7 +54,7 @@ public class JobExecutorTest {
         executor.addJob(job2);
         executor.addJob(job3);
 
-        executor.runRunnableJobs();
+        executor.go();
         Thread.sleep(100);
 
         assertTrue(jobResults.indexOf("1") < jobResults.indexOf("2") && jobResults.indexOf("2") < jobResults.indexOf("3"));
@@ -79,7 +79,7 @@ public class JobExecutorTest {
         };
         job2.addDependency(job1);
         executor.addJob(job2);
-        executor.runRunnableJobs();
+        executor.go();
         assertEquals("2", jobResults.get(0));
     }
 

@@ -466,7 +466,7 @@ public class BuildInstaller {
         executor.addJob(addInfinispan);
         executor.addJob(shutDown);
         executor.addJob(writePorts);
-        executor.runRunnableJobs();
+        executor.go();
     }
 
 }

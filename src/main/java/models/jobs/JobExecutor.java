@@ -16,14 +16,18 @@ public class JobExecutor {
     private ConcurrentHashMap<String, Job> jobPool = new ConcurrentHashMap<>();
     private final Object lock = new Object();
 
+    public void go() {
+        initJobs();
+        runRunnableJobs();
+    }
+
     /**
      * Runs all currently runnable jobs. If the job pool is not
      * empty it recursively calls itself again, running the next
      * set of jobs that may have had dependencies on the previous
      * set.
      */
-    public void runRunnableJobs() {
-        initJobs();
+    private void runRunnableJobs() {
         synchronized (lock) {
             jobPool.values().forEach(this::run);
             try {
