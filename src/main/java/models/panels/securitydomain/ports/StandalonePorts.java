@@ -1,6 +1,5 @@
 package models.panels.securitydomain.ports;
 
-import models.panels.securitydomain.ports.portwriter.PortWriter;
 import models.panels.securitydomain.ports.portwriter.PortWriterFactory;
 import models.resources.exceptions.CommandFailedException;
 import models.resources.servers.ServerResource;

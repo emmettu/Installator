@@ -61,4 +61,26 @@ public class JobExecutorTest {
         assertEquals(1003, jobResults.size());
     }
 
+    @Test
+    public void testNonExistentDep() throws Exception {
+        List<String> jobResults = new ArrayList<>();
+        JobExecutor executor = new JobExecutor();
+        InstallerJob job1 = new InstallerJob("j1") {
+            @Override
+            protected void runJob() {
+                jobResults.add("1");
+            }
+        };
+        InstallerJob job2 = new InstallerJob("j2") {
+            @Override
+            protected void runJob() {
+                jobResults.add("2");
+            }
+        };
+        job2.addDependency(job1);
+        executor.addJob(job2);
+        executor.runRunnableJobs();
+        assertEquals("2", jobResults.get(0));
+    }
+
 }

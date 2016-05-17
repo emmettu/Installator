@@ -23,6 +23,7 @@ public class JobExecutor {
      * set.
      */
     public void runRunnableJobs() {
+        initJobs();
         synchronized (lock) {
             jobPool.values().forEach(this::run);
             try {
@@ -33,6 +34,19 @@ public class JobExecutor {
             }
             if (!jobPool.isEmpty()) {
                 runRunnableJobs();
+            }
+        }
+    }
+
+    /**
+     * Remove non-existent deps
+     */
+    private void initJobs() {
+        for (Job j : jobPool.values()) {
+            for (Job dep : j.getDependencies().values()) {
+                if (!jobPool.contains(dep)) {
+                    j.removeDependency(dep);
+                }
             }
         }
     }
