@@ -55,6 +55,7 @@ public class JobExecutorTest {
         executor.addJob(job3);
 
         executor.runRunnableJobs();
+        Thread.sleep(100);
 
         assertTrue(jobResults.indexOf("1") < jobResults.indexOf("2") && jobResults.indexOf("2") < jobResults.indexOf("3"));
         assertEquals(1003, jobResults.size());

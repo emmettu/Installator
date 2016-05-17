@@ -1,5 +1,10 @@
 package models.panels.securitydomain.ports;
 
+import models.panels.securitydomain.ports.portwriter.PortWriter;
+import models.panels.securitydomain.ports.portwriter.PortWriterFactory;
+import models.resources.exceptions.CommandFailedException;
+import models.resources.servers.ServerResource;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,15 +15,16 @@ public class StandalonePorts {
 
     private List<Port> ports = new ArrayList<>();
     private int offset;
+    private ServerResource server;
 
-    public StandalonePorts() {
-        ports.add(Port.create().withName("jboss.ajp.port").withValue(8009));
+    public StandalonePorts(ServerResource server) {
+        ports.add(Port.create().withName("jboss.ajp.port").withValue(8123));
         ports.add(Port.create().withName("jboss.http.port").withValue(8080));
         ports.add(Port.create().withName("jboss.https.port").withValue(8443));
         ports.add(Port.create().withName("jboss.management.http.port").withValue(9990));
         ports.add(Port.create().withName("jboss.management.https.port").withValue(9993));
         ports.add(Port.create().withName("jboss.management.native.port").withValue(9999));
-        ports.add(Port.create().withName("jboss.management.native.port").withValue(9999));
+        this.server = server;
     }
 
     public List<Port> getPorts() {
@@ -29,8 +35,10 @@ public class StandalonePorts {
         this.offset = offset;
     }
 
-    public void writePorts() {
-        ports.forEach(p -> p.withOffset(offset));
+    public void writePorts() throws CommandFailedException {
+        //ports.forEach(p -> p.withOffset(offset));
+        PortWriter pw = new PortWriterFactory(server).ajpStandalonePortWriter();
+        pw.writePort(ports.get(0));
     }
 
 }

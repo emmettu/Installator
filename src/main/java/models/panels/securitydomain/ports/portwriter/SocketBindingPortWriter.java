@@ -19,10 +19,10 @@ public class SocketBindingPortWriter implements PortWriter {
     }
 
     private SocketBindingPortWriter(Builder builder) {
-        builder.server = server;
-        builder.socketBindingGroup = socketBindingGroup;
-        builder.socketBinding = socketBinding;
-        builder.attribute = attribute;
+        server = builder.server;
+        socketBindingGroup = builder.socketBindingGroup;
+        socketBinding = builder.socketBinding;
+        attribute = builder.attribute;
     }
 
     @Override

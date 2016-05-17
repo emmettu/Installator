@@ -15,6 +15,7 @@ import models.panels.InfinispanModel;
 import models.panels.LdapModel;
 import models.panels.SSLModel;
 import models.panels.VaultModel;
+import models.panels.securitydomain.ports.StandalonePorts;
 import models.resources.*;
 import models.resources.exceptions.CommandFailedException;
 import models.resources.exceptions.InfinispanResource;
@@ -429,6 +430,19 @@ public class BuildInstaller {
             }
         };
 
+        StandalonePorts ports = new StandalonePorts(standalone);
+        InstallerJob writePorts = new InstallerJob("ports") {
+            @Override
+            protected void runJob() {
+                try {
+                    ports.writePorts();
+                }
+                catch (CommandFailedException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+
         InstallerJob shutDown = new InstallerJob("bye bye") {
             @Override
             protected void runJob() {
@@ -444,12 +458,14 @@ public class BuildInstaller {
         shutDown.addDependency(addSSL);
         shutDown.addDependency(addLDAP);
         shutDown.addDependency(addInfinispan);
+        shutDown.addDependency(writePorts);
         executor.addJob(makeKeyStore);
         executor.addJob(addVault);
         executor.addJob(addSSL);
         executor.addJob(addLDAP);
         executor.addJob(addInfinispan);
         executor.addJob(shutDown);
+        executor.addJob(writePorts);
         executor.runRunnableJobs();
     }
 

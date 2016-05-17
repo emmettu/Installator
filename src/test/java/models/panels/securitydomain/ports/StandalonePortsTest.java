@@ -1,5 +1,6 @@
 package models.panels.securitydomain.ports;
 
+import models.resources.servers.ServerResource;
 import org.junit.Test;
 
 import java.util.List;
@@ -13,11 +14,6 @@ public class StandalonePortsTest {
 
     @Test
     public void testMake() throws Exception {
-        List<Port> ports = new StandalonePorts().getPorts();
-
-        for (Port p : ports) {
-            System.out.println(p);
-        }
     }
 
 }
