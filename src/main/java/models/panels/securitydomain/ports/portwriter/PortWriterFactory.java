@@ -22,4 +22,40 @@ public class PortWriterFactory {
                 .create();
     }
 
+    public PortWriter httpStandalonePortWriter() {
+        return SocketBindingPortWriter.Builder()
+                .setServer(server)
+                .setAttribute("port")
+                .setSocketBinding("http")
+                .setSocketBindingGroup("standard-sockets")
+                .create();
+    }
+
+    public PortWriter httpsStandalonePortWriter() {
+        return SocketBindingPortWriter.Builder()
+                .setServer(server)
+                .setAttribute("port")
+                .setSocketBinding("https")
+                .setSocketBindingGroup("standard-sockets")
+                .create();
+    }
+
+    public PortWriter txnRecoveryEnvironmentStandalonePortWriter() {
+        return SocketBindingPortWriter.Builder()
+                .setServer(server)
+                .setAttribute("port")
+                .setSocketBinding("txn-recovery-environment")
+                .setSocketBindingGroup("standard-sockets")
+                .create();
+    }
+
+    public PortWriter txnStatusManagerStandalonePortWriter() {
+        return SocketBindingPortWriter.Builder()
+                .setServer(server)
+                .setAttribute("port")
+                .setSocketBinding("txn-status-manager")
+                .setSocketBindingGroup("standard-sockets")
+                .create();
+    }
+
 }

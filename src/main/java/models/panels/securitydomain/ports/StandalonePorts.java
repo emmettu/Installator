@@ -15,16 +15,17 @@ public class StandalonePorts {
 
     private List<Port> ports = new ArrayList<>();
     private int offset;
-    private ServerResource server;
+    private Port ajp = Port.create().withName("jboss.ajp.port").withValue(1);
+    private Port http = Port.create().withName("jboss.http.port").withValue(2);
+    private Port https = Port.create().withName("jboss.https.port").withValue(3);
+    private Port txnRecovery = Port.create().withValue(4);
+    private Port txnStatus = Port.create().withValue(5);
+    private Port managementHttp = Port.create().withName("jboss.management.http.port").withValue(9990);
+    private Port managementHttps = Port.create().withName("jboss.management.https.port").withValue(9993);
+    private PortWriterFactory pwf;
 
     public StandalonePorts(ServerResource server) {
-        ports.add(Port.create().withName("jboss.ajp.port").withValue(8123));
-        ports.add(Port.create().withName("jboss.http.port").withValue(8080));
-        ports.add(Port.create().withName("jboss.https.port").withValue(8443));
-        ports.add(Port.create().withName("jboss.management.http.port").withValue(9990));
-        ports.add(Port.create().withName("jboss.management.https.port").withValue(9993));
-        ports.add(Port.create().withName("jboss.management.native.port").withValue(9999));
-        this.server = server;
+        pwf = new PortWriterFactory(server);
     }
 
     public List<Port> getPorts() {
@@ -36,9 +37,11 @@ public class StandalonePorts {
     }
 
     public void writePorts() throws CommandFailedException {
-        //ports.forEach(p -> p.withOffset(offset));
-        PortWriter pw = new PortWriterFactory(server).ajpStandalonePortWriter();
-        pw.writePort(ports.get(0));
+        pwf.ajpStandalonePortWriter().writePort(ajp.withOffset(offset));
+        pwf.httpStandalonePortWriter().writePort(http.withOffset(offset));
+        pwf.httpsStandalonePortWriter().writePort(https.withOffset(offset));
+        pwf.txnRecoveryEnvironmentStandalonePortWriter().writePort(txnRecovery.withOffset(offset));
+        pwf.txnStatusManagerStandalonePortWriter().writePort(txnStatus.withOffset(offset));
     }
 
 }
