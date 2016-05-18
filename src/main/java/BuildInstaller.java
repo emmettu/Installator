@@ -16,6 +16,9 @@ import models.panels.InfinispanModel;
 import models.panels.LdapModel;
 import models.panels.SSLModel;
 import models.panels.VaultModel;
+import models.panels.logging.LoggingLevel;
+import models.panels.logging.LoggingModel;
+import models.panels.logging.LoggingResource;
 import models.panels.securitydomain.ports.StandalonePorts;
 import models.resources.*;
 import models.resources.exceptions.CommandFailedException;
@@ -427,6 +430,7 @@ public class BuildInstaller {
                     infiniRes.installInfinispan(infiniMod);
                 }
                 catch (CommandFailedException e) {
+                    setState(State.FAILED);
                     e.printStackTrace();
                 }
             }
@@ -440,6 +444,22 @@ public class BuildInstaller {
                     ports.writePorts();
                 }
                 catch (CommandFailedException e) {
+                    setState(State.FAILED);
+                    e.printStackTrace();
+                }
+            }
+        };
+
+        LoggingModel model = new LoggingModel();
+        LoggingResource loggingResource = new LoggingResource(standalone);
+        InstallerJob loggingLevel = new InstallerJob("logging") {
+            @Override
+            protected void runJob() {
+                try {
+                    loggingResource.installLogging(model);
+                }
+                catch (CommandFailedException e) {
+                    setState(State.FAILED);
                     e.printStackTrace();
                 }
             }
@@ -461,6 +481,7 @@ public class BuildInstaller {
         shutDown.addDependency(addLDAP);
         shutDown.addDependency(addInfinispan);
         shutDown.addDependency(writePorts);
+        shutDown.addDependency(loggingLevel);
         executor.addJob(makeKeyStore);
         executor.addJob(addVault);
         executor.addJob(addSSL);
@@ -468,6 +489,7 @@ public class BuildInstaller {
         executor.addJob(addInfinispan);
         executor.addJob(shutDown);
         executor.addJob(writePorts);
+        executor.addJob(loggingLevel);
         executor.go();
     }
 

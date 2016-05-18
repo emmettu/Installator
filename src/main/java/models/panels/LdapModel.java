@@ -123,7 +123,6 @@ public class LdapModel extends InstallerModel {
         public String getCommand() {
             return command;
         }
-
     }
 
 }

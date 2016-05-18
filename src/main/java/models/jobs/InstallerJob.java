@@ -78,7 +78,7 @@ public abstract class InstallerJob extends InstallerModel implements Job {
         return state;
     }
 
-    private void setState(State state) {
+    public void setState(State state) {
         this.state = state;
         notifyListeners();
     }
