@@ -16,7 +16,6 @@ import models.panels.InfinispanModel;
 import models.panels.LdapModel;
 import models.panels.SSLModel;
 import models.panels.VaultModel;
-import models.panels.logging.LoggingLevel;
 import models.panels.logging.LoggingModel;
 import models.panels.logging.LoggingResource;
 import models.panels.securitydomain.ports.StandalonePorts;
@@ -343,6 +342,7 @@ public class BuildInstaller {
         ServerBuilder builder = new ServerBuilder(ilm);
         ServerResource standalone = builder.newStandaloneServer("standalone.xml");
         ServerResource domain = builder.newHostServer("host.xml");
+        ServerResource standaloneFullHa = builder.newStandaloneServer("standalone-full-ha.xml");
         VaultResource vault = new VaultResource(standalone);
         VaultModel vaultModel = new VaultModel();
         vaultModel.setAlias("vault");
@@ -452,11 +452,13 @@ public class BuildInstaller {
 
         LoggingModel model = new LoggingModel();
         LoggingResource loggingResource = new LoggingResource(standalone);
+        LoggingResource sfhLoggingResource = new LoggingResource(standaloneFullHa);
         InstallerJob loggingLevel = new InstallerJob("logging") {
             @Override
             protected void runJob() {
                 try {
                     loggingResource.installLogging(model);
+                    sfhLoggingResource.installLogging(model);
                 }
                 catch (CommandFailedException e) {
                     setState(State.FAILED);
@@ -471,6 +473,7 @@ public class BuildInstaller {
                 System.out.println("Installation complete, shutting down");
                 executor.shutDown();
                 standalone.shutDown();
+                standaloneFullHa.shutDown();
             }
         };
 
