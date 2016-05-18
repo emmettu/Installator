@@ -5,6 +5,7 @@ import controllers.combobox.ComboBoxController;
 import controllers.installer.NextPanelController;
 import controllers.installer.PreviousPanelController;
 import controllers.progressbar.ProgressBarController;
+import controllers.textinput.InstallValidator;
 import controllers.textinput.PathInputController;
 import controllers.textinput.PathValidator;
 import models.jobs.InstallerJob;
@@ -306,6 +307,7 @@ public class BuildInstaller {
             targetNextButton.addController(uc);
         }
         InstallLocationModel ilm = new InstallLocationModel();
+        pathField.validation().add(new InstallValidator(ilm.getName()));
         targetPanel.getButtonPanel().getNext().addController(nextPanel);
         views.ui.gui.FancyGUITextField field = targetPanel.getField();
         field.addController(() -> ilm.setInstallLocation(field.getText()));

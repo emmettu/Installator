@@ -24,6 +24,10 @@ public class InstallLocationModel extends InstallerModel {
         return installLocation.resolve(name);
     }
 
+    public String getName() {
+        return name;
+    }
+
     public void setInstallLocation(Path path) {
         installLocation = path;
         notifyListeners();
