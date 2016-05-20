@@ -474,6 +474,7 @@ public class BuildInstaller {
                 executor.shutDown();
                 standalone.shutDown();
                 standaloneFullHa.shutDown();
+                domain.shutDown();
             }
         };
 
