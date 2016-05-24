@@ -15,6 +15,11 @@ public class GUILabel extends GUIComponent implements Label {
         jLabel.setText(name);
     }
 
+    public GUILabel(String name, int alignment) {
+        this(name);
+        jLabel.setHorizontalAlignment(alignment);
+    }
+
     public GUILabel() {
         setJComponent(jLabel);
     }
@@ -31,6 +36,14 @@ public class GUILabel extends GUIComponent implements Label {
 
     public void setColor(Color color) {
         jLabel.setForeground(color);
+    }
+
+    public void setOpaque(boolean isOpaque) {
+        jLabel.setOpaque(isOpaque);
+    }
+
+    public void setFont(Font font) {
+        jLabel.setFont(font);
     }
 
 }

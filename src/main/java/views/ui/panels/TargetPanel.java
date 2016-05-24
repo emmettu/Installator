@@ -1,8 +1,11 @@
 package views.ui.panels;
 
+import views.lookandfeel.FontResources;
 import views.ui.gui.*;
 import views.ui.gui.GUIPanel;
+import views.ui.gui.layout.Constraints;
 
+import javax.swing.*;
 import java.awt.*;
 
 /**
@@ -29,6 +32,7 @@ public class TargetPanel extends GUIPanel {
     }
 
     private void build() {
+        contentPanel.addComponent(getTitle(), Constraints.getTitleConstraints());
         GridBagConstraints gbc = getBasicConstraints();
 
         //JLabel info = LabelFactory.create(idata.langpack.getString("TargetPanel.info"));
@@ -61,6 +65,13 @@ public class TargetPanel extends GUIPanel {
 
     public GUIButtonPanel getButtonPanel() {
         return buttonPanel;
+    }
+
+    private GUILabel getTitle() {
+        GUILabel title = new GUILabel("Path Selection Panel", SwingConstants.LEFT);
+        Font font = FontResources.getOpenSansLight();
+        title.setFont(font);
+        return title;
     }
 
 }
