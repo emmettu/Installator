@@ -1,5 +1,7 @@
 package views.ui.gui;
 
+import views.ui.box.GUIBox;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -22,14 +24,28 @@ public class GUIButtonPanel extends GUIPanel {
     private void initializeLayout() {
         setLayout(new GridBagLayout());
         setBorder(BorderFactory.createEmptyBorder(8, 8, 8, 8));
+
+        GridBagConstraints gbcGlue = new GridBagConstraints();
+        gbcGlue.weightx = 1.0;
+        gbcGlue.weighty = 1.0;
+        gbcGlue.fill = GridBagConstraints.BOTH;
+
+        addComponent(GUIBox.createGlue(), gbcGlue);
+
+        addComponent(GUIBox.createHorizontalGlue(),gbcGlue);
+
+        //quitButton = ButtonFactory.createGrayGradientButton(langpack.getString("installer.quit"));
         GridBagConstraints gbc = new GridBagConstraints();
-        gbc.weightx = 1.0;
-        //gbc.weighty = 1.0;
         gbc.anchor = GridBagConstraints.LINE_END;
-        gbc.insets = new Insets(3, 3, 3, 3);
         addComponent(quit, gbc);
+        addComponent(GUIBox.createRigidArea(new Dimension(5, 0)));
+        // prevButton.setFont(prevButton.getFont().deriveFont(Font.BOLD));
         addComponent(prev, gbc);
-        addComponent(next, gbc);
+
+        addComponent(GUIBox.createRigidArea(new Dimension(5, 0)));
+        addComponent(next,gbc);
+
+        addComponent(GUIBox.createRigidArea(new Dimension(5, 0)));
     }
 
     public GUIButton getNext() {
