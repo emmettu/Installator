@@ -14,8 +14,8 @@ public class GUIFrame implements Frame {
     private List<GUIComponent> panels = new ArrayList<>();
     private int currentPanelIndex = 0;
     private GUIPanel contentPanel = new GUIPanel();
-    public static final int WIDTH = 500;
-    public static final int HEIGHT = 500;
+    public static final int WIDTH = 900;
+    public static final int HEIGHT = 600;
     public static final int HEADER_HEIGHT = 50;
     private JFrame frame = new JFrame();
 
