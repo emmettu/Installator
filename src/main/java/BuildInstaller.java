@@ -299,7 +299,6 @@ public class BuildInstaller {
             nextButton.setEnabled(true);
         }, Validation.Type.CONDITIONAL_SUCCESS);
 
-        pathField.validate();
         targetPanel.getField().addController(pic);
         pic.addPackageSet(packages);
 
@@ -310,6 +309,7 @@ public class BuildInstaller {
         }
         InstallLocationModel ilm = new InstallLocationModel();
         pathField.validation().add(new InstallValidator(ilm.getName()));
+        pathField.validate();
         targetPanel.getButtonPanel().getNext().addController(nextPanel);
         views.ui.gui.FancyGUITextField field = targetPanel.getField();
         field.addController(() -> ilm.setInstallLocation(field.getText()));
