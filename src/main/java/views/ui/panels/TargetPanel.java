@@ -16,7 +16,7 @@ import java.awt.*;
 public class TargetPanel extends GUIPanel {
 
     private GUIPanel contentPanel;
-    private GUIButtonPanel buttonPanel;
+    private GUINavPanel buttonPanel;
     public static final int WIDTH = 900;
     public static final int HEIGHT = 600;
     private GUIPathComponent field = new GUIPathComponent();
@@ -25,7 +25,8 @@ public class TargetPanel extends GUIPanel {
         setLayout(new BorderLayout());
         contentPanel = new GUIPanel(new GridBagLayout());
         contentPanel.setSize(WIDTH, HEIGHT);
-        buttonPanel = new GUIButtonPanel();
+        buttonPanel = new GUINavPanel();
+        buttonPanel.getPrev().setVisible(false);
         build();
         addComponent(contentPanel, BorderLayout.CENTER);
         addComponent(buttonPanel, BorderLayout.SOUTH);
@@ -60,7 +61,7 @@ public class TargetPanel extends GUIPanel {
         return field.getField();
     }
 
-    public GUIButtonPanel getButtonPanel() {
+    public GUINavPanel getButtonPanel() {
         return buttonPanel;
     }
 

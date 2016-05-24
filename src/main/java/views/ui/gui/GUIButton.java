@@ -3,6 +3,8 @@ package views.ui.gui;
 import views.lookandfeel.ButtonFactory;
 
 import javax.swing.*;
+import javax.swing.plaf.ButtonUI;
+import java.awt.*;
 
 /**
  * Created by eunderhi on 08/02/16.
@@ -16,6 +18,14 @@ public class GUIButton extends GUIComponent implements Button {
         button = ButtonFactory.createButton(text);
         setJComponent(button);
         button.addActionListener(event -> onClick());
+    }
+
+    public void setUI(ButtonUI ui) {
+        button.setUI(ui);
+    }
+
+    public void setForeground(Color color) {
+        button.setForeground(color);
     }
 
     @Override

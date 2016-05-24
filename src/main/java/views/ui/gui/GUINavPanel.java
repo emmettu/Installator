@@ -1,5 +1,6 @@
 package views.ui.gui;
 
+import views.lookandfeel.buttonstyles.ButtonEmporium;
 import views.ui.box.GUIBox;
 
 import javax.swing.*;
@@ -8,13 +9,13 @@ import java.awt.*;
 /**
  * Created by eunderhi on 09/03/16.
  */
-public class GUIButtonPanel extends GUIPanel {
+public class GUINavPanel extends GUIPanel {
 
-    private GUIButton quit = new GUIButton("quit");
-    private GUIButton prev = new GUIButton("prev");
-    private GUIButton next = new GUIButton("next");
+    private GUIButton quit = new GUIButton("Quit");
+    private GUIButton prev = ButtonEmporium.previousButton("Previous");
+    private GUIButton next = ButtonEmporium.nextButton("Next");
 
-    public GUIButtonPanel() {
+    public GUINavPanel() {
         GUIPanel panel = new GUIPanel();
         panel.setSize(500, 50);
         setJComponent(panel.getJComponent());

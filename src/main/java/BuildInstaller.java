@@ -167,10 +167,10 @@ public class BuildInstaller {
         PreviousPanelController ppc = new PreviousPanelController();
         ppc.setInstaller(installer);
 
-        GUIButton nextButton = new GUIButton(ButtonEmporium.nextButton("Next"));
+        GUIButton nextButton = new GUIButton();
         nextButton.addController(npc);
 
-        GUIButton previousButton = new GUIButton(ButtonEmporium.previousButton("Previous"));
+        GUIButton previousButton = new GUIButton();
 
         previousButton.addController(ppc);
 
