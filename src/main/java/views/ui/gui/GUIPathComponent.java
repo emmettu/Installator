@@ -15,11 +15,14 @@ public class GUIPathComponent extends GUIPanel {
     private FancyGUITextField pathField = new FancyGUITextField();
 
     public GUIPathComponent() {
-        setLayout(new GridLayout(1, 2));
+        setLayout(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.anchor = GridBagConstraints.NORTHWEST;
+        gbc.weightx = 1.0;
+        gbc.weighty = 1.0;
+        gbc.fill = GridBagConstraints.BOTH;
         fileChooser.directoriesOnly();
         GUIButton browseButton = new GUIButton("Browse");
-        GUIPanel buttonContainer = new GUIPanel();
-        buttonContainer.addComponent(browseButton);
         browseButton.addController(() -> {
             fileChooser.setCurrentDirectory(getCurrentDirectory());
             fileChooser.showDialog(GUIPathComponent.this, "Choose");
@@ -31,8 +34,13 @@ public class GUIPathComponent extends GUIPanel {
         });
         pathField.setText(getDefaultPath());
         pathField.validation().add(new PathValidator());
-        addComponent(pathField);
-        addComponent(buttonContainer);
+        addComponent(pathField, gbc);
+        GridBagConstraints gbcButton = new GridBagConstraints();
+        gbcButton.fill = GridBagConstraints.NONE;
+        gbcButton.anchor = GridBagConstraints.NORTHEAST;
+        //gbcButton.weightx = 1.0;
+        gbcButton.weighty = 1.0;
+        addComponent(browseButton, gbcButton);
     }
 
     private File getCurrentDirectory() {

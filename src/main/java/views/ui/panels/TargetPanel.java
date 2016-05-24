@@ -17,8 +17,8 @@ public class TargetPanel extends GUIPanel {
 
     private GUIPanel contentPanel;
     private GUIButtonPanel buttonPanel;
-    public static final int WIDTH = 500;
-    public static final int HEIGHT = 500;
+    public static final int WIDTH = 900;
+    public static final int HEIGHT = 600;
     private GUIPathComponent field = new GUIPathComponent();
 
     public TargetPanel() {
@@ -34,10 +34,7 @@ public class TargetPanel extends GUIPanel {
     private void build() {
         contentPanel.addComponent(getTitle(), Constraints.getTitleConstraints());
         GridBagConstraints gbc = getBasicConstraints();
-
-        //JLabel info = LabelFactory.create(idata.langpack.getString("TargetPanel.info"));
         gbc.gridy++;
-        //contentPanel.add(info, gbc);
         gbc.gridy++;
         gbc.weightx = 1.0;
         gbc.weighty = 1.0;

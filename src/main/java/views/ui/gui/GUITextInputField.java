@@ -23,7 +23,6 @@ public class GUITextInputField extends GUIComponent implements TextInputField, V
 
     protected void setUpJComponent() {
         setJComponent(field);
-        field.setColumns(20);
         field.addFocusListener(new FocusListener() {
             @Override
             public void focusGained(FocusEvent focusEvent) {}
