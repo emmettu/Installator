@@ -1,6 +1,5 @@
 package views.ui.panels;
 
-import views.lookandfeel.FontResources;
 import views.ui.gui.*;
 import views.ui.gui.GUIPanel;
 import views.ui.gui.layout.Constraints;
@@ -33,7 +32,8 @@ public class TargetPanel extends GUIPanel {
     }
 
     private void build() {
-        contentPanel.addComponent(Title.create("Select Installation Path"), Constraints.getTitleConstraints());
+        contentPanel.addComponent(Labels.title("Installation Path"), Constraints.getTitleConstraints());
+        contentPanel.addComponent(Labels.intro("Select the installation path:"), Constraints.getBasicConstraints());
         GridBagConstraints gbc = getBasicConstraints();
         gbc.gridy++;
         gbc.gridy++;

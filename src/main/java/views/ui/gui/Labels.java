@@ -8,12 +8,17 @@ import java.awt.*;
 /**
  * Created by eunderhi on 25/05/16.
  */
-public class Title extends GUILabel {
+public class Labels {
 
-    public static GUILabel create(String text) {
+    public static GUILabel title(String text) {
         GUILabel title = new GUILabel(text, SwingConstants.LEFT);
         Font font = FontResources.getOpenSansLight();
         title.setFont(font);
+        return title;
+    }
+
+    public static GUILabel intro(String text) {
+        GUILabel title = new GUILabel(text, SwingConstants.LEFT);
         return title;
     }
 

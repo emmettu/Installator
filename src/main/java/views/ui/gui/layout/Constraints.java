@@ -12,7 +12,7 @@ public class Constraints {
     public static GridBagConstraints getBasicConstraints() {
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.anchor = GridBagConstraints.NORTHWEST;
-        gbc.insets = new Insets(2, baseIndent, 2, 20);
+        gbc.insets = new Insets(40, baseIndent, 2, 20);
         gbc.gridheight = 1;
         gbc.gridwidth = 1;
         gbc.weightx = 0;
