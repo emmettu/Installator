@@ -33,7 +33,7 @@ public class TargetPanel extends GUIPanel {
     }
 
     private void build() {
-        contentPanel.addComponent(getTitle(), Constraints.getTitleConstraints());
+        contentPanel.addComponent(Title.create("Select Installation Path"), Constraints.getTitleConstraints());
         GridBagConstraints gbc = getBasicConstraints();
         gbc.gridy++;
         gbc.gridy++;
@@ -63,13 +63,6 @@ public class TargetPanel extends GUIPanel {
 
     public GUINavPanel getButtonPanel() {
         return buttonPanel;
-    }
-
-    private GUILabel getTitle() {
-        GUILabel title = new GUILabel("Path Selection Panel", SwingConstants.LEFT);
-        Font font = FontResources.getOpenSansLight();
-        title.setFont(font);
-        return title;
     }
 
 }
