@@ -304,9 +304,9 @@ public class BuildInstaller {
 
         PanelController nextPanel = new PanelController(frame);
         views.ui.gui.GUIButton targetNextButton = targetPanel.getButtonPanel().getNext();
-        for (UnpackerController uc : packages.getUnpackerControllers()) {
-            targetNextButton.addController(uc);
-        }
+//        for (UnpackerController uc : packages.getUnpackerControllers()) {
+//            targetNextButton.addController(uc);
+//        }
         InstallLocationModel ilm = new InstallLocationModel();
         pathField.validation().add(new InstallValidator(ilm.getName()));
         pathField.validate();
@@ -325,9 +325,9 @@ public class BuildInstaller {
         });
 
         unpackPanel.getButtonPanel().getNext().addController(() -> createServer(ilm));
+        frame.addPanel(new UserCreationPanel());
         frame.addPanel(targetPanel);
         frame.addPanel(unpackPanel);
-        frame.addPanel(new UserCreationPanel());
         frame.display();
     }
 

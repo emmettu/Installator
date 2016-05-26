@@ -68,4 +68,8 @@ public class FancyGUITextField extends GUIPanel implements Validated, TextInputF
         message.setVisible(true);
     }
 
+    public void setColumns(int cols) {
+        field.setColumns(cols);
+    }
+
 }

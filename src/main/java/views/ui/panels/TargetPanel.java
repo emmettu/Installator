@@ -4,7 +4,6 @@ import views.ui.gui.*;
 import views.ui.gui.GUIPanel;
 import views.ui.gui.layout.Constraints;
 
-import javax.swing.*;
 import java.awt.*;
 
 /**
