@@ -93,15 +93,15 @@ public class Constraints {
 
     public static GridBagConstraints createFullLineElementConstraint(int row, int col, int indent) {
         GridBagConstraints gbc = new GridBagConstraints();
-        gbc.fill = GridBagConstraints.BOTH;
-        gbc.anchor = GridBagConstraints.WEST;
+        gbc.fill = GridBagConstraints.NONE;
+        gbc.anchor = GridBagConstraints.NORTHWEST;
         gbc.gridheight = 1;
         gbc.gridwidth = GridBagConstraints.REMAINDER;
-        gbc.weightx = 0;
-        gbc.weighty = 0;
+        gbc.weightx = 1;
+        gbc.weighty = 1;
         gbc.gridx = col;
         gbc.gridy = row;
-        gbc.insets = new Insets(2, baseIndent + indent, 2, 40);
+        gbc.insets = new Insets(2, baseIndent + indent, 1, 40);
         return gbc;
     }
 
@@ -145,13 +145,13 @@ public class Constraints {
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.fill = fill;
         gbc.anchor = GridBagConstraints.NORTHWEST;
-        gbc.gridheight = 1;
+        gbc.gridheight = 0;
         gbc.gridwidth = 1;
-        gbc.weightx = 0;
-        gbc.weighty = 0;
+        gbc.weightx = 1;
+        gbc.weighty = 1;
         gbc.gridx = col;
         gbc.gridy = row;
-        gbc.insets = new Insets(2, baseIndent + indent, 2, 20);
+        gbc.insets = new Insets(2, baseIndent + indent, 20, 20);
         return gbc;
     }
 

@@ -36,17 +36,18 @@ public class UserCreationPanel extends GUIPanel {
     private void build() {
         contentPanel.addComponent(Labels.title("Create User"), Constraints.getTitleConstraints());
         contentPanel.addComponent(Labels.intro("Create a user to log into the wildfly management interface."), Constraints.getBasicConstraints());
-        GridBagConstraints gbc = getBasicConstraints();
-        gbc.gridy = 2;
-        gbc.weightx = 1.0;
-        gbc.weighty = 1.0;
-        gbc.anchor = GridBagConstraints.NORTHWEST;
-        contentPanel.addComponent(new GUILabel("Admin username:"), gbc);
-        //gbc.gridx++;
-        gbc.insets = new Insets(2, 0, 2, 20);
-        gbc.anchor = GridBagConstraints.NORTH;
-        userNameField.setColumns(20);
-        contentPanel.addComponent(userNameField, gbc);
+        int row = 2;
+        userNameField.setColumns(16);
+        passwordField.setColumns(16);
+        confirmPasswordField.setColumns(16);
+        contentPanel.addComponent(new GUILabel("Admin username:"), Constraints.createFullLineElementConstraint(row, 0, 0));
+        contentPanel.addComponent(userNameField, Constraints.createAlignedElementConstraint(row, 0, 120, GridBagConstraints.NONE));
+        row++;
+        contentPanel.addComponent(new GUILabel("Admin password:"), Constraints.createFullLineElementConstraint(row, 0, 0));
+        contentPanel.addComponent(passwordField, Constraints.createAlignedElementConstraint(row, 0, 120, GridBagConstraints.NONE));
+        row++;
+        contentPanel.addComponent(new GUILabel("Confirm password:"), Constraints.createFullLineElementConstraint(row, 0, 0));
+        contentPanel.addComponent(confirmPasswordField, Constraints.createAlignedElementConstraint(row, 0, 120, GridBagConstraints.NONE));
     }
 
     private GridBagConstraints getBasicConstraints() {
@@ -77,6 +78,12 @@ public class UserCreationPanel extends GUIPanel {
             }
         });
         confirmPasswordField.validation().add((String data) -> {
+            if (!data.equals(passwordField.getText())) {
+                throw new ControllerFailException("passwords must match");
+            }
+        });
+
+        passwordField.validation().add((String data) -> {
             if (!data.equals(passwordField.getText())) {
                 throw new ControllerFailException("passwords must match");
             }
