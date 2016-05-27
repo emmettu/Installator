@@ -2,6 +2,8 @@ package views.ui.gui;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,6 +31,18 @@ public class GUIFrame implements Frame {
         header.setSize(WIDTH, HEADER_HEIGHT);
         contentPanel.addComponent(header, BorderLayout.NORTH);
         frame.setVisible(true);
+        frame.addComponentListener(new ComponentListener() {
+            @Override
+            public void componentResized(ComponentEvent componentEvent) {
+                frame.pack();
+            }
+            @Override
+            public void componentMoved(ComponentEvent componentEvent) {}
+            @Override
+            public void componentShown(ComponentEvent componentEvent) {}
+            @Override
+            public void componentHidden(ComponentEvent componentEvent) {}
+        });
     }
 
     public void addPanel(GUIComponent panel) {

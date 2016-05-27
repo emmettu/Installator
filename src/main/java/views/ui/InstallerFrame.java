@@ -20,8 +20,8 @@ public class InstallerFrame implements View {
     private JFrame frame;
     private JPanel contentPanel;
     private JPanel buttonPanel;
-    public static final int WIDTH = 500;
-    public static final int HEIGHT = 500;
+    public static final int WIDTH = 900;
+    public static final int HEIGHT = 600;
 
     public InstallerFrame() {
         setUpFrame();

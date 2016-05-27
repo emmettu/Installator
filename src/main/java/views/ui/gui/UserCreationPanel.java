@@ -50,17 +50,6 @@ public class UserCreationPanel extends GUIPanel {
         contentPanel.addComponent(confirmPasswordField, Constraints.bottomElement(row, 0, 120, GridBagConstraints.NONE));
     }
 
-    private GridBagConstraints getBasicConstraints() {
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.anchor = GridBagConstraints.NORTHWEST;
-        gbc.insets = new Insets(2, 20, 2, 0);
-//        gbc.gridheight = 1;
-//        gbc.gridwidth = 1;
-        gbc.gridx = 0;
-        gbc.gridy = 0;
-        return gbc;
-    }
-
     public void addValidation() {
         userNameField.validation().add((String data) -> {
             if (data.contains("$")) {
