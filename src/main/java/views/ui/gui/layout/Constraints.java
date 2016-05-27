@@ -151,7 +151,21 @@ public class Constraints {
         gbc.weighty = 1;
         gbc.gridx = col;
         gbc.gridy = row;
-        gbc.insets = new Insets(2, baseIndent + indent, 20, 20);
+        gbc.insets = new Insets(2, baseIndent + indent, 0, 20);
+        return gbc;
+    }
+
+    public static GridBagConstraints bottomElement(int row, int col, int indent, int fill) {
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.fill = fill;
+        gbc.anchor = GridBagConstraints.NORTHWEST;
+        gbc.gridheight = 0;
+        gbc.gridwidth = 1;
+        gbc.weightx = 1;
+        gbc.weighty = 1;
+        gbc.gridx = col;
+        gbc.gridy = row;
+        gbc.insets = new Insets(2, baseIndent + indent, 200, 20);
         return gbc;
     }
 
