@@ -285,7 +285,7 @@ public class BuildInstaller {
 
         packages.addController(new PackageSetDoneController(packages));
 
-        TargetPanel targetPanel = new TargetPanel();
+        TargetPanel targetPanel = new TargetPanel("Path Selection Panel", "Select the path for your wildfly installation");
         views.ui.gui.GUIButton nextButton = targetPanel.getButtonPanel().getNext();
         nextButton.setEnabled(false);
         UnpackPanel unpackPanel = new UnpackPanel(packages, packageNames);
@@ -310,6 +310,7 @@ public class BuildInstaller {
         pathField.validation().add(new InstallValidator(ilm.getName()));
         pathField.validate();
         targetPanel.getButtonPanel().getNext().addController(nextPanel);
+        targetPanel.getButtonPanel().getPrev().setEnabled(false);
         views.ui.gui.FancyGUITextField field = targetPanel.getField();
         field.addController(() -> ilm.setInstallLocation(field.getText()));
 

@@ -2,7 +2,6 @@ package views.ui.panels;
 
 import views.ui.gui.*;
 import views.ui.gui.GUIPanel;
-import views.ui.gui.layout.Constraints;
 
 import java.awt.*;
 
@@ -11,25 +10,17 @@ import java.awt.*;
  * The panel where user selects the installation path
  */
 
-public class TargetPanel extends GUIPanel {
+public class TargetPanel extends InstallerPanel {
 
-    private GUIPanel contentPanel;
-    private GUINavPanel buttonPanel;
-    private GUIPathComponent field = new GUIPathComponent();
+    private GUIPathComponent field;
 
-    public TargetPanel() {
-        setLayout(new BorderLayout());
-        contentPanel = new GUIPanel(new GridBagLayout());
-        buttonPanel = new GUINavPanel();
-        buttonPanel.getPrev().setVisible(false);
-        build();
-        addComponent(contentPanel, BorderLayout.CENTER);
-        addComponent(buttonPanel, BorderLayout.SOUTH);
+    public TargetPanel(String title, String description) {
+        super(title, description);
     }
 
-    private void build() {
-        contentPanel.addComponent(Labels.title("Installation Path"), Constraints.getTitleConstraints());
-        contentPanel.addComponent(Labels.intro("Select the installation path:"), Constraints.getBasicConstraints());
+    @Override
+    public void build(GUIPanel contentPanel) {
+        field = new GUIPathComponent();
         GridBagConstraints gbc = getBasicConstraints();
         gbc.gridy++;
         gbc.gridy++;
@@ -55,10 +46,6 @@ public class TargetPanel extends GUIPanel {
 
     public FancyGUITextField getField() {
         return field.getField();
-    }
-
-    public GUINavPanel getButtonPanel() {
-        return buttonPanel;
     }
 
 }
