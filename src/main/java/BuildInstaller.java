@@ -326,7 +326,7 @@ public class BuildInstaller {
 
         unpackPanel.getButtonPanel().getNext().addController(() -> createServer(ilm));
         frame.addPanel(targetPanel);
-        frame.addPanel(new UserCreationPanel());
+        frame.addPanel(new UserCreationPanel("User Creation", "Enter the username and password for the admin user."));
         frame.addPanel(unpackPanel);
         frame.display();
     }

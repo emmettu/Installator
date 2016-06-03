@@ -8,34 +8,24 @@ import java.awt.*;
 
 /**
  * Created by eunderhi on 24/03/16.
+ * Panel where the user creates server administration users
  */
-public class UserCreationPanel extends GUIPanel {
+public class UserCreationPanel extends InstallerPanel {
 
     private FancyGUITextField userNameField;
     private FancyGUIPasswordField passwordField;
-    private GUINavPanel buttonPanel;
-    public static final int WIDTH = 900;
-    public static final int HEIGHT = 600;
     private FancyGUIPasswordField confirmPasswordField;
-    private GUIPanel contentPanel;
 
-    public UserCreationPanel() {
-        setLayout(new BorderLayout());
-        contentPanel = new GUIPanel(new GridBagLayout());
-        userNameField = new FancyGUITextField();
-        passwordField = new FancyGUIPasswordField();
-        confirmPasswordField = new FancyGUIPasswordField();
-        buttonPanel = new GUINavPanel();
-        contentPanel.setSize(WIDTH, HEIGHT);
-        build();
-        addComponent(contentPanel, BorderLayout.CENTER);
-        addComponent(buttonPanel, BorderLayout.SOUTH);
+    public UserCreationPanel(String title, String description) {
+        super(title, description);
         addValidation();
     }
 
-    private void build() {
-        contentPanel.addComponent(Labels.title("Create User"), Constraints.getTitleConstraints());
-        contentPanel.addComponent(Labels.intro("Create a user to log into the wildfly management interface."), Constraints.getBasicConstraints());
+    @Override
+    protected void build(GUIPanel contentPanel) {
+        userNameField = new FancyGUITextField();
+        passwordField = new FancyGUIPasswordField();
+        confirmPasswordField = new FancyGUIPasswordField();
         int row = 2;
         userNameField.setColumns(16);
         passwordField.setColumns(16);
