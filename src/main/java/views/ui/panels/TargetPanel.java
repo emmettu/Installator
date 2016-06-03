@@ -15,14 +15,11 @@ public class TargetPanel extends GUIPanel {
 
     private GUIPanel contentPanel;
     private GUINavPanel buttonPanel;
-    public static final int WIDTH = 900;
-    public static final int HEIGHT = 600;
     private GUIPathComponent field = new GUIPathComponent();
 
     public TargetPanel() {
         setLayout(new BorderLayout());
         contentPanel = new GUIPanel(new GridBagLayout());
-        contentPanel.setSize(WIDTH, HEIGHT);
         buttonPanel = new GUINavPanel();
         buttonPanel.getPrev().setVisible(false);
         build();

@@ -2,7 +2,7 @@ package views.ui.gui;
 
 import views.lookandfeel.patternfly.PatternflyProgressBarUI;
 
-import javax.swing.*;
+import javax.swing.JProgressBar;
 
 /**
  * Created by eunderhi on 25/01/16.

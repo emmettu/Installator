@@ -35,7 +35,6 @@ import org.infinispan.eviction.EvictionStrategy;
 import views.lookandfeel.ButtonFactory;
 import views.lookandfeel.FontResources;
 import views.lookandfeel.UiResources;
-import views.lookandfeel.buttonstyles.ButtonEmporium;
 import views.lookandfeel.patternfly.PatternflyButtonUI;
 import views.lookandfeel.patternfly.PatternflyFileChooserUI;
 import views.lookandfeel.patternfly.PatternflyOptionPaneUI;
@@ -232,7 +231,7 @@ public class BuildInstaller {
         while (keys.hasMoreElements()) {
             Object key = keys.nextElement();
             Object value = UIManager.get(key);
-            if (value != null && value instanceof javax.swing.plaf.FontUIResource && !key.equals("PasswordField.font"))
+            if (value != null && value instanceof javax.swing.plaf.FontUIResource)
                 UIManager.put(key, f);
         }
     }
@@ -325,8 +324,8 @@ public class BuildInstaller {
         });
 
         unpackPanel.getButtonPanel().getNext().addController(() -> createServer(ilm));
-        frame.addPanel(new UserCreationPanel());
         frame.addPanel(targetPanel);
+        frame.addPanel(new UserCreationPanel());
         frame.addPanel(unpackPanel);
         frame.display();
     }
