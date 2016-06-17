@@ -1,4 +1,3 @@
-import static org.junit.Assert.*;
 import org.junit.Test;
 
 /**
@@ -7,5 +6,6 @@ import org.junit.Test;
 public class BuildInstallerTest {
 
     @Test
-    public void testMain() throws Exception {}
+    public void testMain() throws Exception {
+    }
 }

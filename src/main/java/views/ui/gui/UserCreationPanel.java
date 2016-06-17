@@ -1,5 +1,6 @@
 package views.ui.gui;
 
+import controllers.Validator;
 import controllers.exceptions.ControllerFailException;
 import controllers.exceptions.ControllerWarnException;
 import views.ui.gui.layout.Constraints;
@@ -41,32 +42,34 @@ public class UserCreationPanel extends InstallerPanel {
     }
 
     public void addValidation() {
-        userNameField.validation().add((String data) -> {
-            if (data.contains("$")) {
-                throw new ControllerFailException("no dollar signs bro");
-            }
-        });
-        userNameField.validation().add((String data) -> {
-            if (data.isEmpty()) {
-                throw new ControllerWarnException("Username is empty");
-            }
-        });
-        passwordField.validation().add((String data) -> {
-            if (data.contains("$")) {
-                throw new ControllerFailException("no dollar signs bro");
-            }
-        });
-        confirmPasswordField.validation().add((String data) -> {
-            if (!data.equals(passwordField.getText())) {
-                throw new ControllerFailException("passwords must match");
-            }
-        });
+        userNameField.validation().add(illegalCharValidator("$"));
+        userNameField.validation().add(emptinessValidator("Username is empty"));
+        passwordField.validation().add(illegalCharValidator("$"));
+        confirmPasswordField.validation().add(matchValidator(passwordField));
+    }
 
-        passwordField.validation().add((String data) -> {
-            if (!data.equals(passwordField.getText())) {
+    private Validator<String> emptinessValidator(String message) {
+        return (String data) -> {
+            if (data.isEmpty()) {
+                throw new ControllerFailException(message);
+            }
+        };
+    }
+
+    private Validator<String> matchValidator(TextInputField mustMatch) {
+        return (String data) -> {
+            if (!data.equals(mustMatch.getText())) {
                 throw new ControllerFailException("passwords must match");
             }
-        });
+        };
+    }
+
+    private Validator<String> illegalCharValidator(String illegalChar) {
+        return (String data) -> {
+            if (data.contains(illegalChar)) {
+                throw new ControllerFailException("Field cannot contain " + illegalChar);
+            }
+        };
     }
 
 }
