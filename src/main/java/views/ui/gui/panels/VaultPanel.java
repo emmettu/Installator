@@ -2,11 +2,9 @@ package views.ui.gui.panels;
 
 import controllers.Validator;
 import controllers.exceptions.ControllerFailException;
-import views.ui.box.GUIBox;
 import views.ui.gui.*;
 import views.ui.gui.layout.Constraints;
 
-import javax.swing.*;
 import java.awt.*;
 
 /**
