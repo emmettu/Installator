@@ -44,10 +44,9 @@ import views.ui.button.ConsoleButton;
 import views.ui.button.GUIButton;
 import views.ui.combobox.ConsoleComboBox;
 import views.ui.combobox.GUIComboBox;
-import views.ui.gui.GUICombobox;
-import views.ui.gui.GUIFrame;
+import views.ui.gui.*;
 import views.ui.gui.GUIPanel;
-import views.ui.gui.UserCreationPanel;
+import views.ui.gui.panels.VaultPanel;
 import views.ui.panels.*;
 import views.ui.progressbar.ConsoleProgressBar;
 import views.ui.progressbar.GUIProgressBar;
@@ -325,6 +324,7 @@ public class BuildInstaller {
         });
 
         unpackPanel.getButtonPanel().getNext().addController(() -> createServer(ilm));
+        frame.addPanel(new VaultPanel("Vault Panel", "Enter the information for password vault installation."));
         frame.addPanel(targetPanel);
         frame.addPanel(new UserCreationPanel("User Creation", "Enter the username and password for the admin user."));
         frame.addPanel(unpackPanel);

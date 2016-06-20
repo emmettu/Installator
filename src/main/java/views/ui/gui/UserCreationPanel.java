@@ -38,7 +38,7 @@ public class UserCreationPanel extends InstallerPanel {
         contentPanel.addComponent(passwordField, Constraints.createAlignedElementConstraint(row, 0, 120, GridBagConstraints.NONE));
         row++;
         contentPanel.addComponent(new GUILabel("Confirm password:"), Constraints.createFullLineElementConstraint(row, 0, 0));
-        contentPanel.addComponent(confirmPasswordField, Constraints.bottomElement(row, 0, 120, GridBagConstraints.NONE));
+        contentPanel.addComponent(confirmPasswordField, Constraints.bottomElement(row, 120, 200));
     }
 
     public void addValidation() {

@@ -23,6 +23,21 @@ public class Constraints {
         return gbc;
     }
 
+    public static GridBagConstraints fieldConstraints(int row) {
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.anchor = GridBagConstraints.NORTHWEST;
+        gbc.insets = new Insets(2, 20, 2, 20);
+        gbc.gridheight = 1;
+        gbc.gridwidth = 1;
+        gbc.gridx = 0;
+        gbc.gridy = row;
+        gbc.gridy++;
+        gbc.weightx = 1.0;
+        gbc.weighty = 1.0;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        return gbc;
+    }
+
     public static GridBagConstraints getBasicNoInsetsConstraints(){
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.anchor = GridBagConstraints.NORTHWEST;
@@ -155,17 +170,17 @@ public class Constraints {
         return gbc;
     }
 
-    public static GridBagConstraints bottomElement(int row, int col, int indent, int fill) {
+    public static GridBagConstraints bottomElement(int row, int indent, int space) {
         GridBagConstraints gbc = new GridBagConstraints();
-        gbc.fill = fill;
+        gbc.fill = GridBagConstraints.NONE;
         gbc.anchor = GridBagConstraints.NORTHWEST;
         gbc.gridheight = 0;
         gbc.gridwidth = 1;
         gbc.weightx = 1;
         gbc.weighty = 1;
-        gbc.gridx = col;
+        gbc.gridx = 0;
         gbc.gridy = row;
-        gbc.insets = new Insets(2, baseIndent + indent, 200, 20);
+        gbc.insets = new Insets(2, baseIndent + indent, space, 20);
         return gbc;
     }
 
