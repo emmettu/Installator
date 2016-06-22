@@ -4,6 +4,7 @@ import models.InstallerModel;
 import org.jboss.as.security.vault.VaultSession;
 
 import java.nio.file.Path;
+import java.nio.file.Paths;
 
 /**
  * Created by eunderhi on 04/04/16.
@@ -41,6 +42,10 @@ public class VaultModel extends InstallerModel {
         return iterationCount;
     }
 
+    public void setIterationCount(String iterationCount) {
+        setIterationCount(Integer.parseInt(iterationCount));
+    }
+
     public void setIterationCount(int iterationCount) {
         this.iterationCount = iterationCount;
         notifyListeners();
@@ -59,6 +64,10 @@ public class VaultModel extends InstallerModel {
         return storeLocation;
     }
 
+    public void setStoreLocation(String storeLocation) {
+        setStoreLocation(Paths.get(storeLocation));
+    }
+
     public void setStoreLocation(Path storeLocation) {
         this.storeLocation = storeLocation;
         notifyListeners();
@@ -66,6 +75,10 @@ public class VaultModel extends InstallerModel {
 
     public Path getEncrDirectory() {
         return encrDirectory;
+    }
+
+    public void setEncrDirectory(String encrDirectory) {
+        setEncrDirectory(Paths.get(encrDirectory));
     }
 
     public void setEncrDirectory(Path encrDirectory) {

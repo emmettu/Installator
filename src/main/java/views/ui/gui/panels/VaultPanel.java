@@ -55,8 +55,8 @@ public class VaultPanel extends InstallerPanel {
     }
 
     private void initializeComponents() {
-        encryptedFileDirectory = new GUIPathComponent();
-        keyStoreLocation = new GUIPathComponent();
+        encryptedFileDirectory = GUIPathComponent.newFileComponent();
+        keyStoreLocation = GUIPathComponent.newFileComponent();
         keystoreConfirmPassword = new FancyGUIPasswordField();
         keystorePassword = new FancyGUIPasswordField();
         iterationCount = new FancyGUITextField();
@@ -80,6 +80,25 @@ public class VaultPanel extends InstallerPanel {
                 throw new ControllerFailException(message);
             }
         };
+    }
+
+    public FancyGUITextField getAlias() {
+        return alias;
+    }
+    public FancyGUITextField getSalt() {
+        return salt;
+    }
+    public FancyGUITextField getIterationCount() {
+        return iterationCount;
+    }
+    public FancyGUIPasswordField getKeystorePassword() {
+        return keystorePassword;
+    }
+    public GUIPathComponent getKeyStoreLocation() {
+        return keyStoreLocation;
+    }
+    public GUIPathComponent getEncryptedFileDirectory() {
+        return encryptedFileDirectory;
     }
 
 }

@@ -13,7 +13,7 @@ import java.io.File;
  * 2. Is a directory
  * 3. Is write-able
  */
-public class PathValidator implements Validator<String> {
+public class DirectoryValidator implements Validator<String> {
 
     @Override
     public void validate(String pathName) throws ControllerFailException, ControllerWarnException {

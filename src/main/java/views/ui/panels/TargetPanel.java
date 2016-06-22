@@ -20,7 +20,7 @@ public class TargetPanel extends InstallerPanel {
 
     @Override
     public void build(GUIPanel contentPanel) {
-        field = new GUIPathComponent();
+        field = GUIPathComponent.newDirectoryComponent();
         GridBagConstraints gbc = getBasicConstraints();
         gbc.gridy++;
         gbc.gridy++;

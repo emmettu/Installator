@@ -4,10 +4,11 @@ import controllers.button.VisibilityController;
 import controllers.combobox.ComboBoxController;
 import controllers.installer.NextPanelController;
 import controllers.installer.PreviousPanelController;
+import controllers.models.VaultController;
 import controllers.progressbar.ProgressBarController;
 import controllers.textinput.InstallValidator;
 import controllers.textinput.PathInputController;
-import controllers.textinput.PathValidator;
+import controllers.textinput.DirectoryValidator;
 import models.jobs.InstallerJob;
 import models.jobs.JobExecutor;
 import models.packaging.InstallLocationModel;
@@ -105,7 +106,7 @@ public class BuildInstaller {
         panel.addComponent(combo);
 
         views.ui.console.ConsoleTextInputField textInputField = new views.ui.console.ConsoleTextInputField();
-        textInputField.validation().add(new PathValidator());
+        textInputField.validation().add(new DirectoryValidator());
         textInputField.validation().addHook((e) -> System.out.println("WARN: " + e.getMessage()), Validation.Type.WARN);
         textInputField.validation().addHook((e) -> System.out.println("FAIL: " + e.getMessage()), Validation.Type.FAIL);
         textInputField.display();
@@ -137,7 +138,7 @@ public class BuildInstaller {
         packages.addMultiThreadedUnpackers();
 
         GUITextInputField field = new GUITextInputField();
-        PathValidator pv = new PathValidator();
+        DirectoryValidator pv = new DirectoryValidator();
         //pv.setField(field);
         field.addValidator(pv);
         GUIButton button = new GUIButton();
@@ -302,9 +303,9 @@ public class BuildInstaller {
 
         PanelController nextPanel = new PanelController(frame);
         views.ui.gui.GUIButton targetNextButton = targetPanel.getButtonPanel().getNext();
-//        for (UnpackerController uc : packages.getUnpackerControllers()) {
-//            targetNextButton.addController(uc);
-//        }
+        for (UnpackerController uc : packages.getUnpackerControllers()) {
+            targetNextButton.addController(uc);
+        }
         InstallLocationModel ilm = new InstallLocationModel();
         pathField.validation().add(new InstallValidator(ilm.getName()));
         pathField.validate();
@@ -323,15 +324,26 @@ public class BuildInstaller {
             }
         });
 
-        unpackPanel.getButtonPanel().getNext().addController(() -> createServer(ilm));
-        frame.addPanel(new VaultPanel("Vault Panel", "Enter the information for password vault installation."));
+        VaultPanel vaultPanel = new VaultPanel("Vault Panel", "Enter the information for password vault installation.");
+        VaultModel vaultModel = new VaultModel();
+        VaultController vc = new VaultController(vaultPanel, vaultModel);
+        vaultPanel.getButtonPanel().getNext().addController(new PanelController(frame));
+        vaultPanel.getAlias().addController(vc);
+        vaultPanel.getSalt().addController(vc);
+        vaultPanel.getIterationCount().addController(vc);
+        vaultPanel.getEncryptedFileDirectory().addController(vc);
+        vaultPanel.getKeystorePassword().addController(vc);
+        vaultPanel.getKeyStoreLocation().addController(vc);
+
+        unpackPanel.getButtonPanel().getNext().addController(() -> createServer(ilm, vaultModel));
         frame.addPanel(targetPanel);
-        frame.addPanel(new UserCreationPanel("User Creation", "Enter the username and password for the admin user."));
+        frame.addPanel(vaultPanel);
+        //frame.addPanel(new UserCreationPanel("User Creation", "Enter the username and password for the admin user."));
         frame.addPanel(unpackPanel);
         frame.display();
     }
 
-    private static void createServer(InstallLocationModel ilm) {
+    private static void createServer(InstallLocationModel ilm, VaultModel vaultModel) {
         JobExecutor executor = new JobExecutor();
         executor.addJob(new InstallerJob("userCreation") {
             @Override
@@ -344,14 +356,6 @@ public class BuildInstaller {
         ServerResource domain = builder.newHostServer("host.xml");
         ServerResource standaloneFullHa = builder.newStandaloneServer("standalone-full-ha.xml");
         VaultResource vault = new VaultResource(standalone);
-        VaultModel vaultModel = new VaultModel();
-        vaultModel.setAlias("vault");
-        vaultModel.setEncrDirectory(ilm.getInstallLocation().resolve("vault"));
-        vaultModel.setIterationCount(44);
-        vaultModel.setStoreLocation(ilm.getInstallLocation().resolve("vault.keystore"));
-        vaultModel.setPassword("testpassword");
-        vaultModel.setSalt("12345678");
-
         InstallerJob makeKeyStore = new InstallerJob("create keystore") {
             @Override
             protected void runJob() {

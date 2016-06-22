@@ -1,6 +1,8 @@
 package views.ui.gui;
 
-import controllers.textinput.PathValidator;
+import controllers.Validator;
+import controllers.textinput.DirectoryValidator;
+import controllers.textinput.FileValidator;
 
 import java.awt.*;
 import java.io.File;
@@ -14,7 +16,15 @@ public class GUIPathComponent extends GUIPanel {
     private FileChooser fileChooser = new FileChooser();
     private FancyGUITextField pathField = new FancyGUITextField();
 
-    public GUIPathComponent() {
+    public static GUIPathComponent newFileComponent() {
+        return new GUIPathComponent(new FileValidator());
+    }
+
+    public static GUIPathComponent newDirectoryComponent() {
+        return new GUIPathComponent(new DirectoryValidator());
+    }
+
+    private GUIPathComponent(Validator<String> validator) {
         setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.anchor = GridBagConstraints.NORTHWEST;
@@ -32,8 +42,8 @@ public class GUIPathComponent extends GUIPanel {
                 pathField.validate();
             }
         });
+        pathField.validation().add(validator);
         pathField.setText(getDefaultPath());
-        pathField.validation().add(new PathValidator());
         addComponent(pathField, gbc);
         GridBagConstraints gbcButton = new GridBagConstraints();
         gbcButton.fill = GridBagConstraints.NONE;
