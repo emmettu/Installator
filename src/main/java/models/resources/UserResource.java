@@ -1,6 +1,7 @@
 package models.resources;
 
 import models.packaging.InstallLocationModel;
+import models.panels.UserModel;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -26,14 +27,14 @@ public class UserResource {
         this.loc = loc;
     }
 
-    public void addUser(String userName, String password) {
+    public void addUser(UserModel model) {
         Path script = loc.getInstallLocation().resolve("bin")
                                               .resolve("add-user.sh");
         ProcessBuilder pb = new ProcessBuilder(
                 script.toString(),
                 "-s",
-                "-u", userName,
-                "-p", password
+                "-u", model.getUserName(),
+                "-p", model.getPassword()
         );
         pb.redirectErrorStream(true);
         try {

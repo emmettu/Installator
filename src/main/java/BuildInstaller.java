@@ -4,6 +4,7 @@ import controllers.button.VisibilityController;
 import controllers.combobox.ComboBoxController;
 import controllers.installer.NextPanelController;
 import controllers.installer.PreviousPanelController;
+import controllers.models.UserController;
 import controllers.models.VaultController;
 import controllers.progressbar.ProgressBarController;
 import controllers.textinput.InstallValidator;
@@ -13,10 +14,7 @@ import models.jobs.InstallerJob;
 import models.jobs.JobExecutor;
 import models.packaging.InstallLocationModel;
 import models.packaging.PackageSetDoneController;
-import models.panels.InfinispanModel;
-import models.panels.LdapModel;
-import models.panels.SSLModel;
-import models.panels.VaultModel;
+import models.panels.*;
 import models.panels.logging.LoggingModel;
 import models.panels.logging.LoggingResource;
 import models.panels.securitydomain.ports.StandalonePorts;
@@ -47,6 +45,7 @@ import views.ui.combobox.ConsoleComboBox;
 import views.ui.combobox.GUIComboBox;
 import views.ui.gui.*;
 import views.ui.gui.GUIPanel;
+import views.ui.gui.panels.UserCreationPanel;
 import views.ui.gui.panels.VaultPanel;
 import views.ui.panels.*;
 import views.ui.progressbar.ConsoleProgressBar;
@@ -331,24 +330,31 @@ public class BuildInstaller {
         vaultPanel.getAlias().addController(vc);
         vaultPanel.getSalt().addController(vc);
         vaultPanel.getIterationCount().addController(vc);
-        vaultPanel.getEncryptedFileDirectory().addController(vc);
+        vaultPanel.getEncryptedFileDirectory().getField().addController(vc);
         vaultPanel.getKeystorePassword().addController(vc);
-        vaultPanel.getKeyStoreLocation().addController(vc);
+        vaultPanel.getKeyStoreLocation().getField().addController(vc);
 
-        unpackPanel.getButtonPanel().getNext().addController(() -> createServer(ilm, vaultModel));
+        UserCreationPanel userCreationPanel = new UserCreationPanel("User Creation", "Enter the username and password of the admin user");
+        UserModel userModel = new UserModel();
+        UserController uc = new UserController(userCreationPanel, userModel);
+        userCreationPanel.getUserField().addController(uc);
+        userCreationPanel.getPasswordField().addController(uc);
+        userCreationPanel.getButtonPanel().getNext().addController(new PanelController(frame));
+
+        unpackPanel.getButtonPanel().getNext().addController(() -> createServer(ilm, vaultModel, userModel));
         frame.addPanel(targetPanel);
         frame.addPanel(vaultPanel);
-        //frame.addPanel(new UserCreationPanel("User Creation", "Enter the username and password for the admin user."));
+        frame.addPanel(userCreationPanel);
         frame.addPanel(unpackPanel);
         frame.display();
     }
 
-    private static void createServer(InstallLocationModel ilm, VaultModel vaultModel) {
+    private static void createServer(InstallLocationModel ilm, VaultModel vaultModel, UserModel userModel) {
         JobExecutor executor = new JobExecutor();
         executor.addJob(new InstallerJob("userCreation") {
             @Override
             protected void runJob() {
-                new UserResource(ilm).addUser("thedude", "qwer#1234");
+                new UserResource(ilm).addUser(userModel);
             }
         });
         ServerBuilder builder = new ServerBuilder(ilm);

@@ -1,8 +1,9 @@
-package views.ui.gui;
+package views.ui.gui.panels;
 
 import controllers.Validator;
 import controllers.exceptions.ControllerFailException;
 import controllers.exceptions.ControllerWarnException;
+import views.ui.gui.*;
 import views.ui.gui.layout.Constraints;
 
 import java.awt.*;
@@ -70,6 +71,14 @@ public class UserCreationPanel extends InstallerPanel {
                 throw new ControllerFailException("Field cannot contain " + illegalChar);
             }
         };
+    }
+
+    public FancyGUITextField getUserField() {
+        return userNameField;
+    }
+
+    public FancyGUIPasswordField getPasswordField() {
+        return passwordField;
     }
 
 }

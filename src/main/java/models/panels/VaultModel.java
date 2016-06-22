@@ -43,7 +43,9 @@ public class VaultModel extends InstallerModel {
     }
 
     public void setIterationCount(String iterationCount) {
-        setIterationCount(Integer.parseInt(iterationCount));
+        try {
+            setIterationCount(Integer.parseInt(iterationCount));
+        } catch (NumberFormatException ignored) {}
     }
 
     public void setIterationCount(int iterationCount) {
@@ -69,6 +71,7 @@ public class VaultModel extends InstallerModel {
     }
 
     public void setStoreLocation(Path storeLocation) {
+        System.out.println("my value is now: " + storeLocation);
         this.storeLocation = storeLocation;
         notifyListeners();
     }
