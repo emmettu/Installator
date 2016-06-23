@@ -3,6 +3,7 @@ package models.panels;
 import models.InstallerModel;
 
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Optional;
 
 /**
@@ -22,6 +23,10 @@ public class SSLModel extends InstallerModel {
 
     public void setKeyStoreLocation(Path keyStoreLocation) {
         this.keyStoreLocation = keyStoreLocation;
+    }
+
+    public void setKeyStoreLocation(String keyStoreLocation) {
+        this.keyStoreLocation = Paths.get(keyStoreLocation);
     }
 
     public String getPassword() {

@@ -10,7 +10,7 @@ import java.awt.*;
  */
 public class SSLPanel extends InstallerPanel {
 
-    private FancyGUITextField sslPassword;
+    private FancyGUIPasswordField sslPassword;
     private FancyGUIPasswordField sslConfirmPassword;
     private GUIPathComponent keystoreLocation;
     private static final int INDENT = 200;
@@ -47,6 +47,14 @@ public class SSLPanel extends InstallerPanel {
 
     private void addValidators() {
 
+    }
+
+    public FancyGUIPasswordField getSSLPassword() {
+        return sslPassword;
+    }
+
+    public GUIPathComponent getKeystoreLocation() {
+        return keystoreLocation;
     }
 
 }

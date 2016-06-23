@@ -4,6 +4,7 @@ import controllers.button.VisibilityController;
 import controllers.combobox.ComboBoxController;
 import controllers.installer.NextPanelController;
 import controllers.installer.PreviousPanelController;
+import controllers.models.SSLController;
 import controllers.models.UserController;
 import controllers.models.VaultController;
 import controllers.progressbar.ProgressBarController;
@@ -342,16 +343,23 @@ public class BuildInstaller {
         userCreationPanel.getPasswordField().addController(uc);
         userCreationPanel.getButtonPanel().getNext().addController(new PanelController(frame));
 
-        unpackPanel.getButtonPanel().getNext().addController(() -> createServer(ilm, vaultModel, userModel));
-        frame.addPanel(new SSLPanel("SSL Panel", "Enable SSL security for management interfaces."));
+        SSLPanel sslPanel = new SSLPanel("SSL", "Enable SSL security for management interfaces");
+        SSLModel sslModel = new SSLModel();
+        SSLController sc = new SSLController(sslPanel, sslModel);
+        sslPanel.getKeystoreLocation().addController(sc);
+        sslPanel.getSSLPassword().addController(sc);
+        sslPanel.getButtonPanel().getNext().addController(new PanelController(frame));
+
+        unpackPanel.getButtonPanel().getNext().addController(() -> createServer(ilm, vaultModel, userModel, sslModel));
         frame.addPanel(targetPanel);
         frame.addPanel(vaultPanel);
+        frame.addPanel(sslPanel);
         frame.addPanel(userCreationPanel);
         frame.addPanel(unpackPanel);
         frame.display();
     }
 
-    private static void createServer(InstallLocationModel ilm, VaultModel vaultModel, UserModel userModel) {
+    private static void createServer(InstallLocationModel ilm, VaultModel vaultModel, UserModel userModel, SSLModel sslModel) {
         JobExecutor executor = new JobExecutor();
         executor.addJob(new InstallerJob("userCreation") {
             @Override
@@ -379,17 +387,17 @@ public class BuildInstaller {
         };
 
         SSLResource sslRes = new SSLResource(standalone);
-        SSLModel sslMod = new SSLModel();
-        sslMod.setVault(vaultModel);
-        sslMod.setKeyStoreLocation(Paths.get("/home/eunderhi/vault/vault.keystore"));
-        sslMod.setPassword("qwer`123");
-        sslMod.setRealm("ManagementRealm");
+//        SSLModel sslMod = new SSLModel();
+//        sslMod.setVault(vaultModel);
+//        sslMod.setKeyStoreLocation(Paths.get("/home/eunderhi/vault/vault.keystore"));
+//        sslMod.setPassword("qwer`123");
+//        sslMod.setRealm("ManagementRealm");
 
         InstallerJob addSSL = new InstallerJob("add ssl") {
             @Override
             protected void runJob() {
                 try {
-                    sslRes.installSSL(sslMod);
+                    sslRes.installSSL(sslModel);
                     sslRes.addHttps();
                 } catch (CommandFailedException e) {
                     e.printStackTrace();
@@ -410,7 +418,7 @@ public class BuildInstaller {
         ldap.setFilter("test");
         ldap.setBaseDN("test");
         ldap.setRealmName("ldap");
-        ldap.setSSL(sslMod);
+        ldap.setSSL(sslModel);
 
         InstallerJob addLDAP = new InstallerJob("add ldap") {
             @Override
