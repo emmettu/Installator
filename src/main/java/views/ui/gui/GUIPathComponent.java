@@ -2,6 +2,7 @@ package views.ui.gui;
 
 import controllers.Validator;
 import controllers.textinput.DirectoryValidator;
+import controllers.textinput.ExistingFileValidator;
 import controllers.textinput.FileValidator;
 
 import java.awt.*;
@@ -18,6 +19,10 @@ public class GUIPathComponent extends GUIPanel {
 
     public static GUIPathComponent newFileComponent() {
         return new GUIPathComponent(new FileValidator());
+    }
+
+    public static GUIPathComponent existingFileComponent() {
+        return new GUIPathComponent(new ExistingFileValidator());
     }
 
     public static GUIPathComponent newDirectoryComponent() {

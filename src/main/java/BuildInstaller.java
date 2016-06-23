@@ -45,6 +45,7 @@ import views.ui.combobox.ConsoleComboBox;
 import views.ui.combobox.GUIComboBox;
 import views.ui.gui.*;
 import views.ui.gui.GUIPanel;
+import views.ui.gui.panels.SSLPanel;
 import views.ui.gui.panels.UserCreationPanel;
 import views.ui.gui.panels.VaultPanel;
 import views.ui.panels.*;
@@ -342,6 +343,7 @@ public class BuildInstaller {
         userCreationPanel.getButtonPanel().getNext().addController(new PanelController(frame));
 
         unpackPanel.getButtonPanel().getNext().addController(() -> createServer(ilm, vaultModel, userModel));
+        frame.addPanel(new SSLPanel("SSL Panel", "Enable SSL security for management interfaces."));
         frame.addPanel(targetPanel);
         frame.addPanel(vaultPanel);
         frame.addPanel(userCreationPanel);
