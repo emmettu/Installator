@@ -2,6 +2,7 @@ package views.ui.gui.panels;
 
 import controllers.Validator;
 import controllers.exceptions.ControllerFailException;
+import models.resources.exceptions.CommandFailedException;
 import views.ui.gui.*;
 import views.ui.gui.layout.Constraints;
 
@@ -72,7 +73,30 @@ public class VaultPanel extends InstallerPanel {
 
     private void addValidators() {
         salt.validation().add(mustBeNChars(8, "Salt is not 8 chars"));
+        salt.validation().add(mustBeNChars(8, "Salt is not 8 chars"));
+        iterationCount.validation().add(numberValidator());
+        iterationCount.validation().add(positiveValidator());
     }
+
+    private Validator<String> numberValidator() {
+        return (String data) -> {
+            try {
+                int number = Integer.parseInt(data);
+            }
+            catch (NumberFormatException e) {
+                throw new ControllerFailException("Not a number");
+            }
+        };
+    }
+
+    private Validator<String> positiveValidator() {
+        return (String data) -> {
+            if (Integer.parseInt(data) < 0) {
+                throw new ControllerFailException("Must be positive");
+            }
+        };
+    }
+
 
     private Validator<String> mustBeNChars(int n, String message) {
         return (String s)  -> {
