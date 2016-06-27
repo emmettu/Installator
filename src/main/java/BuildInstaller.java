@@ -4,6 +4,7 @@ import controllers.button.VisibilityController;
 import controllers.combobox.ComboBoxController;
 import controllers.installer.NextPanelController;
 import controllers.installer.PreviousPanelController;
+import controllers.models.LDAPController;
 import controllers.models.SSLController;
 import controllers.models.UserController;
 import controllers.models.VaultController;
@@ -337,6 +338,15 @@ public class BuildInstaller {
         vaultPanel.getKeystorePassword().addController(vc);
         vaultPanel.getKeyStoreLocation().getField().addController(vc);
 
+        LDAPPanel ldapPanel = new LDAPPanel("LDAP Panel", "Install LDAP Security");
+        LdapModel ldapModel = new LdapModel();
+        LDAPController lc = new LDAPController(ldapPanel, ldapModel);
+        ldapPanel.getPassword().addController(lc);
+        ldapPanel.getConnectionName().addController(lc);
+        ldapPanel.getDirectoryServer().addController(lc);
+        ldapPanel.getDistinguishedName().addController(lc);
+        ldapPanel.getButtonPanel().getNext().addController(new PanelController(frame));
+
         UserCreationPanel userCreationPanel = new UserCreationPanel("User Creation", "Enter the username and password of the admin user");
         UserModel userModel = new UserModel();
         UserController uc = new UserController(userCreationPanel, userModel);
@@ -351,17 +361,17 @@ public class BuildInstaller {
         sslPanel.getSSLPassword().addController(sc);
         sslPanel.getButtonPanel().getNext().addController(new PanelController(frame));
 
-        unpackPanel.getButtonPanel().getNext().addController(() -> createServer(ilm, vaultModel, userModel, sslModel));
-        frame.addPanel(new LDAPPanel("LDAP", "Configure LDAP security"));
+        unpackPanel.getButtonPanel().getNext().addController(() -> createServer(ilm, vaultModel, userModel, sslModel, ldapModel));
         frame.addPanel(targetPanel);
         frame.addPanel(vaultPanel);
         frame.addPanel(sslPanel);
         frame.addPanel(userCreationPanel);
+        frame.addPanel(ldapPanel);
         frame.addPanel(unpackPanel);
         frame.display();
     }
 
-    private static void createServer(InstallLocationModel ilm, VaultModel vaultModel, UserModel userModel, SSLModel sslModel) {
+    private static void createServer(InstallLocationModel ilm, VaultModel vaultModel, UserModel userModel, SSLModel sslModel, LdapModel ldapModel) {
         JobExecutor executor = new JobExecutor();
         executor.addJob(new InstallerJob("userCreation") {
             @Override
@@ -409,24 +419,24 @@ public class BuildInstaller {
 
         LDAPResource ldapRes = new LDAPResource(standalone);
         LDAPResource ldapHost = new LDAPResource(domain);
-        LdapModel ldap = new LdapModel();
-        ldap.setName("test");
-        ldap.setPassword("test");
-        ldap.setUrl("test");
-        ldap.setdN("test");
-        ldap.setVaultModel(vaultModel);
-        ldap.setRecursive(true);
-        ldap.setFilterType(LdapModel.FilterType.ADVANCED);
-        ldap.setFilter("test");
-        ldap.setBaseDN("test");
-        ldap.setRealmName("ldap");
-        ldap.setSSL(sslModel);
+        //LdapModel ldap = new LdapModel();
+        //ldap.setName("test");
+        //ldap.setPassword("test");
+        //ldap.setUrl("test");
+        //ldap.setdN("test");
+        //ldap.setVaultModel(vaultModel);
+        //ldap.setRecursive(true);
+        //ldap.setFilterType(LdapModel.FilterType.ADVANCED);
+        //ldap.setFilter("test");
+        //ldap.setBaseDN("test");
+        //ldap.setRealmName("ldap");
+        //ldap.setSSL(sslModel);
 
         InstallerJob addLDAP = new InstallerJob("add ldap") {
             @Override
             protected void runJob() {
                 try {
-                    ldapRes.installLdap(ldap);
+                    ldapRes.installLdap(ldapModel);
                     //ldapHost.installLdap(ldap);
                 }
                 catch (CommandFailedException e) {
