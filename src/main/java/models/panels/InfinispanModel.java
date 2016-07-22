@@ -65,12 +65,20 @@ public class InfinispanModel {
         this.maxEntries = maxEntries;
     }
 
+    public void setMaxEntries(String maxEntries) {
+        this.maxEntries = Integer.parseInt(maxEntries);
+    }
+
     public int getMaxIdle() {
         return maxIdle;
     }
 
     public void setMaxIdle(int maxIdle) {
         this.maxIdle = maxIdle;
+    }
+
+    public void setMaxIdle(String maxIdle) {
+        this.maxIdle = Integer.parseInt(maxIdle);
     }
 
 }

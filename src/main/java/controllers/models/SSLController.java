@@ -30,4 +30,5 @@ public class SSLController implements Controller {
         password = panel.getSSLPassword();
         keystoreLocation = panel.getKeystoreLocation().getField();
     }
+
 }

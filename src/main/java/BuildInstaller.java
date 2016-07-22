@@ -4,10 +4,7 @@ import controllers.button.VisibilityController;
 import controllers.combobox.ComboBoxController;
 import controllers.installer.NextPanelController;
 import controllers.installer.PreviousPanelController;
-import controllers.models.LDAPController;
-import controllers.models.SSLController;
-import controllers.models.UserController;
-import controllers.models.VaultController;
+import controllers.models.*;
 import controllers.progressbar.ProgressBarController;
 import controllers.textinput.InstallValidator;
 import controllers.textinput.PathInputController;
@@ -58,7 +55,6 @@ import javax.swing.*;
 import javax.swing.plaf.ColorUIResource;
 import javax.swing.plaf.FontUIResource;
 import java.awt.*;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -358,8 +354,20 @@ public class BuildInstaller {
         sslPanel.getSSLPassword().addController(sc);
         sslPanel.getButtonPanel().getNext().addController(new PanelController(frame));
 
-        unpackPanel.getButtonPanel().getNext().addController(() -> createServer(ilm, vaultModel, userModel, sslModel, ldapModel));
-        frame.addPanel(new InfinispanPanel("Infinispan", "Add an infinispan configuration"));
+        InfinispanPanel infPanel = new InfinispanPanel("Infinispan", "Enable Infinispan");
+        InfinispanModel infModel = new InfinispanModel();
+        InfinispanController ic = new InfinispanController(infPanel, infModel);
+        infPanel.getName().addController(ic);
+        infPanel.getJndi().addController(ic);
+        infPanel.getLocalCache().addController(ic);
+        infPanel.getTransactionMode().addController(ic);
+        infPanel.getEvictionStrategy().addController(ic);
+        infPanel.getMaxEntries().addController(ic);
+        infPanel.getMaxIdle().addController(ic);
+        infPanel.getButtonPanel().getNext().addController(new PanelController(frame));
+
+        unpackPanel.getButtonPanel().getNext().addController(() -> createServer(ilm, vaultModel, userModel, sslModel, ldapModel, infModel));
+        frame.addPanel(infPanel);
         frame.addPanel(targetPanel);
         frame.addPanel(vaultPanel);
         frame.addPanel(sslPanel);
@@ -369,7 +377,7 @@ public class BuildInstaller {
         frame.display();
     }
 
-    private static void createServer(InstallLocationModel ilm, VaultModel vaultModel, UserModel userModel, SSLModel sslModel, LdapModel ldapModel) {
+    private static void createServer(InstallLocationModel ilm, VaultModel vaultModel, UserModel userModel, SSLModel sslModel, LdapModel ldapModel, InfinispanModel infModel) {
         JobExecutor executor = new JobExecutor();
         executor.addJob(new InstallerJob("userCreation") {
             @Override
@@ -444,20 +452,11 @@ public class BuildInstaller {
         };
 
         InfinispanResource infiniRes = new InfinispanResource(standalone);
-        InfinispanModel infiniMod = new InfinispanModel();
-        infiniMod.setContainer("test");
-        infiniMod.setEvictionStrategy(EvictionStrategy.LIRS);
-        infiniMod.setJndiName("test");
-        infiniMod.setMaxEntries(1000);
-        infiniMod.setMaxIdle(500);
-        infiniMod.setTransactionMode(TransactionMode.FULL_XA);
-        infiniMod.setLocalCache("test");
-
         InstallerJob addInfinispan = new InstallerJob("infinispan") {
             @Override
             protected void runJob() {
                 try {
-                    infiniRes.installInfinispan(infiniMod);
+                    infiniRes.installInfinispan(infModel);
                 }
                 catch (CommandFailedException e) {
                     setState(State.FAILED);

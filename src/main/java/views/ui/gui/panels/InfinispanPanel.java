@@ -71,5 +71,28 @@ public class InfinispanPanel extends InstallerPanel {
         maxIdle.setColumns(16);
     }
 
+    public FancyGUITextField getName() {
+        return name;
+    }
+    public FancyGUITextField getJndi() {
+        return jndi;
+    }
+    public FancyGUITextField getLocalCache() {
+        return localCache;
+    }
+    public GUICombobox<TransactionMode> getTransactionMode() {
+        return transactionMode;
+    }
+
+    public GUICombobox<EvictionStrategy> getEvictionStrategy() {
+        return evictionStrategy;
+    }
+
+    public FancyGUITextField getMaxEntries() {
+        return maxEntries;
+    }
+    public FancyGUITextField getMaxIdle() {
+        return maxIdle;
+    }
 
 }
