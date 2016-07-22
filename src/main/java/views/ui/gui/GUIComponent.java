@@ -4,6 +4,7 @@ import views.ui.UIComponent;
 
 import javax.swing.*;
 import javax.swing.border.Border;
+import java.awt.*;
 
 /**
  * Created by eunderhi on 25/01/16.
@@ -46,6 +47,11 @@ public abstract class GUIComponent extends UIComponent {
 
     public void setVisible(boolean visibility) {
         jComponent.setVisible(visibility);
+    }
+
+    public void setWidth(int width) {
+        int height = jComponent.getPreferredSize().height;
+        jComponent.setPreferredSize(new Dimension(width, height));
     }
 
 }
