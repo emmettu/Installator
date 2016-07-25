@@ -36,7 +36,6 @@ public class InfinispanController implements Controller {
         model.setEvictionStrategy(evictionStrategy.getSelectedItem());
         model.setMaxEntries(maxEntries.getText());
         model.setMaxIdle(maxIdle.getText());
-
     }
 
     private void subscribeToPanel(InfinispanPanel panel) {

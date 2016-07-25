@@ -367,6 +367,7 @@ public class BuildInstaller {
         infPanel.getButtonPanel().getNext().addController(new PanelController(frame));
 
         unpackPanel.getButtonPanel().getNext().addController(() -> createServer(ilm, vaultModel, userModel, sslModel, ldapModel, infModel));
+        frame.addPanel(new LoggingPanel("Logging", "Select the logging levels for the root and console logger."));
         frame.addPanel(infPanel);
         frame.addPanel(targetPanel);
         frame.addPanel(vaultPanel);
