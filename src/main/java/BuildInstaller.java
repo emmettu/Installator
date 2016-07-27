@@ -366,8 +366,16 @@ public class BuildInstaller {
         infPanel.getMaxIdle().addController(ic);
         infPanel.getButtonPanel().getNext().addController(new PanelController(frame));
 
-        unpackPanel.getButtonPanel().getNext().addController(() -> createServer(ilm, vaultModel, userModel, sslModel, ldapModel, infModel));
-        frame.addPanel(new LoggingPanel("Logging", "Select the logging levels for the root and console logger."));
+        LoggingPanel logPanel = new LoggingPanel("Logging", "Configure the console and root logging levels.");
+        LoggingModel logModel = new LoggingModel();
+        LoggingController logc = new LoggingController(logPanel, logModel);
+
+        logPanel.getConsole().addController(logc);
+        logPanel.getRoot().addController(logc);
+        logPanel.getButtonPanel().getNext().addController(new PanelController(frame));
+
+        unpackPanel.getButtonPanel().getNext().addController(() -> createServer(ilm, vaultModel, userModel, sslModel, ldapModel, infModel, logModel));
+        frame.addPanel(logPanel);
         frame.addPanel(infPanel);
         frame.addPanel(targetPanel);
         frame.addPanel(vaultPanel);
@@ -378,7 +386,7 @@ public class BuildInstaller {
         frame.display();
     }
 
-    private static void createServer(InstallLocationModel ilm, VaultModel vaultModel, UserModel userModel, SSLModel sslModel, LdapModel ldapModel, InfinispanModel infModel) {
+    private static void createServer(InstallLocationModel ilm, VaultModel vaultModel, UserModel userModel, SSLModel sslModel, LdapModel ldapModel, InfinispanModel infModel, LoggingModel logModel) {
         JobExecutor executor = new JobExecutor();
         executor.addJob(new InstallerJob("userCreation") {
             @Override
@@ -480,15 +488,14 @@ public class BuildInstaller {
             }
         };
 
-        LoggingModel model = new LoggingModel();
         LoggingResource loggingResource = new LoggingResource(standalone);
-        LoggingResource sfhLoggingResource = new LoggingResource(standaloneFullHa);
+        //LoggingResource sfhLoggingResource = new LoggingResource(standaloneFullHa);
         InstallerJob loggingLevel = new InstallerJob("logging") {
             @Override
             protected void runJob() {
                 try {
-                    loggingResource.installLogging(model);
-                    sfhLoggingResource.installLogging(model);
+                    loggingResource.installLogging(logModel);
+                    //sfhLoggingResource.installLogging(model);
                 }
                 catch (CommandFailedException e) {
                     setState(State.FAILED);
